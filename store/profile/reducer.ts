@@ -1,8 +1,15 @@
-const initialState = {
-  games: [],
+import AppAction from '../appAction'
+import { Game } from '../../models/game'
+
+type State = {
+  games: Game[],
 }
 
-export default (state = initialState, action) => {
+const initialState = {
+  games: [],
+} as State
+
+export default (state: State = initialState, action: AppAction) => {
   switch (action.type) {
     case 'REQUEST_GAMES_PENDING':
       return {

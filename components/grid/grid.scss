@@ -1,0 +1,100 @@
+@import '../../scss/spacings';
+@import '../../scss/media';
+
+$grid-width: 1200px;
+$grid-gutter: 10px;
+$number-of-columns: 12;
+
+.container {
+  width: 100%;
+  max-width: $grid-width - 2*$grid-gutter;
+  margin: auto;
+  padding-left: $grid-gutter;
+  padding-right: $grid-gutter;
+  box-sizing: border-box;
+
+  .row {
+    display: grid;
+    grid-column: span 12;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: $grid-gutter;
+    margin-top: $spacing-16;
+    margin-bottom: $spacing-16;
+
+    @for $i from 1 through $number-of-columns {
+      .col-#{$i} {
+        grid-column-end: span $i;
+      }
+    }
+
+    @for $i from 1 through $number-of-columns {
+      .col-sm-#{$i} {
+        @include media('>=small') {
+          grid-column-end: span $i;
+        }
+      }
+    }
+
+    @for $i from 1 through $number-of-columns {
+      .col-md-#{$i} {
+        @include media('>=medium') {
+          grid-column-end: span $i;
+        }
+      }
+    }
+
+    @for $i from 1 through $number-of-columns {
+      .col-lg-#{$i} {
+        @include media('>=large') {
+          grid-column-end: span $i;
+        }
+      }
+    }
+
+    @for $i from 1 through $number-of-columns {
+      .col-xl-#{$i} {
+        @include media('>=x-large') {
+          grid-column-end: span $i;
+        }
+      }
+    }
+
+    @for $i from 1 through $number-of-columns {
+      .col-offset-#{$i} {
+        grid-column-start: $i+1;
+      }
+    }
+  
+    @for $i from 1 through $number-of-columns {
+      .col-sm-offset-#{$i} {
+        @include media('>=small') {
+          grid-column-start: $i+1;
+        }
+      }
+    }
+  
+    @for $i from 1 through $number-of-columns {
+      .col-md-offset-#{$i} {
+        @include media('>=medium') {
+          grid-column-start: $i+1;
+        }
+      }
+    }
+  
+    @for $i from 1 through $number-of-columns {
+      .col-lg-offset-#{$i} {
+        @include media('>=large') {
+          grid-column-start: $i+1;
+        }
+      }
+    }
+  
+    @for $i from 1 through $number-of-columns {
+      .col-xl-offset-#{$i} {
+        @include media('>=x-large') {
+          grid-column-start: $i+1;
+        }
+      }
+    }
+  }
+}

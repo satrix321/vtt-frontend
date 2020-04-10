@@ -1,0 +1,30 @@
+@import '../../scss/spacings';
+
+.game {
+  .image img {
+    width: 100%;
+  }
+
+  .headers-section {
+    margin-bottom: $spacing-12;
+    .title {
+      margin: 0;
+    }
+  }
+
+  .players-section {
+    margin-bottom: $spacing-8;
+    .title {
+      margin: 0 0 $spacing-4 0;
+    }
+    .players {
+      > * {
+        margin-right: $spacing-8;
+      }
+    }
+  }
+
+  .dates-section {
+
+  }
+}

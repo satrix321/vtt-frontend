@@ -1,0 +1,46 @@
+@import './colors';
+@import './fonts';
+@import './spacings';
+
+* {
+  font-family: Arial;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: $font-36;
+  margin: 0;
+}
+
+h2 {
+  font-size: $font-30;
+  margin: 0;
+}
+
+h3 {
+  font-size: $font-24;
+  margin: 0;
+}
+
+h4 {
+  font-size: $font-18;
+  margin: 0;
+}
+
+h5 {
+  font-size: $font-16;
+  margin: 0;
+}
+
+h6 {
+  font-size: $font-16;
+  margin: 0;
+}
+
+p, span {
+  font-size: $font-16;
+  margin: 0;
+}

@@ -1,0 +1,9 @@
+@import '../../scss/spacings';
+@import '../../scss/colors';
+
+.chip {
+  display: inline-block;
+  background: $grey-4;
+  border-radius: $spacing-16;
+  padding: $spacing-4 $spacing-16;
+}

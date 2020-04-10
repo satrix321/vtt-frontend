@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import withRedux from 'next-redux-wrapper'
+import withRedux, { ReduxWrapperAppProps } from 'next-redux-wrapper'
 import { initStore } from '../store/store'
+import '../scss/global.scss'
 
-const MyApp = props => {
-  const { Component, pageProps, store } = props
+const MyApp = ({ Component, pageProps, store }: ReduxWrapperAppProps) => {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
