@@ -1,0 +1,23 @@
+@import '../../scss/colors';
+@import '../../scss/fonts';
+@import '../../scss/spacings';
+
+.cta {
+  display: inline-block;
+  font-size: $font-20;
+  text-decoration: none;
+  padding-left: $spacing-32;
+  padding-right: $spacing-32;
+
+  &.primary {
+    color: $white;
+    background: $black;
+    line-height: $spacing-48;
+  }
+  
+  &.secondary {
+    color: $black;
+    line-height: $spacing-48 - $spacing-2*2;
+    border: $spacing-2 solid $black;
+  }
+}

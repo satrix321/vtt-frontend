@@ -1,0 +1,79 @@
+@import '../../scss/spacings';
+@import '../../scss/fonts';
+@import '../../scss/media';
+
+.systems-highlight {
+  margin-top: $spacing-64;
+  margin-bottom: $spacing-64;
+  
+  .title {
+    font-size: $font-36;
+    text-align: center;
+    margin-bottom: $spacing-16;
+  }
+
+  .description {
+    font-size: $font-24;
+    text-align: center;
+    margin-bottom: $spacing-32;
+  }
+
+  .systems-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .system {
+      width: calc((100% - (#{$grid-gutter} * 5)) / 6);
+      padding-left: $grid-gutter / 2;
+      padding-right: $grid-gutter / 2;
+      margin-bottom: $grid-gutter;
+
+      @include media('>=medium') {
+        &:first-child,
+        &:nth-child(6n+1) {
+          padding-left: 0;
+        }
+
+        &:last-child,
+        &:nth-child(6n) {
+          padding-right: 0;
+        }
+      }
+
+      @include media('>=small', '<medium') {
+        width: calc((100% - (#{$grid-gutter} * 3)) / 4);
+
+        &:first-child,
+        &:nth-child(4n+1) {
+          padding-left: 0;
+        }
+
+        &:last-child,
+        &:nth-child(4n) {
+          padding-right: 0;
+        }        
+      }
+
+      @include media('<small') {
+        width: calc((100% - #{$grid-gutter}) / 2);
+
+        &:first-child,
+        &:nth-child(2n+1) {
+          padding-left: 0;
+        }
+
+        &:last-child,
+        &:nth-child(2n) {
+          padding-right: 0;
+        }        
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

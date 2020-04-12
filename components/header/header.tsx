@@ -8,9 +8,10 @@ export const Header: React.FunctionComponent = (props) => {
       <Container>
         <Row>
           <Column cols="2">
-            <picture>
-              <img alt="logo"></img>
-            </picture>
+            <div className="logo-container">
+              <img className="logo" src="logo-inverted.png" alt="logo"/>
+              <span className="logo-text">VTT</span>
+            </div>
           </Column>
           <Column cols="10">
             <nav className="navigation">
@@ -31,7 +32,7 @@ export const HeaderItem: React.FunctionComponent<HeaderItemProps> = (props) => {
   return (
     <div className="header-item">
       <Link href={props.href}>
-        {props.children}
+        <a className="link">{props.children}</a>
       </Link>
     </div>
   )

@@ -1,13 +1,29 @@
 @import '../../scss/spacings';
 @import '../../scss/colors';
+@import '../../scss/fonts';
 
 $header-background: $black;
 $header-item-hover: $grey-1;
 
 .header {
-  height: 72px;
+  height: $spacing-64;
   background-color: $header-background;
   color: $white;
+
+  .logo-container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    .logo {
+      height: $spacing-48;
+    }
+
+    .logo-text {
+      margin-left: $spacing-16;
+      font-size: $font-30;
+    }
+  }
 
   .container, .row, .column {
     height: 100%;
@@ -23,7 +39,6 @@ $header-item-hover: $grey-1;
 
     .header-item {
       display: inline-block;
-      padding: $spacing-16;
       cursor: pointer;
       transition: background ease-out .3s;
 
@@ -31,9 +46,13 @@ $header-item-hover: $grey-1;
         background: $header-item-hover;
       }
 
-      a {
+      .link {
+        display: inline-block;
         color: $white;
         text-decoration: none;
+        line-height: $spacing-48;
+        padding-left: $spacing-16;
+        padding-right: $spacing-16;
       }
     }
   }
