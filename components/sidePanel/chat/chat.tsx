@@ -15,7 +15,10 @@ const Chat: React.FunctionComponent = () => {
           Hello World!
         </Message>
         <Message type="roll" nickname="satrix321" timestamp="0000-00-00 00:00:00">
-          2d100
+          2d100 + 10
+        </Message>
+        <Message type="roll" verbose nickname="satrix321" timestamp="0000-00-00 00:00:00">
+          2d100 + 10
         </Message>
       </div>
       <div className={styles['dice-inputs']}>

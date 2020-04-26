@@ -9,6 +9,31 @@ type Props = {
 }
 
 const Message: React.FunctionComponent<Props> = (props) => {
+  let content = props.children
+
+  if (props.type && props.type === 'roll') {
+    const equation = content
+    let tokens = [50, '-', 20].join(' ')
+    let result = '50'
+
+    if (props.verbose) {
+      content = (
+        <div className={styles['roll-verbose']}>
+          <p className={styles.equation}>Rolling {equation}</p>
+          <div><p className={styles.tokens}>( {tokens} )</p></div>
+          <div><p className={styles.result}>{result}</p></div>
+        </div>
+      )
+    } else {
+      content = (
+        <div className={styles['roll-concise']}>
+          <span className={styles.equation}>{equation}</span>
+          <span className={styles.result}>{result}</span>
+        </div>
+      )
+    }
+  }
+
   return (
     <div className={styles.message}>
       <div className={styles.header}>
@@ -17,17 +42,7 @@ const Message: React.FunctionComponent<Props> = (props) => {
       </div>
       <div className={styles.content}>
         <div className={styles.text}>
-          {(() => {
-          if (props.type && props.type === 'roll') {
-            if (props.verbose) {
-              return props.children
-            } else {
-              return props.children
-            }
-          } else {
-            return props.children
-          }
-        })()}
+          {content}
         </div>
         {(() => {
           if (props.type === 'roll') {

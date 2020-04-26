@@ -35,6 +35,53 @@
     }
     .text {
       font-size: $font-14;
+
+      .roll-verbose {
+        display: flex;
+        flex-direction: column;
+
+        .equation,
+        .tokens,
+        .result {
+          display: inline-block;
+          padding: $spacing-4;
+          border-radius: $spacing-4;
+        }
+
+        .equation {
+          background: $black;
+          color: $white;
+          margin-bottom: $spacing-4;
+        }
+        .tokens {
+          background: $black;
+          color: $white;
+          margin-bottom: $spacing-4;
+        }
+        .result {
+          background: $white;
+          color: $black;
+        }
+      }
+
+      .roll-concise {
+        .equation {
+          display: inline-block;
+          background: $black;
+          color: $white;
+          padding: $spacing-4;
+          border-top-left-radius: $spacing-4;
+          border-bottom-left-radius: $spacing-4;
+        }
+        .result {
+          display: inline-block;
+          background: $white;
+          color: $black;
+          padding: $spacing-4;
+          border-top-right-radius: $spacing-4;
+          border-bottom-right-radius: $spacing-4;
+        }
+      }
     }
   }
 }
