@@ -1,0 +1,39 @@
+@import 'scss/spacings';
+@import 'scss/colors';
+
+.menu {
+  height: 100%;
+  width: $spacing-48;
+  background: $black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing-8;
+    cursor: pointer;
+
+    svg {
+      color: $grey-3;
+      width: $spacing-32;
+      height: $spacing-32;
+    }
+
+    &:hover svg {
+      color: $white;
+    }
+
+    &.active {
+      background: $grey-1;
+      border-right: $spacing-2 solid $white;
+      padding-right: $spacing-8 - $spacing-2;
+
+      svg {
+        color: $white;
+      }
+    }
+  }
+}

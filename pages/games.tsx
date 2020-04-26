@@ -17,7 +17,7 @@ const Games = (props: Props) => {
   }, [props])
 
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>VTT</title>
         <link rel="icon" href="/favicon.ico" />

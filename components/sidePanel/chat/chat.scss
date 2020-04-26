@@ -1,0 +1,80 @@
+@import 'scss/colors';
+@import 'scss/fonts';
+@import 'scss/spacings';
+
+.chat {
+  width: 360px;
+  height: 100%;
+  background: $grey-1;
+  display: flex;
+  flex-direction: column;
+
+  .messages-container {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .dice-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin: $spacing-8;
+    align-items: center;
+
+    .die {
+      width: $spacing-48;
+      height: $spacing-48;
+      cursor: pointer;
+
+      &:hover svg {
+        color: $white;
+      }
+
+      svg {
+        color: $grey-3;
+        width: $spacing-48;
+        height: $spacing-48;
+      }
+
+      .d100 {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        svg {
+          &:first-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: $spacing-32;
+            height: $spacing-32;
+          }
+
+          &:last-child {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: $spacing-32;
+            height: $spacing-32;
+          }
+        }
+      }
+    }
+  }
+
+  .chat-input {
+    textarea {
+      box-sizing: border-box;
+      width: calc(100% - #{$spacing-16});
+      padding: $spacing-8;
+      margin: $spacing-8;
+      border-radius: $spacing-4;
+      color: $black;
+      resize: vertical;
+      font-size: $font-14;
+
+      &::placeholder {
+        color: $grey-3;
+      }
+    }
+  }
+}

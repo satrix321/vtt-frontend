@@ -1,0 +1,40 @@
+@import 'scss/colors';
+@import 'scss/fonts';
+@import 'scss/spacings';
+
+.message {
+  margin: $spacing-8;
+  padding: $spacing-8;
+  border-radius: $spacing-4;
+  background: $grey-2;
+  color: $white;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-8;
+
+    .nickname {
+      font-size: $font-12;
+    }
+
+    .timestamp {
+      font-size: $font-12;
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    .dice {
+      svg {
+        width: $spacing-24;
+        height: $spacing-24;
+      }
+    }
+    .text {
+      font-size: $font-14;
+    }
+  }
+}

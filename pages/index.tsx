@@ -17,7 +17,7 @@ const Home = () => {
       </Head>
 
       <Header>
-        <HeaderItem href="/game">Game View</HeaderItem>
+        <HeaderItem href="/inGame">Game View</HeaderItem>
         <HeaderItem href="/games">Games List</HeaderItem>
         <HeaderItem href="/">FAQ</HeaderItem>
         <HeaderItem href="/">Sign In</HeaderItem>

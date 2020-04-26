@@ -17,9 +17,9 @@ const SystemsHighlight: React.FunctionComponent<Props> = (props) => {
       <div className="title">{props.title}</div>
       <div className="description">{props.description}</div>
       <div className="systems-container">
-        {props.systems.map((system) => {
+        {props.systems.map((system, index) => {
           return (
-            <div className="system" key={system.imageSrc}>
+            <div className="system" key={index}>
               <a href={system.imageHref}>
                 <img src={system.imageSrc} alt="system image"/>
               </a>
