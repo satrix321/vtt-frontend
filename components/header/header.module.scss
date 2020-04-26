@@ -6,6 +6,7 @@ $header-background: $black;
 $header-item-hover: $grey-1;
 
 .header {
+  display: flex;
   height: $spacing-64;
   background-color: $header-background;
   color: $white;

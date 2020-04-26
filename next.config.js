@@ -3,7 +3,7 @@ const sass = require('sass')
 
 module.exports = {
   ...withSass({
-    cssModules: false,
+    cssModules: true,
     sassLoaderOptions: {
       implementation: sass,
     },

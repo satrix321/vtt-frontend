@@ -20,6 +20,11 @@ $number-of-columns: 12;
     margin-top: $spacing-16;
     margin-bottom: $spacing-16;
 
+    &.no-margins {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
     @for $i from 1 through $number-of-columns {
       .col-#{$i} {
         grid-column-end: span $i;

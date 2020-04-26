@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import './cta.scss'
+import styles from './cta.module.scss'
 
 type Props = {
   secondary?: boolean,
@@ -8,11 +8,11 @@ type Props = {
 
 const Cta: React.FunctionComponent<Props> = (props) => {
   let classes = []
-  classes.push('cta');
+  classes.push(styles.cta);
   if (props.secondary) {
-    classes.push('secondary')
+    classes.push(styles.secondary)
   } else {
-    classes.push('primary')
+    classes.push(styles.primary)
   }
 
   return (

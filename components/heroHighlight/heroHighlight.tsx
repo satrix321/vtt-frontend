@@ -1,4 +1,4 @@
-import './heroHighlight.scss'
+import styles from './heroHighlight.module.scss'
 import classNames from 'classnames'
 import { Row, Column } from '../grid/grid'
 import Cta from '../cta/cta'
@@ -15,22 +15,22 @@ type Props = {
 
 const HeroHighlight: React.FunctionComponent<Props> = (props) => {
   let classes = []
-  classes.push('hero-highlight')
+  classes.push(styles['hero-highlight'])
   if (props.invertColors) {
-    classes.push('invert-colors')
+    classes.push(styles['invert-colors'])
   }
 
   return (
     <section className={classNames(classes)}>
-      <div className="background-hero">
+      <div className={styles['background-hero']}>
         <img src={props.backgroundSrc}></img>
       </div>
       <Row>
         <Column cols="12" md="6" offset-md="6">
-          <div className="text">
-            <div className="title">{props.title}</div>
-            <div className="subtitle">{props.subtitle}</div>
-            <div className="description">{props.description}</div>
+          <div className={styles.text}>
+            <div className={styles.title}>{props.title}</div>
+            <div className={styles.subtitle}>{props.subtitle}</div>
+            <div className={styles.description}>{props.description}</div>
             <Cta href={props.ctaHref}>{props.ctaText}</Cta>
           </div>
         </Column>

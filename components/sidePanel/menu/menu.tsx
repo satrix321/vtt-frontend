@@ -1,4 +1,4 @@
-import './menu.scss'
+import styles from './menu.module.scss'
 import classNames from 'classnames'
 import { useCallback, useState } from 'react'
 import { IoMdChatboxes } from 'react-icons/io'
@@ -33,11 +33,11 @@ const Menu: React.FunctionComponent = () => {
   }, [])
 
   return (
-    <div className="menu">
+    <div className={styles.menu}>
       {menuItems.map((item) => {
-        const classes = ['menu-item'];
+        const classes = [styles['menu-item']];
         if (item.active) {
-          classes.push('active')
+          classes.push(styles['active'])
         }
 
         return (

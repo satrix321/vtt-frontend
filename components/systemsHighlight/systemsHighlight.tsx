@@ -1,4 +1,4 @@
-import './systemsHighlight.scss'
+import styles from './systemsHighlight.module.scss'
 
 type Props = {
   title?: string,
@@ -13,13 +13,13 @@ type System = {
 
 const SystemsHighlight: React.FunctionComponent<Props> = (props) => {
   return (
-    <section className="systems-highlight">
-      <div className="title">{props.title}</div>
-      <div className="description">{props.description}</div>
-      <div className="systems-container">
+    <section className={styles['systems-highlight']}>
+      <div className={styles.title}>{props.title}</div>
+      <div className={styles.description}>{props.description}</div>
+      <div className={styles['systems-container']}>
         {props.systems.map((system, index) => {
           return (
-            <div className="system" key={index}>
+            <div className={styles.system} key={index}>
               <a href={system.imageHref}>
                 <img src={system.imageSrc} alt="system image"/>
               </a>

@@ -1,20 +1,20 @@
 import Link from 'next/link'
 import { Container, Row, Column } from '../../components/grid/grid'
-import './header.scss'
+import styles from './header.module.scss'
 
 export const Header: React.FunctionComponent = (props) => {
   return (
-    <header className="header">
+    <header className={styles.header}>
       <Container>
-        <Row>
+        <Row noMargins>
           <Column cols="2">
-            <div className="logo-container">
-              <img className="logo" src="logo-inverted.png" alt="logo"/>
-              <span className="logo-text">VTT</span>
+            <div className={styles['logo-container']}>
+              <img className={styles.logo} src="logo-inverted.png" alt="logo"/>
+              <span className={styles['logo-text']}>VTT</span>
             </div>
           </Column>
           <Column cols="10">
-            <nav className="navigation">
+            <nav className={styles.navigation}>
               {props.children}
             </nav>
           </Column>
@@ -30,9 +30,9 @@ type HeaderItemProps = {
 
 export const HeaderItem: React.FunctionComponent<HeaderItemProps> = (props) => {
   return (
-    <div className="header-item">
+    <div className={styles['header-item']}>
       <Link href={props.href}>
-        <a className="link">{props.children}</a>
+        <a className={styles.link}>{props.children}</a>
       </Link>
     </div>
   )

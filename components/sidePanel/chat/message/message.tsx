@@ -1,4 +1,4 @@
-import './message.scss'
+import styles from './message.module.scss'
 import { GiRollingDices } from 'react-icons/gi'
 
 type Props = {
@@ -10,13 +10,13 @@ type Props = {
 
 const Message: React.FunctionComponent<Props> = (props) => {
   return (
-    <div className="message">
-      <div className="header">
-        <p className="nickname">{props.nickname}</p>
-        <p className="timestamp">{props.timestamp}</p>
+    <div className={styles.message}>
+      <div className={styles.header}>
+        <p className={styles.nickname}>{props.nickname}</p>
+        <p className={styles.timestamp}>{props.timestamp}</p>
       </div>
-      <div className="content">
-        <div className="text">
+      <div className={styles.content}>
+        <div className={styles.text}>
           {(() => {
           if (props.type && props.type === 'roll') {
             if (props.verbose) {
@@ -32,7 +32,7 @@ const Message: React.FunctionComponent<Props> = (props) => {
         {(() => {
           if (props.type === 'roll') {
             return (
-              <div className="dice">
+              <div className={styles.dice}>
                 <GiRollingDices />
               </div>
             )

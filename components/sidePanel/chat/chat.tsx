@@ -1,4 +1,4 @@
-import './chat.scss'
+import styles from './chat.module.scss'
 import { GiD4 } from 'react-icons/gi'
 import { GiPerspectiveDiceSix } from 'react-icons/gi'
 import { GiDiceEightFacesEight } from 'react-icons/gi'
@@ -9,8 +9,8 @@ import Message from './message/message'
 
 const Chat: React.FunctionComponent = () => {
   return (
-    <div className="chat">
-      <div className="messages-container">
+    <div className={styles.chat}>
+      <div className={styles['messages-container']}>
         <Message nickname="satrix321" timestamp="0000-00-00 00:00:00">
           Hello World!
         </Message>
@@ -18,18 +18,18 @@ const Chat: React.FunctionComponent = () => {
           2d100
         </Message>
       </div>
-      <div className="dice-inputs">
-        <div className="die"><GiD4/></div>
-        <div className="die"><GiPerspectiveDiceSix /></div>
-        <div className="die"><GiDiceEightFacesEight /></div>
-        <div className="die"><GiD10 /></div>
-        <div className="die"><GiD12 /></div>
-        <div className="die"><GiDiceTwentyFacesTwenty /></div>
-        <div className="die">
-          <div className="d100"><GiD10 /><GiD10 /></div>
+      <div className={styles['dice-inputs']}>
+        <div className={styles.die}><GiD4/></div>
+        <div className={styles.die}><GiPerspectiveDiceSix /></div>
+        <div className={styles.die}><GiDiceEightFacesEight /></div>
+        <div className={styles.die}><GiD10 /></div>
+        <div className={styles.die}><GiD12 /></div>
+        <div className={styles.die}><GiDiceTwentyFacesTwenty /></div>
+        <div className={styles.die}>
+          <div className={styles.d100}><GiD10 /><GiD10 /></div>
         </div>
       </div>
-      <div className="chat-input">
+      <div className={styles['chat-input']}>
         <textarea placeholder="Type something here..."></textarea>
       </div>
     </div>
