@@ -7,6 +7,10 @@ module.exports = {
     sassLoaderOptions: {
       implementation: sass,
     },
+    cssLoaderOptions: {
+      importLoaders: 1,
+      localIdentName: "[local]___[hash:base64:5]",
+    },
   }),
   env: {
     useMockApi: true,
