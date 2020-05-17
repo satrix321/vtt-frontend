@@ -20,14 +20,14 @@ const Home = () => {
         <HeaderItem href="/inGame">Game View</HeaderItem>
         <HeaderItem href="/games">Games List</HeaderItem>
         <HeaderItem href="/">FAQ</HeaderItem>
-        <HeaderItem href="/">Sign In</HeaderItem>
+        <HeaderItem href="/login">Login</HeaderItem>
+        <HeaderItem href="/register">Register</HeaderItem>
       </Header>
 
       <main>
         <Container>
           <Row>
             <Column cols="12">
-              {/* <p>Hello World!</p> */}
 
               <MediaHighlight
                 title="VTT"

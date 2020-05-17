@@ -8,7 +8,7 @@ type Props = {
 
 const Cta: React.FunctionComponent<Props> = (props) => {
   let classes = []
-  classes.push(styles.cta);
+  classes.push(styles.cta)
   if (props.secondary) {
     classes.push(styles.secondary)
   } else {

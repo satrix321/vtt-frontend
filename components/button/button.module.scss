@@ -1,0 +1,40 @@
+@import 'scss/spacings';
+@import 'scss/colors';
+@import 'scss/fonts';
+
+.button {
+  border: 0;
+  height: $spacing-48;
+  padding-left: $spacing-32;
+  padding-right: $spacing-32;
+  font-size: $font-18;
+  cursor: pointer;
+  margin-right: $spacing-8;
+
+  &.primary {
+    background: $black;
+    color: $white;
+    line-height: $spacing-48;
+  }
+
+  &.secondary {
+    color: $black;
+    line-height: $spacing-48 - $spacing-2*2;
+    border: $spacing-2 solid $black;
+  }
+
+  &.block {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:focus {
+    outline: $spacing-2 solid $black;
+    outline-offset: $spacing-2;
+  }
+}

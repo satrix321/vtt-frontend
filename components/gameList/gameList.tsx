@@ -7,7 +7,6 @@ import styles from './gameList.module.scss'
 
 const GameList: React.FunctionComponent<any> = ({ profile }) => {
   const games = profile.games
-  console.log(styles)
 
   return (
     <div>

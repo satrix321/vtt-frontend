@@ -1,34 +1,35 @@
 import styles from './message.module.scss'
 import { GiRollingDices } from 'react-icons/gi'
+import parser from '../../../../modules/parser';
 
 type Props = {
   type?: 'message' | 'roll',
   nickname: string,
   timestamp: string,
   verbose?: boolean,
+  tokens?: string[],
+  result?: string,
 }
 
 const Message: React.FunctionComponent<Props> = (props) => {
   let content = props.children
 
   if (props.type && props.type === 'roll') {
-    const equation = content
-    let tokens = [50, '-', 20].join(' ')
-    let result = '50'
+    const equation = content as string
 
     if (props.verbose) {
       content = (
         <div className={styles['roll-verbose']}>
           <p className={styles.equation}>Rolling {equation}</p>
-          <div><p className={styles.tokens}>( {tokens} )</p></div>
-          <div><p className={styles.result}>{result}</p></div>
+          <div><p className={styles.tokens}>({props.tokens?.join(' ')})</p></div>
+          <div><p className={styles.result}>{props.result}</p></div>
         </div>
       )
     } else {
       content = (
         <div className={styles['roll-concise']}>
           <span className={styles.equation}>{equation}</span>
-          <span className={styles.result}>{result}</span>
+          <span className={styles.result}>{props.result}</span>
         </div>
       )
     }
