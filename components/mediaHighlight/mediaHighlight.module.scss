@@ -15,12 +15,21 @@
     "media text"
     "media text";
 
-  @include media('<medium') {
+  @include media('<large') {
+    padding-left: $spacing-16;
+    padding-right: $spacing-16;
+  }
+
+  @include media('<=medium') {
     grid-template-areas:
       "text text"
       "media media";
-    padding-left: $spacing-16;
-    padding-right: $spacing-16;
+    row-gap: $spacing-32;
+  }
+
+  @include media('<small') {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .media {
@@ -41,8 +50,7 @@
     flex-direction: column;
     align-items: start;
 
-    @include media('<medium') {
-      margin-bottom: $spacing-48;
+    @include media('<=medium') {
       align-items: center;
 
       .title, .subtitle, .description {
@@ -61,8 +69,12 @@
     }
 
     .description {
-      font-size: $font-24;
+      font-size: $font-20;
       margin-bottom: $spacing-16;
+
+      @include media('<=medium') {
+        margin-bottom: $spacing-32;
+      }
     }
 
     .cta-container {

@@ -13,7 +13,7 @@
   }
 
   .description {
-    font-size: $font-24;
+    font-size: $font-20;
     text-align: center;
     margin-bottom: $spacing-32;
   }
@@ -30,7 +30,7 @@
       padding-right: $grid-gutter / 2;
       margin-bottom: $grid-gutter;
 
-      @include media('>=medium') {
+      @include media('>medium') {
         &:first-child,
         &:nth-child(6n+1) {
           padding-left: 0;
@@ -42,7 +42,7 @@
         }
       }
 
-      @include media('>=small', '<medium') {
+      @include media('>=small', '<=medium') {
         width: calc((100% - (#{$grid-gutter} * 3)) / 4);
 
         &:first-child,

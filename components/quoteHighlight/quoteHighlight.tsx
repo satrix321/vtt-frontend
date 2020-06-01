@@ -13,7 +13,7 @@ const QuoteHighlight: React.FunctionComponent<Props> = (props) => {
   return (
     <section className={styles['quote-highlight']}>
       <Row>
-        <Column cols="10" offset="1" md="5" offset-md="1">
+        <Column cols="12" sm="10" offset-sm="1" md="5" offset-md="1">
           <div className={styles.text}>
             <div className={styles.quote}>"{props.quote}"</div>
             <div className={styles.author}>{props.author}</div>

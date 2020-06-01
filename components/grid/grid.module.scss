@@ -33,7 +33,7 @@ $number-of-columns: 12;
 
     @for $i from 1 through $number-of-columns {
       .col-sm-#{$i} {
-        @include media('>=small') {
+        @include media('>small') {
           grid-column-end: span $i;
         }
       }
@@ -41,7 +41,7 @@ $number-of-columns: 12;
 
     @for $i from 1 through $number-of-columns {
       .col-md-#{$i} {
-        @include media('>=medium') {
+        @include media('>medium') {
           grid-column-end: span $i;
         }
       }
@@ -49,7 +49,7 @@ $number-of-columns: 12;
 
     @for $i from 1 through $number-of-columns {
       .col-lg-#{$i} {
-        @include media('>=large') {
+        @include media('>large') {
           grid-column-end: span $i;
         }
       }
@@ -57,7 +57,7 @@ $number-of-columns: 12;
 
     @for $i from 1 through $number-of-columns {
       .col-xl-#{$i} {
-        @include media('>=x-large') {
+        @include media('>x-large') {
           grid-column-end: span $i;
         }
       }
@@ -71,7 +71,7 @@ $number-of-columns: 12;
   
     @for $i from 1 through $number-of-columns {
       .col-sm-offset-#{$i} {
-        @include media('>=small') {
+        @include media('>small') {
           grid-column-start: $i+1;
         }
       }
@@ -79,7 +79,7 @@ $number-of-columns: 12;
   
     @for $i from 1 through $number-of-columns {
       .col-md-offset-#{$i} {
-        @include media('>=medium') {
+        @include media('>medium') {
           grid-column-start: $i+1;
         }
       }
@@ -87,7 +87,7 @@ $number-of-columns: 12;
   
     @for $i from 1 through $number-of-columns {
       .col-lg-offset-#{$i} {
-        @include media('>=large') {
+        @include media('>large') {
           grid-column-start: $i+1;
         }
       }
@@ -95,7 +95,7 @@ $number-of-columns: 12;
   
     @for $i from 1 through $number-of-columns {
       .col-xl-offset-#{$i} {
-        @include media('>=x-large') {
+        @include media('>x-large') {
           grid-column-start: $i+1;
         }
       }

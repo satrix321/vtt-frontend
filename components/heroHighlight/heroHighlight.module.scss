@@ -4,17 +4,15 @@
 @import 'scss/media';
 
 .hero-highlight {
-  $component-height: 600px;
-
   display: flex;
   position: relative;
-  min-height: $component-height;
+  min-height: 600px;
   align-items: center;
   margin-top: $spacing-64;
   margin-bottom: $spacing-64;
 
-  @include media('<medium') {
-    $component-height: 450px;
+  @include media('<=medium') {
+    min-height: 450px;
   }
 
   .background-hero {
@@ -41,7 +39,10 @@
   }
 
   .text {
-    @include media('<medium') {
+    margin-top: $spacing-32;
+    margin-bottom: $spacing-32;
+
+    @include media('<=medium') {
       text-align: center;
     }
 
@@ -56,8 +57,8 @@
     }
 
     .description {
-      font-size: $font-24;
-      margin-bottom: $spacing-16;
+      font-size: $font-20;
+      margin-bottom: $spacing-32;
     }
   }
 }
