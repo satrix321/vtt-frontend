@@ -1,6 +1,6 @@
-import { Action } from 'redux'
+import { AnyAction } from 'redux'
 
-export default class AppAction implements Action<string> {
+export default interface AppAction extends AnyAction {
   type: any
   payload: any
 }

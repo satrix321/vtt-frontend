@@ -1,14 +1,15 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
 import { connect } from 'react-redux'
-import { Container, Row, Column } from '../components/grid/grid'
-import { Header, HeaderItem } from '../components/header/header'
-import Footer from '../components/footer/footer'
-import MediaHighlight from '../components/mediaHighlight/mediaHighlight'
-import SystemsHightlight from '../components/systemsHighlight/systemsHighlight'
-import HeroHighlight from '../components/heroHighlight/heroHighlight'
-import QuoteHighlight from '../components/quoteHighlight/quoteHighlight'
+import { Container, Row, Column } from '../components/page/grid/grid'
+import { Header, HeaderItem } from '../components/page/header/header'
+import { Footer } from '../components/page/footer/footer'
+import { MediaHighlight } from '../components/page/mediaHighlight/mediaHighlight'
+import { SystemsHighlight } from '../components/page/systemsHighlight/systemsHighlight'
+import { HeroHighlight } from '../components/page/heroHighlight/heroHighlight'
+import { QuoteHighlight } from '../components/page/quoteHighlight/quoteHighlight'
 
-const Home = () => {
+const Home: NextPage = () => {
   return (
     <div>
       <Head>
@@ -37,7 +38,7 @@ const Home = () => {
                 ctaHref="https://www.google.com"
               />
 
-              <SystemsHightlight
+              <SystemsHighlight
                 title="All your favorite systems in one place!"
                 description="VTT is a highly customizable tool that can support any custom system. Start now with built-in support for most popular game systems."
                 systems={[

@@ -1,6 +1,14 @@
 import { Game } from '../models/game'
 
 const mockApi = {
+  register: async (email: string, password: string): Promise<void> => {
+
+  },
+
+  login: async(email: string, password: string): Promise<void> => {
+
+  },
+
   getGames: async (): Promise<Game[]> => {
     return [
       {

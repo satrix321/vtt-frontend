@@ -1,17 +1,18 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { requestGames } from '../store/profile/action'
-import { Container, Row, Column } from '../components/grid/grid'
-import Footer from '../components/footer/footer'
-import GameList from '../components/gameList/gameList'
+import { Container, Row, Column } from '../components/page/grid/grid'
+import { Footer } from '../components/page/footer/footer'
+import { GameList } from '../components/page/gameList/gameList'
 
 type Props = {
-  requestGames: any
+  requestGames: any,
 }
 
-const Games = (props: Props) => {
+const Games: NextPage<Props> = (props) => {
   useEffect(() => {
     props.requestGames()
   }, [props])
@@ -36,11 +37,6 @@ const Games = (props: Props) => {
       <Footer/>
     </div>
   )
-}
-
-Games.getInitialProps = async ({ store, isServer }: any) => {
-  store.dispatch(requestGames())
-  return { isServer }
 }
 
 const mapDispatchToProps = (dispatch: any) => {

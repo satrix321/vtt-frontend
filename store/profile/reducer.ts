@@ -1,21 +1,18 @@
 import AppAction from '../appAction'
 import { Game } from '../../models/game'
+import { Reducer } from 'redux'
 
 type State = {
   games: Game[],
 }
 
-const initialState = {
+const initialState: State = {
   games: [],
-} as State
+}
 
-export default (state: State = initialState, action: AppAction) => {
+const reducer: Reducer<State, AppAction> = (state = initialState, action) => {
   switch (action.type) {
     case 'REQUEST_GAMES_PENDING':
-      return {
-        ...state,
-        games: [],
-      }
     case 'REQUEST_GAMES_REJECTED':
       return {
         ...state,
@@ -26,7 +23,21 @@ export default (state: State = initialState, action: AppAction) => {
         ...state,
         games: action.payload,
       }
+
+    case 'REGISTER_PENDING':
+    case 'REGISTER_REJECTED':
+      return {
+        ...state,
+        token: '',
+      }
+    case 'REGISTER_FULFILLED':
+      return {
+        ...state,
+        token: action.payload,
+      }
     default:
       return state
   }
 }
+
+export default reducer

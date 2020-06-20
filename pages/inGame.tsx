@@ -1,14 +1,18 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { connect } from 'react-redux'
-import SidePanel from '../components/sidePanel/sidePanel'
+import { SidePanel } from '../components/game/sidePanel/sidePanel'
 
 const GameView = dynamic(
-  () => import('../components/gameView/gameView'),
+  async () => {
+    const { GameView } = await import('../components/game/gameView/gameView')
+    return GameView
+  },
   { ssr: false }
 )
 
-const InGame = () => {
+const InGame: NextPage = () => {
   return (
     <div>
       <Head>

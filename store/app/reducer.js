@@ -12,6 +12,9 @@ export default (state = initialState, action) => {
         ...state,
         api: action.useMockApi ? mockApi : api,
       }
+    case 'HYDRATE':
+      // Attention! This will overwrite client state! Real apps should use proper reconciliation.
+      return {...state, ...action.payload};
     default:
       return state
   }
