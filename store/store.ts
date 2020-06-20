@@ -4,8 +4,10 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import app from './app/reducer'
 import profile from './profile/reducer'
+import { MakeStore, Context, createWrapper } from 'next-redux-wrapper'
 
-export const initStore = () => {
+// create a makeStore function
+const makeStore: MakeStore<any> = (context: Context) => {
   return createStore(
     combineReducers({
       app,
@@ -17,3 +19,6 @@ export const initStore = () => {
     ))
   )
 }
+
+// export an assembled wrapper
+export const wrapper = createWrapper<any>(makeStore, {debug: true});
