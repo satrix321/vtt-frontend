@@ -1,16 +1,17 @@
 import AppAction from '../appAction'
 import { Game } from '../../models/game'
 import { Reducer } from 'redux'
+import { HYDRATE } from 'next-redux-wrapper'
 
-type State = {
+export type ProfileState = {
   games: Game[],
 }
 
-const initialState: State = {
+const initialState: ProfileState = {
   games: [],
 }
 
-const reducer: Reducer<State, AppAction> = (state = initialState, action) => {
+const reducer: Reducer<ProfileState, AppAction> = (state = initialState, action) => {
   switch (action.type) {
     case 'REQUEST_GAMES_PENDING':
     case 'REQUEST_GAMES_REJECTED':
@@ -35,6 +36,8 @@ const reducer: Reducer<State, AppAction> = (state = initialState, action) => {
         ...state,
         token: action.payload,
       }
+    case HYDRATE:
+      return {...state, ...action.payload.profile }
     default:
       return state
   }

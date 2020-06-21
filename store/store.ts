@@ -5,11 +5,18 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import app from './app/reducer'
 import profile from './profile/reducer'
 import { MakeStore, Context, createWrapper } from 'next-redux-wrapper'
+import AppAction from './appAction'
+import { AppState } from './app/reducer'
+import { ProfileState } from './profile/reducer'
 
-// create a makeStore function
-const makeStore: MakeStore<any> = (context: Context) => {
+type State = {
+  app: AppState,
+  profile: ProfileState
+}
+
+const makeStore: MakeStore<State, AppAction> = (context: Context) => {
   return createStore(
-    combineReducers({
+    combineReducers<State, AppAction>({
       app,
       profile,
     }),
@@ -20,5 +27,4 @@ const makeStore: MakeStore<any> = (context: Context) => {
   )
 }
 
-// export an assembled wrapper
-export const wrapper = createWrapper<any>(makeStore, {debug: true});
+export const wrapper = createWrapper<State, AppAction>(makeStore, {debug: true});
