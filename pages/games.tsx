@@ -12,10 +12,10 @@ type Props = {
   requestGames: () => any,
 }
 
-const Games: NextPage<Props> = (props) => {
+const Games: NextPage<Props> = ({ requestGames }) => {
   useEffect(() => {
-    props.requestGames()
-  }, [props])
+    requestGames()
+  }, [])
 
   return (
     <div>

@@ -6,12 +6,16 @@ type Props = {
 }
 
 export const Form: React.FunctionComponent<Props> = (props) => {
-  if (!props.onSubmit) {
-    props.onSubmit = () => {}
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    
+    if (props.onSubmit) {
+      props.onSubmit(e)
+    }
   }
 
   return (
-    <form className={styles.form} onSubmit={props.onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit}>
       {props.children}
     </form>
   )

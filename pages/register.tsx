@@ -8,15 +8,28 @@ import { TextInput } from '../components/page/textInput/textInput'
 import { Button } from '../components/page/button/button'
 import { Form } from '../components/page/form/form'
 
+import axios from 'axios'
+
 const Register: NextPage = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log('form submit!')
-    console.log(email);
-    console.log(password);
+
+    const registerQuery = `mutation {
+      register(email: "${email}", password: "${password}") {
+        id
+        email
+        username
+      }
+    }`
+
+    axios.post('http://localhost:4000/', {
+      query: registerQuery
+    }).then((response) => {
+      console.log(response)
+    });
   }
 
   return (
