@@ -9,7 +9,7 @@ import AppAction from './appAction'
 import { AppState } from './app/reducer'
 import { ProfileState } from './profile/reducer'
 
-type State = {
+export type State = {
   app: AppState,
   profile: ProfileState
 }

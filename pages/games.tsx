@@ -9,7 +9,7 @@ import { Footer } from '../components/page/footer/footer'
 import { GameList } from '../components/page/gameList/gameList'
 
 type Props = {
-  requestGames: any,
+  requestGames: () => any,
 }
 
 const Games: NextPage<Props> = (props) => {

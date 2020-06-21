@@ -1,15 +1,15 @@
 import { AnyAction } from "redux"
 
-export const useMockApi = () => {
+export const useMockApi = (): AnyAction => {
   return {
     type: 'SET_API_TYPE',
     useMockApi: true,
-  } as AnyAction
+  }
 }
 
-export const useDefaultApi = () => {
+export const useDefaultApi = (): AnyAction => {
   return {
     type: 'SET_API_TYPE',
     useMockApi: false,
-  } as AnyAction
+  }
 }
