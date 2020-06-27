@@ -35,9 +35,9 @@ const Login: NextPage = () => {
       </Header>
 
       <main>
-        <Container>
+        <Container vCenter>
           <Row>
-            <Column cols="4" offset="4">
+            <Column lg="4" md="6" sm="8" cols="12" offset-lg="4" offset-md="3" offset-sm="2">
               <Form onSubmit={onSubmit}>
                 <TextInput
                   name="email"

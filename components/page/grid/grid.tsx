@@ -1,9 +1,18 @@
 import classNames from 'classnames'
 import styles from './grid.module.scss'
 
-export const Container: React.FunctionComponent = (props) => {
+type ContainerProps = {
+  vCenter?: boolean,
+}
+
+export const Container: React.FunctionComponent<ContainerProps> = (props) => {
+  let classes: string[] = [styles.container]
+  if (props.vCenter) {
+    classes.push(styles['v-center'])
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={classNames(classes)}>
       {props.children}
     </div>
   )

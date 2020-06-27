@@ -5,7 +5,7 @@ import styles from './header.module.scss'
 export const Header: React.FunctionComponent = (props) => {
   return (
     <header className={styles.header}>
-      <Container>
+      <Container vCenter>
         <Row noMargins>
           <Column cols="2">
             <div className={styles['logo-container']}>

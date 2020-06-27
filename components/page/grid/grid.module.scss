@@ -7,10 +7,16 @@ $number-of-columns: 12;
 .container {
   width: 100%;
   max-width: $grid-width - 2*$grid-gutter;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: $grid-gutter;
   padding-right: $grid-gutter;
   box-sizing: border-box;
+
+  &.v-center {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
   .row {
     display: grid;

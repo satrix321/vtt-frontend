@@ -42,9 +42,9 @@ const Register: NextPage<Props> = (props) => {
       </Header>
 
       <main>
-        <Container>
+        <Container vCenter>
           <Row>
-            <Column lg="4" md="6" cols="10" offset-lg="4" offset-md="3" offset="1">
+            <Column lg="4" md="6" sm="8" cols="12" offset-lg="4" offset-md="3" offset-sm="2">
               <Form onSubmit={onSubmit}>
                 <TextInput
                   name="username"
