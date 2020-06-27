@@ -1,7 +1,8 @@
-import { Game } from '../models/game'
+import { BackendApi } from './api'
+import { Game } from '../models/profile'
 
-const mockApi = {
-  register: async (email: string, password: string): Promise<any> => {
+const mockApi: BackendApi = {
+  register: async (email: string, password: string, username?: string): Promise<any> => {
     return 'success'
   },
 

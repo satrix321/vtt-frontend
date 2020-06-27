@@ -15,8 +15,8 @@ const Login: NextPage = () => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
     console.log('form submit!')
-    console.log(email);
-    console.log(password);
+    console.log(email)
+    console.log(password)
   }
 
   return (

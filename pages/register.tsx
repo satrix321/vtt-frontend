@@ -1,35 +1,29 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { useState, FormEvent, ChangeEvent } from 'react'
+import { useState, FormEvent } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Header, HeaderItem } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { TextInput } from '../components/page/textInput/textInput'
 import { Button } from '../components/page/button/button'
 import { Form } from '../components/page/form/form'
+import { register } from '../store/profile/action'
 
-import axios from 'axios'
+type Props = {
+  register: (email: string, password: string, username?: string) => any,
+}
 
-const Register: NextPage = () => {
+const Register: NextPage<Props> = (props) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    const registerQuery = `mutation {
-      register(email: "${email}", password: "${password}") {
-        id
-        email
-        username
-      }
-    }`
-
-    axios.post('http://localhost:4000/', {
-      query: registerQuery
-    }).then((response) => {
-      console.log(response)
-    });
+    const response = await props.register(email, password, username)
+    console.log(response)
   }
 
   return (
@@ -52,6 +46,12 @@ const Register: NextPage = () => {
           <Row>
             <Column lg="4" md="6" cols="10" offset-lg="4" offset-md="3" offset="1">
               <Form onSubmit={onSubmit}>
+                <TextInput
+                  name="username"
+                  label="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
                 <TextInput
                   name="email"
                   label="Email"
@@ -76,4 +76,10 @@ const Register: NextPage = () => {
   )
 }
 
-export default connect(null, null)(Register)
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    register: bindActionCreators(register, dispatch),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Register)

@@ -13,6 +13,7 @@ module.exports = {
     },
   }),
   env: {
-    useMockApi: true,
+    useMockApi: false,
+    apiBaseUrl: 'http://localhost:4000/',
   },
 }

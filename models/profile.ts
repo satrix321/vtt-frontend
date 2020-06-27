@@ -5,3 +5,9 @@ export type Game = {
   lastGameDate: string | null,
   nextGameDate: string | null,
 }
+
+export type User = {
+  id: Number,
+  email: string,
+  username?: string,
+}

@@ -1,0 +1,64 @@
+@import 'scss/spacings';
+@import 'scss/colors';
+
+.alert {
+  position: fixed;
+  max-width: $spacing-512;
+  min-height: $spacing-32;
+  padding: $spacing-8 $spacing-24;
+  bottom: $spacing-16;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+  box-shadow: 0 $spacing-4 $spacing-12 rgba(0, 0, 0, 0.15);
+
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.error-type {
+    border-left: $spacing-4 solid $error;
+    color: $black;
+
+    .icon {
+      color: $error;
+      margin-right: $spacing-12;
+    }
+  }
+
+  &.warning-type {
+    border-left: $spacing-4 solid $warning;
+    color: $black;
+
+    .icon {
+      color: $warning;
+      margin-right: $spacing-12;
+    }
+  }
+
+  &.success-type {
+    border-left: $spacing-4 solid $success;
+    color: $black;
+
+    .icon {
+      color: $success;
+      margin-right: $spacing-12;
+    }
+  }
+
+  &.regular-type {
+    border-left: $spacing-4 solid $black;
+    color: $black;
+
+    .icon {
+      color: $black;
+      margin-right: $spacing-12;
+    }
+  }
+}

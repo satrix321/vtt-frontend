@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const Cta: React.FunctionComponent<Props> = (props) => {
-  let classes = []
+  let classes: string[] = []
   classes.push(styles.cta)
   if (props.secondary) {
     classes.push(styles.secondary)

@@ -1,5 +1,5 @@
-import AppAction from '../appAction'
-import { Game } from '../../models/game'
+import { AppAction } from '../types'
+import { Game } from '../../models/profile'
 import { Reducer } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 
@@ -13,28 +13,15 @@ const initialState: ProfileState = {
 
 const reducer: Reducer<ProfileState, AppAction> = (state = initialState, action) => {
   switch (action.type) {
-    case 'REQUEST_GAMES_PENDING':
-    case 'REQUEST_GAMES_REJECTED':
-      return {
-        ...state,
-        games: [],
-      }
-    case 'REQUEST_GAMES_FULFILLED':
+    case 'REQUEST_GAMES':
       return {
         ...state,
         games: action.payload,
       }
 
-    case 'REGISTER_PENDING':
-    case 'REGISTER_REJECTED':
+    case 'REGISTER':
       return {
         ...state,
-        token: '',
-      }
-    case 'REGISTER_FULFILLED':
-      return {
-        ...state,
-        token: action.payload,
       }
     case HYDRATE:
       return {...state, ...action.payload.profile }

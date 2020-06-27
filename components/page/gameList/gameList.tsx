@@ -1,11 +1,13 @@
 import React from 'react'
-import { Game } from '../../../models/game'
+import { Game } from '../../../models/profile'
 import { connect } from 'react-redux'
 import { Row, Column } from '../grid/grid'
 import { Chip } from '../chip/chip'
 import styles from './gameList.module.scss'
+import { State } from '../../../store/store'
+import { ProfileState } from '../../../store/profile/reducer'
 
-const GameListComponent: React.FunctionComponent<any> = ({ profile }) => {
+const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
   const games = profile.games
 
   return (
@@ -44,4 +46,4 @@ const GameListComponent: React.FunctionComponent<any> = ({ profile }) => {
   )
 }
 
-export const GameList = connect(state => state)(GameListComponent)
+export const GameList = connect((state: State) => state.profile)(GameListComponent)

@@ -14,7 +14,7 @@ type RowProps = {
 }
 
 export const Row: React.FunctionComponent<RowProps> = (props) => {
-  let classes = [styles.row]
+  let classes: string[] = [styles.row]
   if (props.noMargins) {
     classes.push(styles['no-margins'])
   }
@@ -40,7 +40,7 @@ type Props = {
 }
 
 export const Column: React.FunctionComponent<Props> = (props) => {
-  let classes = []
+  let classes: string[] = []
   if (props.cols) {
     classes.push(styles['col-' + props.cols])
   }
