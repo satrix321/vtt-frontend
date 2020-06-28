@@ -26,13 +26,7 @@ const Login: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header>
-        <HeaderItem href="/inGame">Game View</HeaderItem>
-        <HeaderItem href="/games">Games List</HeaderItem>
-        <HeaderItem href="/">FAQ</HeaderItem>
-        <HeaderItem href="/login">Login</HeaderItem>
-        <HeaderItem href="/register">Register</HeaderItem>
-      </Header>
+      <Header/>
 
       <main>
         <Container vCenter>

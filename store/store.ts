@@ -1,11 +1,10 @@
 import thunk from 'redux-thunk'
-import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { createStore, applyMiddleware, combineReducers, AnyAction, Action } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import app from './app/reducer'
 import profile from './profile/reducer'
 import alert from './alert/reducer'
 import { MakeStore, Context, createWrapper } from 'next-redux-wrapper'
-import { AppAction } from './types'
 import { AppState } from './app/reducer'
 import { ProfileState } from './profile/reducer'
 import { AlertState } from './alert/reducer'
@@ -16,9 +15,9 @@ export type State = {
   alert: AlertState,
 }
 
-const makeStore: MakeStore<State, AppAction> = (context: Context) => {
+const makeStore: MakeStore<State, Action> = (context: Context) => {
   return createStore(
-    combineReducers<State, AppAction>({
+    combineReducers<State, Action>({
       app,
       profile,
       alert,
@@ -29,4 +28,4 @@ const makeStore: MakeStore<State, AppAction> = (context: Context) => {
   )
 }
 
-export const wrapper = createWrapper<State, AppAction>(makeStore, {debug: true})
+export const wrapper = createWrapper<State, Action>(makeStore, { debug: true })

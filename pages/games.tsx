@@ -1,18 +1,18 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
 import { requestGames } from '../store/profile/action'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { Footer } from '../components/page/footer/footer'
 import { GameList } from '../components/page/gameList/gameList'
+import { MyThunkDispatch } from '../store/types'
+import { bindThunkAction } from '../store/utils'
+import { Header } from '../components/page/header/header'
 
-type Props = {
-  requestGames: () => any,
-}
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Games: NextPage<Props> = ({ requestGames }) => {
+const Games: NextPage<PropsFromRedux> = ({ requestGames }) => {
   useEffect(() => {
     requestGames()
   }, [])
@@ -23,6 +23,8 @@ const Games: NextPage<Props> = ({ requestGames }) => {
         <title>VTT</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Header/>
 
       <main>
         <Container>
@@ -39,10 +41,11 @@ const Games: NextPage<Props> = ({ requestGames }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    requestGames: bindActionCreators(requestGames, dispatch),
+    requestGames: bindThunkAction(requestGames, dispatch),
   }
 }
 
-export default connect(null, mapDispatchToProps)(Games)
+const connector = connect(null, mapDispatchToProps)
+export default connector(Games)

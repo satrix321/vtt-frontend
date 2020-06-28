@@ -1,29 +1,37 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useState, FormEvent } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
 import { Header, HeaderItem } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { TextInput } from '../components/page/textInput/textInput'
 import { Button } from '../components/page/button/button'
 import { Form } from '../components/page/form/form'
 import { register } from '../store/profile/action'
+import { ErrorBlock } from '../components/page/errorBlock/errorBlock'
+import { MyThunkDispatch } from '../store/types'
+import { bindThunkAction } from '../store/utils'
+import Router from 'next/router'
 
-type Props = {
-  register: (email: string, password: string, username?: string) => any,
-}
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Register: NextPage<Props> = (props) => {
+const Register: NextPage<PropsFromRedux> = (props) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [username, setUsername] = useState<string>('')
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setErrorMessage('')
 
-    const response = await props.register(email, password, username)
-    console.log(response)
+    try {
+      const result = await props.register(email, password, username)
+      console.log(result)
+      Router.push('/')
+    } catch (e) {
+      setErrorMessage(e.message)
+    }
   }
 
   return (
@@ -33,13 +41,7 @@ const Register: NextPage<Props> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header>
-        <HeaderItem href="/inGame">Game View</HeaderItem>
-        <HeaderItem href="/games">Games List</HeaderItem>
-        <HeaderItem href="/">FAQ</HeaderItem>
-        <HeaderItem href="/login">Login</HeaderItem>
-        <HeaderItem href="/register">Register</HeaderItem>
-      </Header>
+      <Header/>
 
       <main>
         <Container vCenter>
@@ -66,6 +68,7 @@ const Register: NextPage<Props> = (props) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <ErrorBlock message={errorMessage}/>
                 <Button block type="submit">SUBMIT</Button>
               </Form>
             </Column>
@@ -76,10 +79,11 @@ const Register: NextPage<Props> = (props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    register: bindActionCreators(register, dispatch),
+    register: bindThunkAction(register, dispatch)
   }
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+const connector = connect(null, mapDispatchToProps)
+export default connector(Register)

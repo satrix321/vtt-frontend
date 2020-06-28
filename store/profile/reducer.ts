@@ -1,6 +1,5 @@
-import { AppAction } from '../types'
 import { Game } from '../../models/profile'
-import { Reducer } from 'redux'
+import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 
 export type ProfileState = {
@@ -11,7 +10,7 @@ const initialState: ProfileState = {
   games: [],
 }
 
-const reducer: Reducer<ProfileState, AppAction> = (state = initialState, action) => {
+const reducer: Reducer<ProfileState, AnyAction> = (state = initialState, action) => {
   switch (action.type) {
     case 'REQUEST_GAMES':
       return {

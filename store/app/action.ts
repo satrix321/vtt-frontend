@@ -1,12 +1,12 @@
-import { AppAction } from "../types"
+import { AnyAction } from "redux"
 
-export const useMockApi = (): AppAction => {
+export const useMockApi = (): AnyAction => {
   return {
     type: 'USE_MOCK_API',
   }
 }
 
-export const useDefaultApi = (): AppAction => {
+export const useDefaultApi = (): AnyAction => {
   return {
     type: 'USE_DEFAULT_API',
   }

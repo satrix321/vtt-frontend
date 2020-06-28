@@ -1,8 +1,9 @@
-import { ThunkAction } from '../types'
+import { MyThunkAction } from '../types'
 import { showAlert } from '../alert/action'
 import { AlertType } from '../alert/reducer'
+import { User } from '../../models/profile'
 
-export const requestGames = (): ThunkAction => {
+export const requestGames = (): MyThunkAction => {
   return async (dispatch, getState) => {
     try {
       const games = await getState().app.api.getGames()
@@ -11,7 +12,6 @@ export const requestGames = (): ThunkAction => {
         payload: games,
       })
     } catch (e) {
-      console.error(e)
       dispatch({
         type: 'REQUEST_GAMES',
         payload: [],
@@ -21,7 +21,7 @@ export const requestGames = (): ThunkAction => {
   }
 }
 
-export const register = (email: string, password: string, username?: string): ThunkAction => {
+export const register = (email: string, password: string, username?: string): MyThunkAction<Promise<User>> => {
   return async (dispatch, getState) => {
     try {
       const user = await getState().app.api.register(email, password, username)
@@ -31,8 +31,7 @@ export const register = (email: string, password: string, username?: string): Th
       })
       return user
     } catch (e) {
-      console.error(e)
-      dispatch(showAlert(AlertType.Error, e.message))
+      throw e
     }
   }
 }

@@ -1,8 +1,7 @@
-import { Reducer } from 'redux'
+import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 import mockApi from '../../adapters/mockApi'
 import api, { BackendApi } from '../../adapters/api'
-import { AppAction } from '../types'
 
 export type AppState = {
   api: BackendApi,
@@ -12,7 +11,7 @@ const initialState: AppState = {
   api: process.env.useMockApi ? mockApi : api,
 }
 
-const reducer: Reducer<AppState, AppAction> = (state = initialState, action) => {
+const reducer: Reducer<AppState, AnyAction> = (state = initialState, action) => {
   switch (action.type) {
     case 'USE_MOCK_API':
       return {

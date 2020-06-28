@@ -1,10 +1,6 @@
 import { AnyAction } from 'redux'
-import { ThunkAction as OriginalThunkAction } from 'redux-thunk'
+import { ThunkAction as OriginalThunkAction, ThunkDispatch } from 'redux-thunk'
 import { State } from './store'
 
-export interface AppAction extends AnyAction {
-  type: string
-  payload?: any,
-}
-
-export type ThunkAction = OriginalThunkAction<void, State, unknown, AppAction>
+export type MyThunkAction<R = any> = OriginalThunkAction<R, State, unknown, AnyAction>
+export type MyThunkDispatch = ThunkDispatch<State, unknown, AnyAction>

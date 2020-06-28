@@ -1,6 +1,5 @@
-import { Reducer } from 'redux'
+import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
-import { AppAction } from '../types'
 
 export enum AlertType {
   Error,
@@ -21,7 +20,7 @@ const initialState: AlertState = {
   message: '',
 }
 
-const reducer: Reducer<AlertState, AppAction> = (state = initialState, action) => {
+const reducer: Reducer<AlertState, AnyAction> = (state = initialState, action) => {
   switch (action.type) {
     case 'SHOW_ALERT':
       return {

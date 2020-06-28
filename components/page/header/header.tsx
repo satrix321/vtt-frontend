@@ -15,7 +15,11 @@ export const Header: React.FunctionComponent = (props) => {
           </Column>
           <Column cols="10">
             <nav className={styles.navigation}>
-              {props.children}
+              <HeaderItem href="/inGame">Game View</HeaderItem>
+              <HeaderItem href="/games">Games List</HeaderItem>
+              <HeaderItem href="/">FAQ</HeaderItem>
+              <HeaderItem href="/login">Login</HeaderItem>
+              <HeaderItem href="/register">Register</HeaderItem>
             </nav>
           </Column>
         </Row>
