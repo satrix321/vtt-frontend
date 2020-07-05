@@ -16,6 +16,7 @@
   opacity: 0;
   transition: visibility 0.3s linear, opacity 0.3s linear;
   box-shadow: 0 $spacing-4 $spacing-12 rgba(0, 0, 0, 0.15);
+  background: $white;
 
   &.visible {
     visibility: visible;
