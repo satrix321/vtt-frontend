@@ -2,11 +2,12 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useState, FormEvent } from 'react'
 import { connect } from 'react-redux'
-import { Header, HeaderItem } from '../components/page/header/header'
+import { Header } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { TextInput } from '../components/page/textInput/textInput'
 import { Button } from '../components/page/button/button'
 import { Form } from '../components/page/form/form'
+import styleUtils from '../scss/utils.module.scss'
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState<string>('')
@@ -30,9 +31,10 @@ const Login: NextPage = () => {
 
       <main>
         <Container vCenter>
-          <Row>
-            <Column lg="4" md="6" sm="8" cols="12" offset-lg="4" offset-md="3" offset-sm="2">
+          <Row center>
+            <Column cols="12" sm="8" md="6" lg="4">
               <Form onSubmit={onSubmit}>
+              <h1 className={styleUtils['text--center']}>Login</h1>
                 <TextInput
                   name="email"
                   label="Email"

@@ -3,10 +3,11 @@
 
 $grid-width: 1200px;
 $number-of-columns: 12;
+$grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
 
 .container {
   width: 100%;
-  max-width: $grid-width - 2*$grid-gutter;
+  max-width: $grid-width;
   margin-left: auto;
   margin-right: auto;
   padding-left: $grid-gutter;
@@ -22,7 +23,7 @@ $number-of-columns: 12;
     display: grid;
     grid-column: span 12;
     grid-template-columns: repeat(12, 1fr);
-    grid-gap: $grid-gutter;
+    gap: $grid-gutter;
     margin-top: $spacing-16;
     margin-bottom: $spacing-16;
 
@@ -69,9 +70,19 @@ $number-of-columns: 12;
       }
     }
 
+    .col-offset-0 {
+      grid-column-start: unset;
+    }
+
     @for $i from 1 through $number-of-columns {
       .col-offset-#{$i} {
         grid-column-start: $i+1;
+      }
+    }
+
+    .col-sm-offset-0 {
+      @include media('>small') {
+        grid-column-start: unset;
       }
     }
   
@@ -82,12 +93,24 @@ $number-of-columns: 12;
         }
       }
     }
+
+    .col-md-offset-0 {
+      @include media('>medium') {
+        grid-column-start: unset;
+      }
+    }
   
     @for $i from 1 through $number-of-columns {
       .col-md-offset-#{$i} {
         @include media('>medium') {
           grid-column-start: $i+1;
         }
+      }
+    }
+
+    .col-lg-offset-0 {
+      @include media('>large') {
+        grid-column-start: unset;
       }
     }
   
@@ -98,11 +121,71 @@ $number-of-columns: 12;
         }
       }
     }
+
+    .col-xl-offset-0 {
+      @include media('>x-large') {
+        grid-column-start: unset;
+      }
+    }
   
     @for $i from 1 through $number-of-columns {
       .col-xl-offset-#{$i} {
         @include media('>x-large') {
           grid-column-start: $i+1;
+        }
+      }
+    }
+
+    &.center {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      @for $i from 1 through $number-of-columns {
+        .col-#{$i} {
+          $percents: 100% * ($i / $number-of-columns);
+          $pixels: -($grid-gutters-width-sum * ($i / $number-of-columns)) + ($i - 1) * $grid-gutter;
+          width: calc(#{$percents} + #{$pixels});
+        }
+      }
+  
+      @for $i from 1 through $number-of-columns {
+        .col-sm-#{$i} {
+          @include media('>small') {
+            $percents: 100% * ($i / $number-of-columns);
+            $pixels: -($grid-gutters-width-sum * ($i / $number-of-columns)) + ($i - 1) * $grid-gutter;
+            width: calc(#{$percents} + #{$pixels});
+          }
+        }
+      }
+  
+      @for $i from 1 through $number-of-columns {
+        .col-md-#{$i} {
+          @include media('>medium') {
+            $percents: 100% * ($i / $number-of-columns);
+            $pixels: -($grid-gutters-width-sum * ($i / $number-of-columns)) + ($i - 1) * $grid-gutter;
+            width: calc(#{$percents} + #{$pixels});
+          }
+        }
+      }
+  
+      @for $i from 1 through $number-of-columns {
+        .col-lg-#{$i} {
+          @include media('>large') {
+            $percents: 100% * ($i / $number-of-columns);
+            $pixels: -($grid-gutters-width-sum * ($i / $number-of-columns)) + ($i - 1) * $grid-gutter;
+            width: calc(#{$percents} + #{$pixels});
+          }
+        }
+      }
+  
+      @for $i from 1 through $number-of-columns {
+        .col-xl-#{$i} {
+          @include media('>x-large') {
+            $percents: 100% * ($i / $number-of-columns);
+            $pixels: -($grid-gutters-width-sum * ($i / $number-of-columns)) + ($i - 1) * $grid-gutter;
+            width: calc(#{$percents} + #{$pixels});
+          }
         }
       }
     }

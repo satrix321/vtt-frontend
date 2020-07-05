@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useState, FormEvent } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { Header, HeaderItem } from '../components/page/header/header'
+import { Header } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { TextInput } from '../components/page/textInput/textInput'
 import { Button } from '../components/page/button/button'
@@ -12,6 +12,7 @@ import { ErrorBlock } from '../components/page/errorBlock/errorBlock'
 import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
 import Router from 'next/router'
+import styleUtils from '../scss/utils.module.scss'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -45,9 +46,10 @@ const Register: NextPage<PropsFromRedux> = (props) => {
 
       <main>
         <Container vCenter>
-          <Row>
-            <Column lg="4" md="6" sm="8" cols="12" offset-lg="4" offset-md="3" offset-sm="2">
+          <Row center>
+            <Column cols="12" sm="8" md="6" lg="4">
               <Form onSubmit={onSubmit}>
+                <h1 className={styleUtils['text--center']}>Register</h1>
                 <TextInput
                   name="username"
                   label="Username"

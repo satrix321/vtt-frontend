@@ -1,8 +1,18 @@
 import Link from 'next/link'
 import { Container, Row, Column } from '../grid/grid'
 import styles from './header.module.scss'
+import { useState } from 'react'
+import classNames from 'classnames'
+import { MdMenu } from 'react-icons/md'
 
-export const Header: React.FunctionComponent = (props) => {
+export const Header: React.FunctionComponent = () => {
+  const [mobileNavOpen, setMobileNavOpen] = useState<boolean>()
+
+  const navClasses = [styles.navigation]
+  if (mobileNavOpen) {
+    navClasses.push(styles['mobile-open'])
+  }
+
   return (
     <header className={styles.header}>
       <Container vCenter>
@@ -14,7 +24,12 @@ export const Header: React.FunctionComponent = (props) => {
             </div>
           </Column>
           <Column cols="10">
-            <nav className={styles.navigation}>
+            <div className={styles['hamburger-container']}>
+              <a className={styles.hamburger} onClick={() => setMobileNavOpen(!mobileNavOpen)}>
+                <MdMenu size="2rem"/>
+              </a>
+            </div>
+            <nav className={classNames(navClasses)}>
               <HeaderItem href="/inGame">Game View</HeaderItem>
               <HeaderItem href="/games">Games List</HeaderItem>
               <HeaderItem href="/">FAQ</HeaderItem>

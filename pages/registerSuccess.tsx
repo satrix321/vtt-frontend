@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Header, HeaderItem } from '../components/page/header/header'
+import { Header } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 
 const RegisterSuccess: NextPage = () => {

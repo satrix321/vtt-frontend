@@ -6,7 +6,7 @@ type ContainerProps = {
 }
 
 export const Container: React.FunctionComponent<ContainerProps> = (props) => {
-  let classes: string[] = [styles.container]
+  const classes: string[] = [styles.container]
   if (props.vCenter) {
     classes.push(styles['v-center'])
   }
@@ -20,12 +20,16 @@ export const Container: React.FunctionComponent<ContainerProps> = (props) => {
 
 type RowProps = {
   noMargins?: boolean,
+  center?: boolean,
 }
 
 export const Row: React.FunctionComponent<RowProps> = (props) => {
-  let classes: string[] = [styles.row]
+  const classes: string[] = [styles.row]
   if (props.noMargins) {
     classes.push(styles['no-margins'])
+  }
+  if (props.center) {
+    classes.push(styles.center)
   }
 
   return (
@@ -35,7 +39,7 @@ export const Row: React.FunctionComponent<RowProps> = (props) => {
   )
 }
 
-type Props = {
+type ColumnProps = {
   cols?: string,
   sm?: string, 
   md?: string,
@@ -48,8 +52,8 @@ type Props = {
   'offset-xl'?: string,
 }
 
-export const Column: React.FunctionComponent<Props> = (props) => {
-  let classes: string[] = []
+export const Column: React.FunctionComponent<ColumnProps> = (props) => {
+  const classes: string[] = []
   if (props.cols) {
     classes.push(styles['col-' + props.cols])
   }

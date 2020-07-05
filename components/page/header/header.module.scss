@@ -1,15 +1,41 @@
 @import 'scss/spacings';
 @import 'scss/colors';
 @import 'scss/fonts';
+@import 'scss/media';
 
 $header-background: $black;
 $header-item-hover: $grey-1;
+$mobile-menu-width: 320px;
 
 .header {
   display: flex;
   height: $spacing-64;
   background-color: $header-background;
   color: $white;
+  position: relative;
+  z-index: 1;
+
+  .hamburger-container {
+    display: none;
+
+    .hamburger {
+      cursor: pointer;
+      display: block;
+      height: $spacing-32;
+      width: $spacing-32;
+    }
+  }
+
+  @include media('<=medium') {
+    position: fixed;
+
+    .hamburger-container {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      height: 100%;
+    }
+  }
 
   .logo-container {
     display: flex;
@@ -54,6 +80,32 @@ $header-item-hover: $grey-1;
         line-height: $spacing-48;
         padding-left: $spacing-16;
         padding-right: $spacing-16;
+      }
+    }
+
+    @include media('<=medium') {
+      position: absolute;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      width: $mobile-menu-width;
+      height: calc(100vh - 100%);
+      top: 100%;
+      right: -$mobile-menu-width;
+      background: $header-background;
+      transition: right ease-out .3s;
+
+      &.mobile-open {
+        right: 0;
+      }
+
+      .header-item {
+        background: $header-background;
+        width: 100%;
+
+        .link {
+          width: 100%;
+        }
       }
     }
   }
