@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { Container, Row, Column } from '../grid/grid'
-import styles from './header.module.scss'
 import { useState } from 'react'
 import classNames from 'classnames'
 import { MdMenu } from 'react-icons/md'
+import styles from './header.module.scss'
 
 export const Header: React.FunctionComponent = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>()

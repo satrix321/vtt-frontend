@@ -2,6 +2,7 @@ import { MyThunkAction } from '../types'
 import { showAlert } from '../alert/action'
 import { AlertType } from '../alert/reducer'
 import { User } from '../../models/profile'
+import axios from 'axios'
 
 export const requestGames = (): MyThunkAction => {
   return async (dispatch, getState) => {
@@ -22,15 +23,28 @@ export const requestGames = (): MyThunkAction => {
 }
 
 export const register = (email: string, password: string, username?: string): MyThunkAction<Promise<User>> => {
-  return async (dispatch, getState) => {
+  return async (_, getState) => {
     try {
       const user = await getState().app.api.register(email, password, username)
-      dispatch({
-        type: 'REGISTER',
-        payload: user,
-      })
       return user
     } catch (e) {
+      throw e
+    }
+  }
+}
+
+export const login = (email: string, password: string): MyThunkAction<Promise<User>> => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await getState().app.api.login(email, password)
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.token
+      dispatch({
+        type: 'LOGIN',
+        payload: response.user,
+      })
+      return response.user
+    } catch (e) {
+      delete axios.defaults.headers.common['Authorization']
       throw e
     }
   }

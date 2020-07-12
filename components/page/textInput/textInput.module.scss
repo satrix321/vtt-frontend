@@ -24,6 +24,7 @@
 
     &:focus {
       border-color: $black;
+      outline: none;
     }
   }
 }

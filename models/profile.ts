@@ -11,3 +11,8 @@ export type User = {
   email: string,
   username?: string,
 }
+
+export type LoginResponse = {
+  token: string,
+  user: User,
+}

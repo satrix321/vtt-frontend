@@ -17,14 +17,20 @@ import styleUtils from '../scss/utils.module.scss'
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const Register: NextPage<PropsFromRedux> = (props) => {
+  const [username, setUsername] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [username, setUsername] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
+
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords don\'t match')
+      return
+    }
 
     try {
       const result = await props.register(email, password, username)
@@ -69,6 +75,13 @@ const Register: NextPage<PropsFromRedux> = (props) => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                />
+                <TextInput
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <ErrorBlock message={errorMessage}/>
                 <Button block type="submit">SUBMIT</Button>
