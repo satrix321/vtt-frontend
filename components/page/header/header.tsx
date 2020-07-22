@@ -3,9 +3,12 @@ import { Container, Row, Column } from '../grid/grid'
 import { useState } from 'react'
 import classNames from 'classnames'
 import { MdMenu } from 'react-icons/md'
+import { useSelector } from 'react-redux'
+import { State } from '../../../store/store'
 import styles from './header.module.scss'
 
 export const Header: React.FunctionComponent = () => {
+  const isLogged = useSelector((state: State) => state.profile.isLogged)
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>()
 
   const navClasses = [styles.navigation]
@@ -33,8 +36,15 @@ export const Header: React.FunctionComponent = () => {
               <HeaderItem href="/inGame">Game View</HeaderItem>
               <HeaderItem href="/games">Games List</HeaderItem>
               <HeaderItem href="/">FAQ</HeaderItem>
-              <HeaderItem href="/login">Login</HeaderItem>
-              <HeaderItem href="/register">Register</HeaderItem>
+              {!isLogged
+                ? <>
+                  <HeaderItem href="/login">Login</HeaderItem>
+                  <HeaderItem href="/register">Register</HeaderItem>
+                </>
+                : <>
+                  <HeaderItem href="/logout">Logout</HeaderItem>
+                </>
+              }
             </nav>
           </Column>
         </Row>

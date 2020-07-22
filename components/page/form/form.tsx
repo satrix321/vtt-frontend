@@ -1,5 +1,5 @@
-import styles from './form.module.scss'
 import { FormEvent } from 'react'
+import styles from './form.module.scss'
 
 type Props = {
   onSubmit?: (e: FormEvent) => void

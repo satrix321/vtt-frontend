@@ -1,6 +1,6 @@
-import styles from './quoteHighlight.module.scss'
 import { Row, Column } from '../grid/grid'
 import { Cta } from '../cta/cta'
+import styles from './quoteHighlight.module.scss'
 
 type Props = {
   quote?: string,

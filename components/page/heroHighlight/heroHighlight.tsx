@@ -1,7 +1,7 @@
-import styles from './heroHighlight.module.scss'
 import classNames from 'classnames'
 import { Row, Column } from '../grid/grid'
 import { Cta } from '../cta/cta'
+import styles from './heroHighlight.module.scss'
 
 type Props = {
   title?: string,

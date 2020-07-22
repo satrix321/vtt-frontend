@@ -3,9 +3,9 @@ import { Game } from '../../../models/profile'
 import { connect } from 'react-redux'
 import { Row, Column } from '../grid/grid'
 import { Chip } from '../chip/chip'
-import styles from './gameList.module.scss'
 import { State } from '../../../store/store'
 import { ProfileState } from '../../../store/profile/reducer'
+import styles from './gameList.module.scss'
 
 const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
   const games = profile.games

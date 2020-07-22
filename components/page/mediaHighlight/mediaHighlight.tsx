@@ -1,5 +1,5 @@
-import styles from './mediaHighlight.module.scss'
 import { Cta } from '../cta/cta'
+import styles from './mediaHighlight.module.scss'
 
 type Props = {
   title?: string,

@@ -9,6 +9,7 @@ import { GameList } from '../components/page/gameList/gameList'
 import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
 import { Header } from '../components/page/header/header'
+import { withAuth } from '../components/utils/auth/auth'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -48,4 +49,4 @@ const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
 }
 
 const connector = connect(null, mapDispatchToProps)
-export default connector(Games)
+export default withAuth(connector(Games))

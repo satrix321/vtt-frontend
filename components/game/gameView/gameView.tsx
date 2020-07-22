@@ -1,6 +1,6 @@
-import styles from './gameView.module.scss'
 import * as PIXI from 'pixi.js'
 import { useRef, useEffect } from 'react'
+import styles from './gameView.module.scss'
 
 export const GameView: React.FunctionComponent = () => {
   const root = useRef<HTMLDivElement>(null)

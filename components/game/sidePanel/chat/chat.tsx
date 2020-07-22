@@ -1,4 +1,3 @@
-import styles from './chat.module.scss'
 import { GiD4 } from 'react-icons/gi'
 import { GiPerspectiveDiceSix } from 'react-icons/gi'
 import { GiDiceEightFacesEight } from 'react-icons/gi'
@@ -6,6 +5,7 @@ import { GiD10 } from 'react-icons/gi'
 import { GiD12 } from 'react-icons/gi'
 import { GiDiceTwentyFacesTwenty } from 'react-icons/gi'
 import { Message } from './message/message'
+import styles from './chat.module.scss'
 
 export const Chat: React.FunctionComponent = () => {
   return (

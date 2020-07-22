@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import styles from './alert.module.scss'
 import { connect } from 'react-redux'
 import { State } from '../../../store/store'
 import { AlertState, AlertType } from '../../../store/alert/reducer'
@@ -7,6 +6,7 @@ import { IoMdCloseCircle } from 'react-icons/io'
 import { IoMdWarning } from 'react-icons/io'
 import { IoMdCheckmarkCircle } from 'react-icons/io'
 import { IoMdInformationCircle } from 'react-icons/io'
+import styles from './alert.module.scss'
 
 const AlertComponent: React.FunctionComponent<AlertState> = (alert) => {
   let classes: string[] = []

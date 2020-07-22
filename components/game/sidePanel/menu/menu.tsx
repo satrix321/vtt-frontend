@@ -1,4 +1,3 @@
-import styles from './menu.module.scss'
 import classNames from 'classnames'
 import { useCallback, useState } from 'react'
 import { IoMdChatboxes } from 'react-icons/io'
@@ -10,6 +9,7 @@ import { MdQueueMusic } from 'react-icons/md'
 import { GiSpinningSword } from 'react-icons/gi'
 import { AiFillCode } from 'react-icons/ai'
 import { FaCogs } from 'react-icons/fa'
+import styles from './menu.module.scss'
 
 export const Menu: React.FunctionComponent = () => {
   const [menuItems, setMenuItems] = useState([
