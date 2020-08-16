@@ -41,6 +41,7 @@ $mobile-menu-width: 320px;
     display: flex;
     height: 100%;
     align-items: center;
+    cursor: pointer;
 
     .logo {
       height: $spacing-48;
