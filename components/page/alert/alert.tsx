@@ -18,20 +18,20 @@ const AlertComponent: React.FunctionComponent<AlertState> = (alert) => {
   switch (alert.type) {
     case AlertType.Error:
       classes.push(styles['error-type'])
-      icon = <IoMdCloseCircle className={styles.icon} size="1.5rem"/>
+      icon = <IoMdCloseCircle className={styles.icon} size="1.5em"/>
       break;
     case AlertType.Warning:
       classes.push(styles['warning-type'])
-      icon = <IoMdWarning className={styles.icon} size="1.5rem"/>
+      icon = <IoMdWarning className={styles.icon} size="1.5em"/>
       break;
     case AlertType.Success:
       classes.push(styles['success-type'])
-      icon = <IoMdCheckmarkCircle className={styles.icon} size="1.5rem"/>
+      icon = <IoMdCheckmarkCircle className={styles.icon} size="1.5em"/>
       break;
     case AlertType.Regular:
     default:
       classes.push(styles['regular-type'])
-      icon = <IoMdInformationCircle className={styles.icon} size="1.5rem"/>
+      icon = <IoMdInformationCircle className={styles.icon} size="1.5em"/>
       break;
   }
 
