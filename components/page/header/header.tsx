@@ -21,27 +21,28 @@ export const Header: React.FunctionComponent = () => {
       <Container vCenter>
         <Row noMargins>
           <Column cols="2">
-            <div className={styles['logo-container']}>
-              <img className={styles.logo} src="logo-inverted.png" alt="logo"/>
-              <span className={styles['logo-text']}>VTT</span>
-            </div>
+            <Link href="/">
+              <div className={styles['logo-container']}>
+                <img className={styles.logo} src="logo-inverted.png" alt="logo"/>    
+                <span className={styles['logo-text']}>VTT</span>
+              </div>
+            </Link>
           </Column>
           <Column cols="10">
             <div className={styles['hamburger-container']}>
               <a className={styles.hamburger} onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-                <MdMenu size="2rem"/>
+                <MdMenu size="2em"/>
               </a>
             </div>
             <nav className={classNames(navClasses)}>
-              <HeaderItem href="/inGame">Game View</HeaderItem>
-              <HeaderItem href="/games">Games List</HeaderItem>
-              <HeaderItem href="/">FAQ</HeaderItem>
               {!isLogged
                 ? <>
                   <HeaderItem href="/login">Login</HeaderItem>
                   <HeaderItem href="/register">Register</HeaderItem>
                 </>
                 : <>
+                  <HeaderItem href="/games">Games List</HeaderItem>
+                  <HeaderItem href="/inGame">Game View</HeaderItem>
                   <HeaderItem href="/logout">Logout</HeaderItem>
                 </>
               }
