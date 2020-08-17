@@ -4,10 +4,10 @@ import { AlertType } from '../alert/reducer'
 import { User } from '../../models/profile'
 import axios from 'axios'
 
-export const requestGames = (): MyThunkAction => {
+export const requestGames = (userId: number): MyThunkAction => {
   return async (dispatch, getState) => {
     try {
-      const games = await getState().app.api.getGames()
+      const games = await getState().app.api.getGames(userId)
       dispatch({
         type: 'REQUEST_GAMES',
         payload: games,
@@ -51,13 +51,23 @@ export const login = (email: string, password: string): MyThunkAction<Promise<Us
   }
 }
 
-export const autoLogin = (): MyThunkAction => {
-  return (dispatch) => {
+export const autoLogin = (): MyThunkAction<Promise<User|undefined>> => {
+  return async (dispatch, getState) => {
     const auth = window.localStorage.getItem('auth')
 
     if (auth) {
-      axios.defaults.headers.common['Authorization'] = auth
-      dispatch({ type: 'AUTO_LOGIN' })
+      try {
+        axios.defaults.headers.common['Authorization'] = auth
+        const response = await getState().app.api.autoLogin(auth.replace('Bearer ', ''))
+        dispatch({
+          type: 'AUTO_LOGIN',
+          payload: response,
+        })
+        return response.user
+      } catch (e) {
+        delete axios.defaults.headers.common['Authorization']
+        throw e
+      }
     } else if (axios.defaults.headers.common['Authorization']) {
       delete axios.defaults.headers.common['Authorization']
     }

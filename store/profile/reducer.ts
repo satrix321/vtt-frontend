@@ -1,7 +1,6 @@
 import { Game, User } from '../../models/profile'
 import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
-import { runInContext } from 'vm'
 
 export type ProfileState = {
   isLogged: boolean,
@@ -32,11 +31,13 @@ const reducer: Reducer<ProfileState, AnyAction> = (state = initialState, action)
       return {
         ...state,
         isLogged: true,
+        user: action.payload,
       }
     case 'LOGOUT':
       return {
         ...state,
         isLogged: false,
+        user: null,
       }
     case HYDRATE:
       return {...state, ...action.payload.profile }

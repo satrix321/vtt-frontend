@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
+import { connect, ConnectedProps, useSelector } from 'react-redux'
 import { requestGames } from '../store/profile/action'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { Footer } from '../components/page/footer/footer'
@@ -10,12 +10,17 @@ import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
 import { Header } from '../components/page/header/header'
 import { withAuth } from '../components/utils/auth/auth'
+import { State } from '../store/store'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const Games: NextPage<PropsFromRedux> = ({ requestGames }) => {
+  const userId = useSelector((state: State) => state.profile.user?.id)
+
   useEffect(() => {
-    requestGames()
+    if (userId) {
+      requestGames(userId)
+    }
   }, [])
 
   return (

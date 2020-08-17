@@ -6,7 +6,9 @@ const apiBaseUrl = process.env.apiBaseUrl as string
 export type BackendApi = {
   register: (email: string, password: string, username?: string) => Promise<User>,
   login: (email: string, password: string) => Promise<LoginResponse>,
-  getGames: () => Promise<Game[]>,
+  autoLogin: (token: string) => Promise<LoginResponse>,
+
+  getGames: (userId: number) => Promise<Game[]>,
 }
 
 const api: BackendApi = {
@@ -49,9 +51,46 @@ const api: BackendApi = {
     }
   },
 
-  getGames: async (): Promise<Game[]> => {
-    const response = await axios.get('http://localhost:8080/api/games')
-    return response.data as Game[]
+  autoLogin: async (token: string): Promise<LoginResponse> => {
+    const autoLoginQuery = `mutation {
+      autoLogin(token: "${token}") {
+        id
+        email
+        username
+      }
+    }`
+
+    const response = await axios.post(apiBaseUrl, { query: autoLoginQuery })
+
+    if (!response.data.errors) {
+      return response.data.data.autoLogin as LoginResponse
+    } else {
+      throw new Error(response.data.errors[0].message)
+    }
+  },
+
+  getGames: async (userId: number): Promise<Game[]> => {
+    const getGamesQuery = `query {
+      listOfGames(userId: ${userId}) {
+        id
+        name
+        ownerId
+        description
+        lastGameDate
+        nextGameDate
+        players {
+          id
+        }
+      }
+    }`
+
+    const response = await axios.post(apiBaseUrl, { query: getGamesQuery })
+
+    if (!response.data.errors) {
+      return response.data.data.listOfGames as Game[]
+    } else {
+      throw new Error(response.data.errors[0].message)
+    }
   }
 }
 

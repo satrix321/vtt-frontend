@@ -14,7 +14,7 @@ const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
     <div>
       <h1>List of Games</h1>
       {games.map((game: Game) => (
-        <div data-id={game.gameId} key={game.gameId} className={styles.game}>
+        <div data-id={game.id} key={game.id} className={styles.game}>
           <Row>
             <Column cols="12" md="4">
               <picture className={styles.image}>
