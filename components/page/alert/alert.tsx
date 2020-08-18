@@ -36,7 +36,7 @@ const AlertComponent: React.FunctionComponent<AlertState> = (alert) => {
   }
 
   return (
-    <div className={classNames(classes)}>
+    <div className={classNames(classes)} style={{ display: 'none' }}>
       {icon} {alert.message}
     </div>
   )

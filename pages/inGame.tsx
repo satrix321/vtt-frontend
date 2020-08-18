@@ -3,6 +3,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { connect } from 'react-redux'
 import { SidePanel } from '../components/game/sidePanel/sidePanel'
+import { motion } from 'framer-motion'
 
 const GameView = dynamic(
   async () => {
@@ -20,10 +21,10 @@ const InGame: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <GameView />
         <SidePanel />
-      </main>
+      </motion.main>
     </div>
   )
 }

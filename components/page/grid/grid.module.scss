@@ -17,6 +17,10 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
   &.v-center {
     margin-top: auto;
     margin-bottom: auto;
+
+    main & > div {
+      padding-bottom: $spacing-64;
+    }
   }
 
   .row {

@@ -11,6 +11,7 @@ import { bindThunkAction } from '../store/utils'
 import { Header } from '../components/page/header/header'
 import { withAuth } from '../components/utils/auth/auth'
 import { State } from '../store/store'
+import { motion } from 'framer-motion'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -32,7 +33,7 @@ const Games: NextPage<PropsFromRedux> = ({ requestGames }) => {
 
       <Header/>
 
-      <main>
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container>
           <Row>
             <Column cols="12">
@@ -40,7 +41,7 @@ const Games: NextPage<PropsFromRedux> = ({ requestGames }) => {
             </Column>
           </Row>
         </Container>
-      </main>
+      </motion.main>
 
       <Footer/>
     </div>

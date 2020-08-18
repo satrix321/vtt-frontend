@@ -8,6 +8,7 @@ import { MediaHighlight } from '../components/page/mediaHighlight/mediaHighlight
 import { SystemsHighlight } from '../components/page/systemsHighlight/systemsHighlight'
 import { HeroHighlight } from '../components/page/heroHighlight/heroHighlight'
 import { QuoteHighlight } from '../components/page/quoteHighlight/quoteHighlight'
+import { motion } from 'framer-motion'
 
 const Home: NextPage = () => {
   return (
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
 
       <Header/>
 
-      <main>
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container>
           <Row>
             <Column cols="12">
@@ -69,7 +70,7 @@ const Home: NextPage = () => {
             </Column>
           </Row>
         </Container>
-      </main>
+      </motion.main>
 
       <Footer/>
     </div>

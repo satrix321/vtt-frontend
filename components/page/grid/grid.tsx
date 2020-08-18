@@ -13,7 +13,9 @@ export const Container: React.FunctionComponent<ContainerProps> = (props) => {
 
   return (
     <div className={classNames(classes)}>
-      {props.children}
+      <div>
+        {props.children}
+      </div>
     </div>
   )
 }

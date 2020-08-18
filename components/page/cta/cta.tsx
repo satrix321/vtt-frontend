@@ -3,6 +3,7 @@ import styles from './cta.module.scss'
 
 type Props = {
   secondary?: boolean,
+  small?: boolean,
   href?: string,
 }
 
@@ -13,6 +14,10 @@ export const Cta: React.FunctionComponent<Props> = (props) => {
     classes.push(styles.secondary)
   } else {
     classes.push(styles.primary)
+  }
+
+  if (props.small) {
+    classes.push(styles.small)
   }
 
   return (

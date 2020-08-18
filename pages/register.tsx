@@ -13,6 +13,7 @@ import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
 import Router from 'next/router'
 import styleUtils from '../scss/utils.module.scss'
+import { motion } from 'framer-motion'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -34,7 +35,6 @@ const Register: NextPage<PropsFromRedux> = (props) => {
 
     try {
       const result = await props.register(email, password, username)
-      console.log(result)
       Router.push('/')
     } catch (e) {
       setErrorMessage(e.message)
@@ -50,7 +50,7 @@ const Register: NextPage<PropsFromRedux> = (props) => {
 
       <Header/>
 
-      <main>
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container vCenter>
           <Row center>
             <Column cols="12" sm="8" md="6" lg="4">
@@ -89,7 +89,7 @@ const Register: NextPage<PropsFromRedux> = (props) => {
             </Column>
           </Row>
         </Container>
-      </main>
+      </motion.main>
     </div>
   )
 }

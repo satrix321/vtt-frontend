@@ -3,13 +3,13 @@ import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 
 export type ProfileState = {
-  isLogged: boolean,
+  isLogged: boolean | null,
   user: User | null,
   games: Game[],
 }
 
 const initialState: ProfileState = {
-  isLogged: false,
+  isLogged: null,
   user: null,
   games: [],
 }

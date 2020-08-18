@@ -6,6 +6,7 @@ import { MdMenu } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { State } from '../../../store/store'
 import styles from './header.module.scss'
+import { motion } from 'framer-motion'
 
 export const Header: React.FunctionComponent = () => {
   const isLogged = useSelector((state: State) => state.profile.isLogged)
@@ -17,7 +18,7 @@ export const Header: React.FunctionComponent = () => {
   }
 
   return (
-    <header className={styles.header}>
+    <motion.header className={styles.header} initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }}>
       <Container vCenter>
         <Row noMargins>
           <Column cols="2">
@@ -42,7 +43,6 @@ export const Header: React.FunctionComponent = () => {
                 </>
                 : <>
                   <HeaderItem href="/games">Games List</HeaderItem>
-                  <HeaderItem href="/inGame">Game View</HeaderItem>
                   <HeaderItem href="/logout">Logout</HeaderItem>
                 </>
               }
@@ -50,7 +50,7 @@ export const Header: React.FunctionComponent = () => {
           </Column>
         </Row>
       </Container>
-    </header>
+    </motion.header>
   )
 }
 

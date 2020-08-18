@@ -13,11 +13,27 @@
     color: $white;
     background: $black;
     line-height: $spacing-48;
+
+    &.small {
+      line-height: $spacing-32;
+      font-size: $font-16;
+      padding-left: $spacing-16;
+      padding-right: $spacing-16;
+    }
   }
   
   &.secondary {
     color: $black;
     line-height: $spacing-48 - $spacing-2*2;
     border: $spacing-2 solid $black;
+    padding-left: $spacing-32 - $spacing-2;
+    padding-right: $spacing-32 - $spacing-2;
+
+    &.small {
+      line-height: $spacing-32 - $spacing-2*2;
+      font-size: $font-16;
+      padding-left: $spacing-16 - $spacing-2;
+      padding-right: $spacing-16 - $spacing-2;
+    }
   }
 }

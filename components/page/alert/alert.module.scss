@@ -2,6 +2,7 @@
 @import 'scss/colors';
 
 .alert {
+  display: none;
   position: fixed;
   max-width: $spacing-512;
   min-height: $spacing-32;
@@ -11,7 +12,6 @@
   transform: translateX(-50%);
   justify-content: center;
   align-items: center;
-  display: inline-flex;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s linear, opacity 0.3s linear;
@@ -19,6 +19,7 @@
   background: $white;
 
   &.visible {
+    display: inline-flex !important;
     visibility: visible;
     opacity: 1;
   }

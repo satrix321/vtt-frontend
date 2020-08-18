@@ -80,6 +80,7 @@ const api: BackendApi = {
         nextGameDate
         players {
           id
+          username
         }
       }
     }`

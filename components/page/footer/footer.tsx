@@ -1,9 +1,10 @@
 import { Container, Row, Column } from '../grid/grid'
 import styles from './footer.module.scss'
+import { motion } from 'framer-motion'
 
 export const Footer: React.FunctionComponent = () => {
   return (
-    <footer className={styles.footer}>
+    <motion.footer className={styles.footer} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <Container>
         <Row>
           <Column cols="12">
@@ -11,6 +12,6 @@ export const Footer: React.FunctionComponent = () => {
           </Column>
         </Row>
       </Container>
-    </footer>
+    </motion.footer>
   )
 }

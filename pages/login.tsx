@@ -13,6 +13,7 @@ import { bindThunkAction } from '../store/utils'
 import { login } from '../store/profile/action'
 import Router from 'next/router'
 import styleUtils from '../scss/utils.module.scss'
+import { motion } from 'framer-motion'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -41,7 +42,7 @@ const Login: NextPage<PropsFromRedux> = (props) => {
 
       <Header/>
 
-      <main>
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container vCenter>
           <Row center>
             <Column cols="12" sm="8" md="6" lg="4">
@@ -66,7 +67,7 @@ const Login: NextPage<PropsFromRedux> = (props) => {
             </Column>
           </Row>
         </Container>
-      </main>
+      </motion.main>
     </div>
   )
 }

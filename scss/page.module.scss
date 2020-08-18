@@ -1,4 +1,6 @@
-.page > div:first-child { 
+@import 'scss/spacings';
+
+.page > div:nth-child(1) { 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
