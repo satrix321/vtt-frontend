@@ -12,6 +12,7 @@ export const GameView: React.FunctionComponent = () => {
     const app = new PIXI.Application({
       width: root.current?.offsetWidth,
       height: root.current?.offsetHeight,
+      resizeTo: window,
     })
 
     // The application will create a canvas element for you that you
