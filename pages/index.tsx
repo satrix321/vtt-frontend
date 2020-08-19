@@ -2,7 +2,6 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { connect } from 'react-redux'
 import { Container, Row, Column } from '../components/page/grid/grid'
-import { Header } from '../components/page/header/header'
 import { Footer } from '../components/page/footer/footer'
 import { MediaHighlight } from '../components/page/mediaHighlight/mediaHighlight'
 import { SystemsHighlight } from '../components/page/systemsHighlight/systemsHighlight'
@@ -17,8 +16,6 @@ const Home: NextPage = () => {
         <title>VTT</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header/>
 
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container>

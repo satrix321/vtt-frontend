@@ -18,7 +18,7 @@ export const Header: React.FunctionComponent = () => {
   }
 
   return (
-    <motion.header className={styles.header} initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }}>
+    <motion.header className={styles.header} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <Container vCenter>
         <Row noMargins>
           <Column cols="2">

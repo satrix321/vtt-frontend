@@ -1,7 +1,7 @@
 @import 'scss/spacings';
 
-.page > div:nth-child(1) { 
-  min-height: 100vh;
+.page > div:nth-child(2) { 
+  min-height: calc(100vh - #{$spacing-64});
   display: flex;
   flex-direction: column;
 

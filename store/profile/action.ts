@@ -45,6 +45,7 @@ export const login = (email: string, password: string): MyThunkAction<Promise<Us
       })
       return response.user
     } catch (e) {
+      dispatch({ type: 'LOGOUT' })
       delete axios.defaults.headers.common['Authorization']
       throw e
     }
@@ -60,15 +61,17 @@ export const autoLogin = (): MyThunkAction<Promise<User|undefined>> => {
         axios.defaults.headers.common['Authorization'] = auth
         const response = await getState().app.api.autoLogin(auth.replace('Bearer ', ''))
         dispatch({
-          type: 'AUTO_LOGIN',
+          type: 'LOGIN',
           payload: response,
         })
         return response.user
       } catch (e) {
+        dispatch({ type: 'LOGOUT' })
         delete axios.defaults.headers.common['Authorization']
         throw e
       }
-    } else if (axios.defaults.headers.common['Authorization']) {
+    } else {
+      dispatch({ type: 'LOGOUT' })
       delete axios.defaults.headers.common['Authorization']
     }
   }

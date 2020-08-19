@@ -1,6 +1,5 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Header } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -19,8 +18,6 @@ const Logout: NextPage = () => {
         <title>VTT</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header/>
 
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container vCenter>

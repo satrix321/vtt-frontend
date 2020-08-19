@@ -2,7 +2,6 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useState, FormEvent } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { Header } from '../components/page/header/header'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { TextInput } from '../components/page/textInput/textInput'
 import { Button } from '../components/page/button/button'
@@ -47,8 +46,6 @@ const Register: NextPage<PropsFromRedux> = (props) => {
         <title>VTT</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header/>
 
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container vCenter>

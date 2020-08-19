@@ -8,6 +8,7 @@ import { autoLogin } from '../store/profile/action'
 import { AnimatePresence } from 'framer-motion'
 import styles from '../scss/page.module.scss'
 import '../scss/global.scss'
+import { Header } from '../components/page/header/header'
 
 function handleExitComplete() {
   if (typeof window !== 'undefined') {
@@ -25,6 +26,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <div className={styles.page}>
+      <div style={{ display: router.route === '/inGame' ? 'none' : 'initial' }}>
+        <Header/>
+      </div>
       <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
         <Component {...pageProps} key={router.route}/>
       </AnimatePresence>

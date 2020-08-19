@@ -27,12 +27,6 @@ const reducer: Reducer<ProfileState, AnyAction> = (state = initialState, action)
         isLogged: true,
         user: action.payload,
       }
-    case 'AUTO_LOGIN':
-      return {
-        ...state,
-        isLogged: true,
-        user: action.payload,
-      }
     case 'LOGOUT':
       return {
         ...state,
