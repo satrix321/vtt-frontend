@@ -14,17 +14,16 @@
     margin-top: $spacing-8;
     display: block;
     width: 100%;
-    border: $spacing-2 solid $grey-4;
+    border: thin solid $black;
     height: $spacing-48;
     box-sizing: border-box;
     font-size: $font-16;
     padding-left: $spacing-12;
     padding-right: $spacing-12;
-    transition: border-color .2s ease-out;
+    transition: outline ease-in-out .1s;
 
     &:focus {
-      border-color: $black;
-      outline: none;
+      outline: $spacing-4 solid $focus;
     }
   }
 }

@@ -8,8 +8,7 @@ type Props = {
 }
 
 export const Button: React.FunctionComponent<Props> = (props) => {
-  let classes: string[] = []
-  classes.push(styles.button)
+  let classes: string[] = [styles.button]
   if (props.secondary) {
     classes.push(styles.secondary)
   } else {

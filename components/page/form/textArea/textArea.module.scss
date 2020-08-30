@@ -1,0 +1,44 @@
+@import 'scss/spacings';
+@import 'scss/colors';
+@import 'scss/fonts';
+
+.form-component {
+  margin-bottom: $spacing-24;
+
+  .label {
+    display: block;
+    font-size: $font-16;
+  }
+
+  .textarea {
+    margin-top: $spacing-8;
+    display: block;
+    width: 100%;
+    border: thin solid $black;
+    min-height: $spacing-48;
+    box-sizing: border-box;
+    font-size: $font-16;
+    padding: $spacing-16 $spacing-12;
+    transition: outline ease-in-out .1s;
+
+    &:focus {
+      outline: $spacing-4 solid $focus;
+    }
+
+    &.resize-none {
+      resize: none;
+    }
+
+    &.resize-horizontal {
+      resize: horizontal;
+    }
+
+    &.resize-vertical {
+      resize: vertical;
+    }
+
+    &.resize-both {
+      resize: both;
+    }
+  }
+}

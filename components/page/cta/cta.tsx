@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import styles from './cta.module.scss'
+import Link from 'next/link'
 
 type Props = {
   secondary?: boolean,
@@ -20,7 +21,20 @@ export const Cta: React.FunctionComponent<Props> = (props) => {
     classes.push(styles.small)
   }
 
-  return (
-    <a href={props.href} className={classNames(classes)}>{props.children}</a>
-  )
+  if (!props.href) {
+    props.href = '#'
+  }
+
+  
+  if (props.href?.startsWith('http') || props.href?.startsWith('https')) {
+    return (
+      <a className={classNames(classes)} href={props.href as string}>{props.children}</a>
+    )
+  } else {
+    return (
+      <Link href={props.href as string}>
+        <a className={classNames(classes)}>{props.children}</a>
+      </Link>
+    )
+  }
 }

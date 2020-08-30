@@ -11,6 +11,7 @@
   cursor: pointer;
   margin-right: $spacing-8;
   margin-bottom: $spacing-24;
+  transition: outline ease-in-out .1s;
 
   &.primary {
     background: $black;
@@ -21,7 +22,7 @@
   &.secondary {
     color: $black;
     line-height: $spacing-48 - $spacing-2*2;
-    border: $spacing-2 solid $black;
+    border: thin solid $black;
   }
 
   &.block {
@@ -35,7 +36,6 @@
   }
 
   &:focus {
-    outline: $spacing-2 solid $black;
-    outline-offset: $spacing-2;
+    outline: $spacing-4 solid $focus;
   }
 }

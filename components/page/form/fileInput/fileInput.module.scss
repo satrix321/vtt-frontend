@@ -1,0 +1,86 @@
+@import 'scss/spacings';
+@import 'scss/colors';
+@import 'scss/fonts';
+
+.form-component {
+  margin-bottom: $spacing-24;
+
+  .label {
+    display: block;
+    font-size: $font-16;
+  }
+
+  .input {
+    display: none;
+  }
+
+  .input-wrapper {
+    display: flex;
+    gap: $spacing-12;
+    align-items: baseline;
+
+    .button {
+      display: inline-block;
+      margin-top: $spacing-8;
+      padding-left: $spacing-16 - $spacing-2;
+      padding-right: $spacing-16 - $spacing-2;
+      font-size: $font-16;
+      cursor: pointer;
+      color: $black;
+      border: thin solid $black;
+      box-sizing: border-box;
+      line-height: $spacing-32 - $spacing-2*2;
+      transition: outline ease-in-out .1s;
+  
+      &::-moz-focus-inner {
+        border: 0;
+      }
+  
+      &:focus {
+        outline: $spacing-4 solid $focus;
+      }
+    }
+  
+    .filename {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+
+    &.multiple-files {
+      display: block;
+
+      .filename {
+        margin-left: 0;
+        margin-top: $spacing-8;
+      }
+    }
+  }
+
+  .image-previews {
+    margin-top: $spacing-12;
+
+    .preview {
+      display: flex;
+      gap: $spacing-12;
+      align-items: center;
+      margin-top: $spacing-8;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      img {
+        display: block;
+        width: 128px;
+        max-height: 72px;
+      }
+
+      .filename {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
+    }
+  }
+}

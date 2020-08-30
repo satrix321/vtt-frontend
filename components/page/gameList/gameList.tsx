@@ -16,7 +16,7 @@ const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
       <div className={styles['list-header']}>
         <h1 className={styles['title']}>List of Games</h1>
         <div className={styles['actions']}>
-          <Cta small href="#">CREATE NEW GAME</Cta>
+          <Cta small href="/createGame">CREATE NEW GAME</Cta>
           <Cta small href="#">JOIN GAME</Cta>
         </div>
       </div>
