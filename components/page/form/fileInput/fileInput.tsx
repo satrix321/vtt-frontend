@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState, useRef } from 'react'
+import { ChangeEvent, useState, useRef } from 'react'
 import styles from './fileInput.module.scss'
 import classNames from 'classnames'
 
@@ -25,7 +25,7 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
     inputWrapperClasses.push(styles['multiple-files'])
   }
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const files: FileWrapper[] = []
 
@@ -42,14 +42,14 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
     if (props.onChange) {
       props.onChange(event)
     }
-  }, [])
+  }
 
-  const onKeyPress = useCallback((event: React.KeyboardEvent<HTMLSpanElement>) => {
+  const onKeyPress = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     const keyCode = event.which || event.keyCode
     if (keyCode === 13 || keyCode === 32) {
       labelRef.current?.click()
     }
-  }, [])
+  }
 
   return (
     <div className={styles['form-component']}>

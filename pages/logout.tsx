@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Container, Row, Column } from '../components/page/grid/grid'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../store/profile/action'
+import { logout } from '../store/profile/actions'
 import { motion } from 'framer-motion'
 
 const Logout: NextPage = () => {

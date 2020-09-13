@@ -8,6 +8,7 @@
   text-decoration: none;
   padding-left: $spacing-32;
   padding-right: $spacing-32;
+  transition: outline ease-in-out .1s;
 
   &.primary {
     color: $white;
@@ -35,5 +36,9 @@
       padding-left: $spacing-16 - $spacing-2;
       padding-right: $spacing-16 - $spacing-2;
     }
+  }
+
+  &:focus {
+    outline: $spacing-4 solid $focus;
   }
 }

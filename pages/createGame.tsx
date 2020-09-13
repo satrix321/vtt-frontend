@@ -9,8 +9,14 @@ import { TextInput } from '../components/page/form/textInput/textInput'
 import { FileInput } from '../components/page/form/fileInput/fileInput'
 import { useState, FormEvent } from 'react'
 import { TextArea, ResizeType } from '../components/page/form/textArea/textArea'
+import { MyThunkDispatch } from '../store/types'
+import { bindThunkAction } from '../store/utils'
+import { connect, ConnectedProps } from 'react-redux'
+import { createGame } from '../store/profile/actions'
 
-const CreateGame: NextPage = () => {
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const CreateGame: NextPage<PropsFromRedux> = (props) => {
   const [gameName, setGameName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [gameImage, setGameImage] = useState<FileList|null>(null)
@@ -18,11 +24,9 @@ const CreateGame: NextPage = () => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setErrorMessage('')
 
-    if (!gameName) {
-      setErrorMessage('')
-      return
-    }
+    props.createGame(gameName, description, gameImage)
   }
   
   return (
@@ -41,6 +45,7 @@ const CreateGame: NextPage = () => {
                   name="gameName"
                   label="Game Name"
                   value={gameName}
+                  required
                   onChange={(e) => setGameName(e.target.value)}
                 />
                 <TextArea
@@ -69,4 +74,11 @@ const CreateGame: NextPage = () => {
   )
 }
 
-export default CreateGame
+const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
+  return {
+    createGame: bindThunkAction(createGame, dispatch)
+  }
+}
+
+const connector = connect(null, mapDispatchToProps)
+export default connector(CreateGame)

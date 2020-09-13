@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { IoMdChatboxes } from 'react-icons/io'
 import { GiPerson } from 'react-icons/gi'
 import { GiBookmark } from 'react-icons/gi'
@@ -24,13 +24,13 @@ export const Menu: React.FunctionComponent = () => {
     { id: 'settings', active: false, content: <FaCogs /> },
   ])
 
-  const changeSection = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+  const changeSection = (event: React.MouseEvent<HTMLDivElement>) => {
     const menuItemsTemp = [...menuItems]
     for (const menuItem of menuItemsTemp) {
       menuItem.active = menuItem.id === event.currentTarget.dataset.id
     }
     setMenuItems(menuItemsTemp)
-  }, [])
+  }
 
   return (
     <div className={styles.menu}>

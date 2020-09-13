@@ -1,7 +1,14 @@
-import axios from 'axios'
-import { Game, User, LoginResponse } from '../models/profile'
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client';
+import axios from 'axios';
+import { Game, LoginResponse, User } from '../models/profile';
 
 const apiBaseUrl = process.env.apiBaseUrl as string
+
+const apolloClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: createUploadLink({ uri: apiBaseUrl }),
+})
 
 export type BackendApi = {
   register: (email: string, password: string, username?: string) => Promise<User>,
@@ -9,9 +16,12 @@ export type BackendApi = {
   autoLogin: (token: string) => Promise<LoginResponse>,
 
   getGames: (userId: number) => Promise<Game[]>,
+  createGame: (gameName: string, description: string, gameImage: FileList | null) => Promise<boolean>,
 }
 
 const api: BackendApi = {
+  
+
   register: async (email: string, password: string, username?: string): Promise<User> => {
     const registerQuery = `mutation {
       register(email: "${email}", password: "${password}", username: "${username}") {
@@ -92,6 +102,33 @@ const api: BackendApi = {
     } else {
       throw new Error(response.data.errors[0].message)
     }
+  },
+
+  createGame: async (gameName: string, description: string, gameImage: FileList | null): Promise<boolean> => {
+    const mutation = gql`
+      mutation($file: Upload!) {
+        uploadFile(file: $file) {
+          result
+          error
+        }
+      }
+    `
+
+    if (gameImage && gameImage.length) {
+      const file = gameImage[0]
+      console.log(file)
+
+      const result = await apolloClient.mutate({
+        mutation,
+        variables: {
+          file,
+        }
+      })
+
+      console.log(result)
+    }
+
+    return false
   }
 }
 

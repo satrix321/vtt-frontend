@@ -3,7 +3,8 @@
 @import 'scss/fonts';
 
 .form-component {
-  margin-bottom: $spacing-24;
+  position: relative;
+  margin-bottom: $spacing-48;
 
   .label {
     display: block;
@@ -22,8 +23,33 @@
     padding-right: $spacing-12;
     transition: outline ease-in-out .1s;
 
+    &:invalid {
+      box-shadow: none;
+    }
+
     &:focus {
       outline: $spacing-4 solid $focus;
+    }
+
+    &.is-invalid {
+      border: thin solid $error;
+    }
+  }
+
+  .error-message {
+    position: absolute;
+    top: 100%;
+
+    color: $error;
+    margin-top: $spacing-8;
+    transition: transform ease-in .3s, opacity .3s;
+    transform: translateY(-$spacing-16);
+    opacity: 0;
+
+    &.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform ease-out .3s, opacity .3s .05s;
     }
   }
 }

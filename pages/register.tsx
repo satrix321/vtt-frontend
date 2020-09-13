@@ -6,7 +6,7 @@ import { Container, Row, Column } from '../components/page/grid/grid'
 import { TextInput } from '../components/page/form/textInput/textInput'
 import { Button } from '../components/page/form/button/button'
 import { Form } from '../components/page/form/form'
-import { register } from '../store/profile/action'
+import { register } from '../store/profile/actions'
 import { ErrorBlock } from '../components/page/form/errorBlock/errorBlock'
 import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
@@ -27,13 +27,8 @@ const Register: NextPage<PropsFromRedux> = (props) => {
     e.preventDefault()
     setErrorMessage('')
 
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords don\'t match')
-      return
-    }
-
     try {
-      const result = await props.register(email, password, username)
+      await props.register(email, password, username)
       Router.push('/')
     } catch (e) {
       setErrorMessage(e.message)
@@ -57,6 +52,7 @@ const Register: NextPage<PropsFromRedux> = (props) => {
                   name="username"
                   label="Username"
                   value={username}
+                  required
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <TextInput
@@ -64,6 +60,7 @@ const Register: NextPage<PropsFromRedux> = (props) => {
                   label="Email"
                   type="email"
                   value={email}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextInput
@@ -71,6 +68,7 @@ const Register: NextPage<PropsFromRedux> = (props) => {
                   label="Password"
                   type="password"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <TextInput
@@ -78,6 +76,10 @@ const Register: NextPage<PropsFromRedux> = (props) => {
                   label="Confirm Password"
                   type="password"
                   value={confirmPassword}
+                  required
+                  rules={[
+                    (v) => [v === password, 'Passwords don\'t match'],
+                  ]}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <ErrorBlock message={errorMessage}/>

@@ -9,7 +9,7 @@ import { Form } from '../components/page/form/form'
 import { ErrorBlock } from '../components/page/form/errorBlock/errorBlock'
 import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
-import { login } from '../store/profile/action'
+import { login } from '../store/profile/actions'
 import Router from 'next/router'
 import styleUtils from '../scss/utils.module.scss'
 import { motion } from 'framer-motion'
@@ -23,6 +23,7 @@ const Login: NextPage<PropsFromRedux> = (props) => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setErrorMessage('')
 
     try {
       await props.login(email, password)
@@ -50,7 +51,9 @@ const Login: NextPage<PropsFromRedux> = (props) => {
                 <TextInput
                   name="email"
                   label="Email"
+                  type="email"
                   value={email}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextInput
@@ -58,6 +61,7 @@ const Login: NextPage<PropsFromRedux> = (props) => {
                   label="Password"
                   type="password"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <ErrorBlock message={errorMessage}/>
