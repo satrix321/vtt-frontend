@@ -1,7 +1,7 @@
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client';
-import axios from 'axios';
-import { Game, LoginResponse, User } from '../models/profile';
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
+import { createUploadLink } from 'apollo-upload-client'
+import axios from 'axios'
+import { Game, LoginResponse, User } from '../models/profile'
 
 const apiBaseUrl = process.env.apiBaseUrl as string
 
