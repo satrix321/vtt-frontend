@@ -64,6 +64,7 @@
   .chat-input {
     textarea {
       box-sizing: border-box;
+      height: 70px;
       width: calc(100% - #{$spacing-16});
       padding: $spacing-8;
       margin: $spacing-8;

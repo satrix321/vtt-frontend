@@ -11,7 +11,11 @@ import { AiFillCode } from 'react-icons/ai'
 import { FaCogs } from 'react-icons/fa'
 import styles from './menu.module.scss'
 
-export const Menu: React.FunctionComponent = () => {
+type Props = {
+  onSectionChangedCallback?: (id: string | undefined) => void
+}
+
+export const Menu: React.FunctionComponent<Props> = (props) => {
   const [menuItems, setMenuItems] = useState([
     { id: 'chat', active: false, content: <IoMdChatboxes /> },
     { id: 'characters', active: false, content: <GiPerson /> },
@@ -26,10 +30,21 @@ export const Menu: React.FunctionComponent = () => {
 
   const changeSection = (event: React.MouseEvent<HTMLDivElement>) => {
     const menuItemsTemp = [...menuItems]
+    let id = event.currentTarget.dataset.id;
+
     for (const menuItem of menuItemsTemp) {
-      menuItem.active = menuItem.id === event.currentTarget.dataset.id
+      if (menuItem.active && menuItem.id === event.currentTarget.dataset.id) {
+        menuItem.active = false;
+        id = undefined;
+      } else {
+        menuItem.active = menuItem.id === event.currentTarget.dataset.id
+      }
     }
     setMenuItems(menuItemsTemp)
+
+    if (props.onSectionChangedCallback) {
+      props.onSectionChangedCallback(id);
+    }
   }
 
   return (

@@ -6,8 +6,26 @@ import { GiD12 } from 'react-icons/gi'
 import { GiDiceTwentyFacesTwenty } from 'react-icons/gi'
 import { Message } from './message/message'
 import styles from './chat.module.scss'
+import { useRef, useState } from 'react'
 
 export const Chat: React.FunctionComponent = () => {
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const [inputText, setInputText] = useState<string>('')
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      console.log(inputText)
+
+      if (inputRef.current) {
+        inputRef.current.value = ''
+      }
+    }
+  }
+  const onInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(event.target.value)
+  }
+
   return (
     <div className={styles.chat}>
       <div className={styles['messages-container']}>
@@ -46,7 +64,12 @@ export const Chat: React.FunctionComponent = () => {
         </div>
       </div>
       <div className={styles['chat-input']}>
-        <textarea placeholder="Type something here..."></textarea>
+        <textarea
+          placeholder="Type something here..."
+          ref={inputRef}
+          onKeyDown={onKeyDown}
+          onChange={onInputChange}
+        ></textarea>
       </div>
     </div>
   )
