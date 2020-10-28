@@ -22,6 +22,7 @@ export const Chat: React.FunctionComponent = () => {
       }
     }
   }
+
   const onInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(event.target.value)
   }
@@ -53,7 +54,7 @@ export const Chat: React.FunctionComponent = () => {
         </Message>
       </div>
       <div className={styles['dice-inputs']}>
-        <div className={styles.die}><GiD4/></div>
+        <div className={styles.die}><GiD4 /></div>
         <div className={styles.die}><GiPerspectiveDiceSix /></div>
         <div className={styles.die}><GiDiceEightFacesEight /></div>
         <div className={styles.die}><GiD10 /></div>
