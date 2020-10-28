@@ -1,3 +1,4 @@
+@import 'scss/colors';
 @import 'scss/spacings';
 @import 'scss/fonts';
 @import 'scss/media';
@@ -70,7 +71,16 @@
         }        
       }
 
-      img {
+      .system__link {
+        display: block;
+        transition: outline ease-in-out .1s;
+
+        &:focus {
+          outline: $spacing-4 solid $focus;
+        }
+      }
+
+      .system__img {
         display: block;
         width: 100%;
       }
