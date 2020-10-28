@@ -3,15 +3,17 @@
 @import 'scss/fonts';
 @import 'scss/media';
 
+$header-text: $white;
 $header-background: $black;
 $header-item-hover: $grey-1;
+$header-item-focus: $grey-2;
 $mobile-menu-width: 320px;
 
 .header {
   display: flex;
   height: $spacing-64;
   background-color: $header-background;
-  color: $white;
+  color: $header-text;
   position: relative;
   z-index: 1;
 
@@ -38,10 +40,22 @@ $mobile-menu-width: 320px;
   }
 
   .logo-container {
-    display: flex;
+    display: inline-flex;
     height: 100%;
     align-items: center;
-    cursor: pointer;
+    color: $header-text;
+    text-decoration: none;
+    padding-left: $spacing-16;
+    padding-right: $spacing-16;
+    transition: background ease-out .1s;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &[data-focus-visible-added] {
+      background: $header-item-focus;
+    }
 
     .logo {
       height: $spacing-48;
@@ -76,11 +90,20 @@ $mobile-menu-width: 320px;
 
       .link {
         display: inline-block;
-        color: $white;
+        color: $header-text;
         text-decoration: none;
         line-height: $spacing-48;
         padding-left: $spacing-16;
         padding-right: $spacing-16;
+        transition: background ease-out .1s;
+
+        &[data-focus-visible-added] {
+          background: $header-item-focus;
+        }
+
+        &:focus {
+          outline: 0;
+        }
       }
     }
 

@@ -9,6 +9,7 @@ import { AnimatePresence } from 'framer-motion'
 import styles from '../scss/page.module.scss'
 import '../scss/global.scss'
 import { Header } from '../components/page/header/header'
+import 'focus-visible'
 
 function handleExitComplete() {
   if (typeof window !== 'undefined') {

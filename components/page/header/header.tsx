@@ -23,10 +23,10 @@ export const Header: React.FunctionComponent = () => {
         <Row noMargins>
           <Column cols="2">
             <Link href="/">
-              <div className={styles['logo-container']}>
+              <a className={styles['logo-container']}>
                 <img className={styles.logo} src="logo-inverted.png" alt="logo"/>    
                 <span className={styles['logo-text']}>VTT</span>
-              </div>
+              </a>
             </Link>
           </Column>
           <Column cols="10">
