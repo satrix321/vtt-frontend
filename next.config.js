@@ -1,5 +1,5 @@
 module.exports = {
   env: {
-    apiBaseUrl: 'http://localhost:4000/',
+    apiBaseUrl: 'http://localhost:3000/api/graphql',
   },
 }

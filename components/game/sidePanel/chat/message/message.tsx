@@ -1,5 +1,4 @@
 import { GiRollingDices } from 'react-icons/gi'
-import parser from '../../../../../modules/parser'
 import styles from './message.module.scss'
 
 type Props = {

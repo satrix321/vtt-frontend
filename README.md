@@ -19,6 +19,37 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 email: admin@gmail.com
 password: adminq1@W
 
+## Prisma Migrations
+
+1. Modify the schema
+2. Run the following commands:
+
+```
+npx @prisma/cli migrate save --experimental
+npx @prisma/cli migrate up --experimental
+npx @prisma/cli generate
+```
+
+## Localstack [WIP]
+
+1. Install localstack & run it
+
+```
+DATA_DIR="/tmp/localstack/data" localstack start
+```
+
+2. Install awscli-local
+
+```
+pip install awscli-local
+```
+
+3. Create VTT Bucket
+
+```
+awslocal s3 mb s3://vtt
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

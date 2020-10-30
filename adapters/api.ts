@@ -106,10 +106,9 @@ const api: BackendApi = {
 
   createGame: async (gameName: string, description: string, gameImage: FileList | null): Promise<boolean> => {
     const mutation = gql`
-      mutation($file: Upload!) {
-        uploadFile(file: $file) {
-          result
-          error
+      mutation($ownerId: ID!, $name: String!, $description: String, $file: Upload!) {
+        createGame(ownerId: $ownerId, name: $name, description: $description, file: $file) {
+          name
         }
       }
     `
@@ -118,14 +117,22 @@ const api: BackendApi = {
       const file = gameImage[0]
       console.log(file)
 
-      const result = await apolloClient.mutate({
-        mutation,
-        variables: {
-          file,
-        }
-      })
+      try {
+        const result = await apolloClient.mutate({
+          mutation,
+          variables: {
+            ownerId: 0,
+            name: gameName,
+            description: description,
+            file,
+          }
+        })
 
-      console.log(result)
+        console.log(result)
+      } catch (e) {
+        console.log('error!')
+        console.log(e)
+      }
     }
 
     return false

@@ -1,9 +1,4 @@
-// Simple Arithmetics Grammar
-// ==========================
-//
-// Accepts expressions like "2 * (3 + 4)" and computes their value.
-// Modified to support random dice rolls like "2d12"
-
+export default `
 Expression
   = head:Term tail:(_ ("+" / "-") _ Term)* {
       return tail.reduce(function(result, element) {
@@ -41,4 +36,5 @@ Integer "integer"
   = _ [0-9]+ { return parseInt(text(), 10); }
 
 _ "whitespace"
-  = [ \t\n\r]*
+  = [ \\t\\n\\r]*
+`

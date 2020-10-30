@@ -73,7 +73,9 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
           </span>
           {!props.imagePreview &&
             fileWrappers.map((fileWrapper) => (
-              <p className={styles.filename}>{fileWrapper.file.name}</p>
+              <p className={styles.filename} key={fileWrapper.imageURL}>
+                {fileWrapper.file.name}
+              </p>
             ))
           }
         </div>
@@ -81,8 +83,8 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
           <div className={styles['image-previews']}>
             {
               fileWrappers.map((fileWrapper) => (
-                <div className={styles.preview}>
-                  <img src={fileWrapper.imageURL} key={fileWrapper.imageURL}></img>
+                <div className={styles.preview} key={fileWrapper.imageURL}>
+                  <img src={fileWrapper.imageURL}></img>
                   <span className={styles.filename}>{fileWrapper.file.name}</span>
                 </div>
               ))

@@ -1,0 +1,7 @@
+# Prisma Migrate lockfile v1
+
+20200501220033-init
+20200816122343-game-model-init
+20200817080508-game-players
+20200818081146-user-username-mandatory-and-unique
+20200818081347-username-unique
