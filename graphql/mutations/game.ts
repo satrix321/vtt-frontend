@@ -1,23 +1,14 @@
 import { Context } from '../context'
 
 export const createGame = async (_: any, { ownerId, name, description, file }: any, ctx: Context) => {
-  console.log(typeof ownerId)
-  console.log(typeof name)
-  console.log(typeof description)
-  console.log(typeof file)
+  if (!ctx.user) {
+    throw new Error('Not Authenticated')
+  }
+
+  console.log(ctx.user)
 
   // const { stream, filename, mimetype, encoding } = await file
 
-  // console.log(filename)
-  // console.log(mimetype)
-  // console.log(encoding)
-  // console.log(stream)
-
-  // console.log(ownerId)
-  // console.log(name)
-  // console.log(description)
-
-  // console.log('create game resolver!')
   return { name }
 
   // const user = await ctx.prisma.user.findOne({

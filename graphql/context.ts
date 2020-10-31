@@ -5,15 +5,22 @@ const jwtSecret = 'my-secret-from-env-file-in-prod'
 
 const prisma = new PrismaClient()
 
-export interface Context {
-  user: any
+type TokenPayload = {
+  id: number
+  email: string
+  iat: number
+  exp: number
+}
+
+export type Context = {
+  user: TokenPayload | null
   prisma: PrismaClient
 }
 
 const getUser = (token: string) => {
   try {
     if (token) {
-      return jwt.verify(token, jwtSecret)
+      return jwt.verify(token, jwtSecret) as TokenPayload
     }
     return null
   } catch (err) {
@@ -33,5 +40,5 @@ export function createContext({ req }: any): Context {
 }
 
 export function destroyContext(): Promise<any> {
-  return prisma.disconnect()
+  return prisma.$disconnect()
 }

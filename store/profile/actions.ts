@@ -52,8 +52,8 @@ export const login = (email: string, password: string): MyThunkAction<Promise<Us
   return async (dispatch, getState) => {
     try {
       const response = await getState().app.api.login(email, password)
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.token
-      localStorage.setItem('auth', 'Bearer ' + response.token)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+      localStorage.setItem('token', response.token)
       dispatch({
         type: 'LOGIN',
         payload: response.user,
@@ -69,12 +69,12 @@ export const login = (email: string, password: string): MyThunkAction<Promise<Us
 
 export const autoLogin = (): MyThunkAction<Promise<User | undefined>> => {
   return async (dispatch, getState) => {
-    const auth = window.localStorage.getItem('auth')
+    const token = window.localStorage.getItem('token')
 
-    if (auth) {
+    if (token) {
       try {
-        axios.defaults.headers.common['Authorization'] = auth
-        const response = await getState().app.api.autoLogin(auth.replace('Bearer ', ''))
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        const response = await getState().app.api.autoLogin(token)
         dispatch({
           type: 'LOGIN',
           payload: response,
@@ -94,7 +94,7 @@ export const autoLogin = (): MyThunkAction<Promise<User | undefined>> => {
 
 export const logout = (): MyThunkAction => {
   return (dispatch) => {
-    window.localStorage.removeItem('auth')
+    window.localStorage.removeItem('token')
     delete axios.defaults.headers.common['Authorization']
     dispatch({ type: 'LOGOUT' })
   }
