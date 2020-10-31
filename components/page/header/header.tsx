@@ -24,7 +24,7 @@ export const Header: React.FunctionComponent = () => {
           <Column cols="2">
             <Link href="/">
               <a className={styles['logo-container']}>
-                <img className={styles.logo} src="logo-inverted.png" alt="logo"/>    
+                <img className={styles.logo} src="logo-inverted.png" alt="logo" />
                 <span className={styles['logo-text']}>VTT</span>
               </a>
             </Link>
@@ -32,20 +32,21 @@ export const Header: React.FunctionComponent = () => {
           <Column cols="10">
             <div className={styles['hamburger-container']}>
               <a className={styles.hamburger} onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-                <MdMenu size="2em"/>
+                <MdMenu size="2em" />
               </a>
             </div>
             <nav className={classNames(navClasses)}>
-              {!isLogged
-                ? <>
+              {!isLogged ? (
+                <>
                   <HeaderItem href="/login">Login</HeaderItem>
                   <HeaderItem href="/register">Register</HeaderItem>
                 </>
-                : <>
+              ) : (
+                <>
                   <HeaderItem href="/games">Games List</HeaderItem>
                   <HeaderItem href="/logout">Logout</HeaderItem>
                 </>
-              }
+              )}
             </nav>
           </Column>
         </Row>
@@ -56,9 +57,10 @@ export const Header: React.FunctionComponent = () => {
 
 type HeaderItemProps = {
   href: string
+  children: React.ReactNode
 }
 
-export const HeaderItem: React.FunctionComponent<HeaderItemProps> = (props) => {
+export const HeaderItem: React.FunctionComponent<HeaderItemProps> = (props: HeaderItemProps) => {
   return (
     <div className={styles['header-item']}>
       <Link href={props.href}>

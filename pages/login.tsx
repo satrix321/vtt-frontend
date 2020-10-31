@@ -16,7 +16,7 @@ import { motion } from 'framer-motion'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Login: NextPage<PropsFromRedux> = (props) => {
+const Login: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -47,7 +47,7 @@ const Login: NextPage<PropsFromRedux> = (props) => {
           <Row center>
             <Column cols="12" sm="8" md="6" lg="4">
               <Form onSubmit={onSubmit}>
-              <h1 className={styleUtils['text--center']}>Login</h1>
+                <h1 className={styleUtils['text--center']}>Login</h1>
                 <TextInput
                   name="email"
                   label="Email"
@@ -64,8 +64,10 @@ const Login: NextPage<PropsFromRedux> = (props) => {
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <ErrorBlock message={errorMessage}/>
-                <Button block type="submit">LOGIN</Button>
+                <ErrorBlock message={errorMessage} />
+                <Button block type="submit">
+                  LOGIN
+                </Button>
               </Form>
             </Column>
           </Row>
@@ -77,7 +79,7 @@ const Login: NextPage<PropsFromRedux> = (props) => {
 
 const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    login: bindThunkAction(login, dispatch)
+    login: bindThunkAction(login, dispatch),
   }
 }
 

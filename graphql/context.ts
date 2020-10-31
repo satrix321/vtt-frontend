@@ -6,8 +6,8 @@ const jwtSecret = 'my-secret-from-env-file-in-prod'
 const prisma = new PrismaClient()
 
 export interface Context {
-  user: any,
-  prisma: PrismaClient,
+  user: any
+  prisma: PrismaClient
 }
 
 const getUser = (token: string) => {

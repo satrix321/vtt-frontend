@@ -7,27 +7,27 @@ export enum ResizeType {
   None = 1,
   Horizontal,
   Vertical,
-  Both
+  Both,
 }
 
 type Props = {
-  name: string,
-  label?: string,
-  value?: string,
-  width?: number,
-  height?: number,
-  minWidth?: number,
-  minHeight?: number,
-  resize?: ResizeType,
-  required?: boolean,
-  rules?: ValidationRule[],
-  validationEmitter?: ValidationEmitter,
-  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => any
+  name: string
+  label?: string
+  value?: string
+  width?: number
+  height?: number
+  minWidth?: number
+  minHeight?: number
+  resize?: ResizeType
+  required?: boolean
+  rules?: ValidationRule[]
+  validationEmitter?: ValidationEmitter
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export const TextArea: React.FunctionComponent<Props> = (props) => {
+export const TextArea: React.FunctionComponent<Props> = (props: Props) => {
   const [isValid, setIsValid] = useState<boolean>(true)
-  const [errorMessage, setErrorMessage] = useState<string|undefined>(undefined)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const textarea = useRef<HTMLTextAreaElement>(null)
 
   const textareaClasses: string[] = [styles.textarea]
@@ -79,9 +79,12 @@ export const TextArea: React.FunctionComponent<Props> = (props) => {
   useEffect(() => {
     const formValidation = () => {
       const validationState = validate(textarea.current?.value)
-    
+
       if (props.validationEmitter) {
-        props.validationEmitter.updateState(props.name, { result: validationState.result, error: validationState.error })
+        props.validationEmitter.updateState(props.name, {
+          result: validationState.result,
+          error: validationState.error,
+        })
       }
     }
 

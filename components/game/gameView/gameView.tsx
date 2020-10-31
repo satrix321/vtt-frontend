@@ -32,11 +32,7 @@ export const GameView: React.FunctionComponent = () => {
 
     app.stage.addChild(viewport)
 
-    viewport
-      .drag({ mouseButtons: 'right',  })
-      .pinch()
-      .wheel()
-      .decelerate({ friction: 0.8 })
+    viewport.drag({ mouseButtons: 'right' }).pinch().wheel().decelerate({ friction: 0.8 })
 
     // load the texture we need
     app.loader.add('bunny', 'bunny.jpg').load((loader, resources) => {
@@ -65,12 +61,5 @@ export const GameView: React.FunctionComponent = () => {
     })
   }, [root])
 
-  return (
-    <div
-      id="gameView"
-      className={styles['game-view']}
-      ref={root}
-    >
-    </div>
-  )
+  return <div id="gameView" className={styles['game-view']} ref={root}></div>
 }

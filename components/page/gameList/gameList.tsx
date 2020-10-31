@@ -16,8 +16,12 @@ const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
       <div className={styles['list-header']}>
         <h1 className={styles['title']}>List of Games</h1>
         <div className={styles['actions']}>
-          <Cta small href="/createGame">CREATE NEW GAME</Cta>
-          <Cta small href="#">JOIN GAME</Cta>
+          <Cta small href="/createGame">
+            CREATE NEW GAME
+          </Cta>
+          <Cta small href="#">
+            JOIN GAME
+          </Cta>
         </div>
       </div>
       {games.map((game: Game) => (
@@ -38,7 +42,9 @@ const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
               </h4>
               <div className={styles.players}>
                 {game.players?.map((player: any) => (
-                  <Chip data-id={player.id} key={player.id}>{player.username}</Chip>
+                  <Chip data-id={player.id} key={player.id}>
+                    {player.username}
+                  </Chip>
                 ))}
               </div>
             </div>

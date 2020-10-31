@@ -10,7 +10,7 @@ const GameView = dynamic(
     const { GameView } = await import('../components/game/gameView/gameView')
     return GameView
   },
-  { ssr: false }
+  { ssr: false },
 )
 
 const InGame: NextPage = () => {
@@ -22,8 +22,8 @@ const InGame: NextPage = () => {
       </Head>
 
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-        <GameView/>
-        <SidePanel/>
+        <GameView />
+        <SidePanel />
       </motion.main>
     </div>
   )

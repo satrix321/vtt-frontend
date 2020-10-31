@@ -3,20 +3,20 @@ import styles from './fileInput.module.scss'
 import classNames from 'classnames'
 
 type Props = {
-  name?: string,
-  label?: string,
-  multiple?: boolean,
-  accept?: string,
-  imagePreview?: boolean,
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => any
+  name?: string
+  label?: string
+  multiple?: boolean
+  accept?: string
+  imagePreview?: boolean
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 type FileWrapper = {
-  file: File,
+  file: File
   imageURL: string
 }
 
-export const FileInput: React.FunctionComponent<Props> = (props) => {
+export const FileInput: React.FunctionComponent<Props> = (props: Props) => {
   const [fileWrappers, setFileWrappers] = useState<FileWrapper[]>([])
   const labelRef = useRef<HTMLLabelElement>(null)
 
@@ -32,7 +32,7 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
       for (let i = 0; i < event.target.files.length; i++) {
         files.push({
           file: event.target.files[i],
-          imageURL: URL.createObjectURL(event.target.files[i])
+          imageURL: URL.createObjectURL(event.target.files[i]),
         })
       }
 
@@ -45,8 +45,8 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
   }
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLSpanElement>) => {
-    const keyCode = event.which || event.keyCode
-    if (keyCode === 13 || keyCode === 32) {
+    const key = event.key
+    if (key === 'Enter' || key === ' ') {
       labelRef.current?.click()
     }
   }
@@ -64,11 +64,7 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
           accept={props.accept}
         ></input>
         <div className={classNames(inputWrapperClasses)}>
-          <span
-            className={styles.button}
-            tabIndex={0}
-            onKeyPress={onKeyPress}
-          >
+          <span className={styles.button} tabIndex={0} onKeyPress={onKeyPress}>
             UPLOAD
           </span>
           {!props.imagePreview &&
@@ -76,21 +72,18 @@ export const FileInput: React.FunctionComponent<Props> = (props) => {
               <p className={styles.filename} key={fileWrapper.imageURL}>
                 {fileWrapper.file.name}
               </p>
-            ))
-          }
+            ))}
         </div>
-        {props.imagePreview &&
+        {props.imagePreview && (
           <div className={styles['image-previews']}>
-            {
-              fileWrappers.map((fileWrapper) => (
-                <div className={styles.preview} key={fileWrapper.imageURL}>
-                  <img src={fileWrapper.imageURL}></img>
-                  <span className={styles.filename}>{fileWrapper.file.name}</span>
-                </div>
-              ))
-            }
+            {fileWrappers.map((fileWrapper) => (
+              <div className={styles.preview} key={fileWrapper.imageURL}>
+                <img src={fileWrapper.imageURL}></img>
+                <span className={styles.filename}>{fileWrapper.file.name}</span>
+              </div>
+            ))}
           </div>
-        }
+        )}
       </label>
     </div>
   )

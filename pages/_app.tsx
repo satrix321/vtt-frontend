@@ -17,7 +17,7 @@ function handleExitComplete() {
   }
 }
 
-const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -28,12 +28,12 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <div className={styles.page}>
       <div style={{ display: router.route === '/inGame' ? 'none' : 'initial' }}>
-        <Header/>
+        <Header />
       </div>
       <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
-        <Component {...pageProps} key={router.route}/>
+        <Component {...pageProps} key={router.route} />
       </AnimatePresence>
-      <Alert/>
+      <Alert />
     </div>
   )
 }

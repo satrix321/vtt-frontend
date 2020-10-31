@@ -8,11 +8,15 @@ let hideAlertDebounced: (() => void) | null = null
 export const showAlert = (type: AlertType, message: string): MyThunkAction => {
   return (dispatch) => {
     if (!hideAlertDebounced) {
-      hideAlertDebounced = debounce(() => dispatch({
-        type: 'HIDE_ALERT',
-      }), alertDuration)
+      hideAlertDebounced = debounce(
+        () =>
+          dispatch({
+            type: 'HIDE_ALERT',
+          }),
+        alertDuration,
+      )
     }
-  
+
     hideAlertDebounced()
 
     return dispatch({
@@ -26,8 +30,9 @@ export const showAlert = (type: AlertType, message: string): MyThunkAction => {
 }
 
 export const hideAlert = (): MyThunkAction => {
-  return (dispatch) => dispatch({
-    type: 'HIDE_ALERT',
-    payload: null,
-  })
+  return (dispatch) =>
+    dispatch({
+      type: 'HIDE_ALERT',
+      payload: null,
+    })
 }

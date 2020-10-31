@@ -19,7 +19,7 @@ export const register = async (_: any, { email, password, username }: any, ctx: 
       email,
       password: hashedPassword,
       username,
-    }
+    },
   })
 
   return user
@@ -27,7 +27,7 @@ export const register = async (_: any, { email, password, username }: any, ctx: 
 
 export const login = async (_: any, { email, password }: any, ctx: Context) => {
   const user = await ctx.prisma.user.findOne({
-    where: { email }
+    where: { email },
   })
 
   if (!user) {
@@ -62,7 +62,7 @@ export const autoLogin = async (_: any, { token }: any, ctx: Context) => {
 
   if (decodedToken) {
     return await ctx.prisma.user.findOne({
-      where: { id: decodedToken.id }
+      where: { id: decodedToken.id },
     })
   }
 

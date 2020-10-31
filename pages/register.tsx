@@ -16,7 +16,7 @@ import { motion } from 'framer-motion'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Register: NextPage<PropsFromRedux> = (props) => {
+const Register: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
   const [username, setUsername] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -77,13 +77,13 @@ const Register: NextPage<PropsFromRedux> = (props) => {
                   type="password"
                   value={confirmPassword}
                   required
-                  rules={[
-                    (v) => [v === password, 'Passwords don\'t match'],
-                  ]}
+                  rules={[(v) => [v === password, "Passwords don't match"]]}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <ErrorBlock message={errorMessage}/>
-                <Button block type="submit">SUBMIT</Button>
+                <ErrorBlock message={errorMessage} />
+                <Button block type="submit">
+                  SUBMIT
+                </Button>
               </Form>
             </Column>
           </Row>
@@ -95,7 +95,7 @@ const Register: NextPage<PropsFromRedux> = (props) => {
 
 const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    register: bindThunkAction(register, dispatch)
+    register: bindThunkAction(register, dispatch),
   }
 }
 

@@ -10,9 +10,9 @@ import { ProfileState } from './profile/reducer'
 import { AlertState } from './alert/reducer'
 
 export type State = {
-  app: AppState,
-  profile: ProfileState,
-  alert: AlertState,
+  app: AppState
+  profile: ProfileState
+  alert: AlertState
 }
 
 const makeStore: MakeStore<State, Action> = (context: Context) => {
@@ -22,9 +22,7 @@ const makeStore: MakeStore<State, Action> = (context: Context) => {
       profile,
       alert,
     }),
-    composeWithDevTools(applyMiddleware(
-      thunk,
-    ))
+    composeWithDevTools(applyMiddleware(thunk)),
   )
 }
 

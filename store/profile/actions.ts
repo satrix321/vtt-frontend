@@ -22,12 +22,17 @@ export const requestGames = (userId: number): MyThunkAction => {
   }
 }
 
-export const createGame = (gameName: string, description: string, gameImage: FileList | null): MyThunkAction => {
+export const createGame = (
+  ownerId: number,
+  gameName: string,
+  description: string,
+  gameImage: FileList | null,
+): MyThunkAction => {
   return async (dispatch, getState) => {
     try {
-      await getState().app.api.createGame(gameName, description, gameImage)
+      await getState().app.api.createGame(ownerId, gameName, description, gameImage)
     } catch (e) {
-      console.error(e)
+      throw e
     }
   }
 }
@@ -62,7 +67,7 @@ export const login = (email: string, password: string): MyThunkAction<Promise<Us
   }
 }
 
-export const autoLogin = (): MyThunkAction<Promise<User|undefined>> => {
+export const autoLogin = (): MyThunkAction<Promise<User | undefined>> => {
   return async (dispatch, getState) => {
     const auth = window.localStorage.getItem('auth')
 

@@ -2,15 +2,16 @@ import { GiRollingDices } from 'react-icons/gi'
 import styles from './message.module.scss'
 
 type Props = {
-  type?: 'message' | 'roll',
-  nickname: string,
-  timestamp: string,
-  verbose?: boolean,
-  tokens?: string[],
-  result?: string,
+  type?: 'message' | 'roll'
+  nickname: string
+  timestamp: string
+  verbose?: boolean
+  tokens?: string[]
+  result?: string
+  children: React.ReactNode
 }
 
-export const Message: React.FunctionComponent<Props> = (props) => {
+export const Message: React.FunctionComponent<Props> = (props: Props) => {
   let content = props.children
 
   if (props.type && props.type === 'roll') {
@@ -20,8 +21,12 @@ export const Message: React.FunctionComponent<Props> = (props) => {
       content = (
         <div className={styles['roll-verbose']}>
           <p className={styles.equation}>Rolling {equation}</p>
-          <div><p className={styles.tokens}>({props.tokens?.join(' ')})</p></div>
-          <div><p className={styles.result}>{props.result}</p></div>
+          <div>
+            <p className={styles.tokens}>({props.tokens?.join(' ')})</p>
+          </div>
+          <div>
+            <p className={styles.result}>{props.result}</p>
+          </div>
         </div>
       )
     } else {
@@ -41,9 +46,7 @@ export const Message: React.FunctionComponent<Props> = (props) => {
         <p className={styles.timestamp}>{props.timestamp}</p>
       </div>
       <div className={styles.content}>
-        <div className={styles.text}>
-          {content}
-        </div>
+        <div className={styles.text}>{content}</div>
         {(() => {
           if (props.type === 'roll') {
             return (

@@ -4,17 +4,17 @@ import { Cta } from '../cta/cta'
 import styles from './heroHighlight.module.scss'
 
 type Props = {
-  title?: string,
-  subtitle?: string,
-  description?: string,
-  ctaText?: string,
-  ctaHref?: string,
-  backgroundSrc?: string,
-  invertColors?: boolean,
+  title?: string
+  subtitle?: string
+  description?: string
+  ctaText?: string
+  ctaHref?: string
+  backgroundSrc?: string
+  invertColors?: boolean
 }
 
-export const HeroHighlight: React.FunctionComponent<Props> = (props) => {
-  let classes: string[] = []
+export const HeroHighlight: React.FunctionComponent<Props> = (props: Props) => {
+  const classes: string[] = []
   classes.push(styles['hero-highlight'])
   if (props.invertColors) {
     classes.push(styles['invert-colors'])

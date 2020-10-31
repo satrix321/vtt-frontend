@@ -8,14 +8,15 @@ import { FileInput } from './fileInput/fileInput'
 
 type Props = {
   onSubmit?: (e: FormEvent) => void
+  children: React.ReactNode
 }
 
-export const Form: React.FunctionComponent<Props> = (props) => {
+export const Form: React.FunctionComponent<Props> = (props: Props) => {
   const [validationEmitter] = useState(new ValidationEmitter())
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    
+
     const isValid = validationEmitter.validateForm()
 
     if (isValid && props.onSubmit) {

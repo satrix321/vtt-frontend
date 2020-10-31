@@ -1,6 +1,6 @@
 import { EventEmitter, EventEmitterCallback } from '../../../modules/eventEmitter'
 
-export type ValidationState = { result: boolean, error?: string }
+export type ValidationState = { result: boolean; error?: string }
 export type ValidationRule = (data: string | number | string[] | undefined) => [boolean, string]
 
 export class ValidationEmitter {
@@ -65,7 +65,7 @@ export const validateEmail = (value: FieldValue) => {
 
 export const validateRules = (value: FieldValue, rules: ValidationRule[] | undefined) => {
   if (rules) {
-    for (let rule of rules) {
+    for (const rule of rules) {
       const [result, error] = rule(value)
 
       if (!result) {

@@ -3,13 +3,13 @@ import styles from './cta.module.scss'
 import Link from 'next/link'
 
 type Props = {
-  secondary?: boolean,
-  small?: boolean,
-  href?: string,
+  secondary?: boolean
+  small?: boolean
+  href?: string
 }
 
 export const Cta: React.FunctionComponent<Props> = (props) => {
-  let classes: string[] = []
+  const classes: string[] = []
   classes.push(styles.cta)
   if (props.secondary) {
     classes.push(styles.secondary)
@@ -25,10 +25,11 @@ export const Cta: React.FunctionComponent<Props> = (props) => {
     props.href = '#'
   }
 
-  
   if (props.href?.startsWith('http') || props.href?.startsWith('https')) {
     return (
-      <a className={classNames(classes)} href={props.href as string}>{props.children}</a>
+      <a className={classNames(classes)} href={props.href as string}>
+        {props.children}
+      </a>
     )
   } else {
     return (

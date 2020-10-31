@@ -16,19 +16,19 @@ import { createGame } from '../store/profile/actions'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CreateGame: NextPage<PropsFromRedux> = (props) => {
+const CreateGame: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
   const [gameName, setGameName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [gameImage, setGameImage] = useState<FileList|null>(null)
+  const [gameImage, setGameImage] = useState<FileList | null>(null)
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
 
-    props.createGame(gameName, description, gameImage)
+    props.createGame(0, gameName, description, gameImage)
   }
-  
+
   return (
     <div>
       <Head>
@@ -63,8 +63,10 @@ const CreateGame: NextPage<PropsFromRedux> = (props) => {
                   imagePreview
                   onChange={(e) => setGameImage(e.target.files)}
                 />
-                <ErrorBlock message={errorMessage}/>
-                <Button block type="submit">SUBMIT</Button>
+                <ErrorBlock message={errorMessage} />
+                <Button block type="submit">
+                  SUBMIT
+                </Button>
               </Form>
             </Column>
           </Row>
@@ -76,7 +78,7 @@ const CreateGame: NextPage<PropsFromRedux> = (props) => {
 
 const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    createGame: bindThunkAction(createGame, dispatch)
+    createGame: bindThunkAction(createGame, dispatch),
   }
 }
 

@@ -1,17 +1,17 @@
 import styles from './systemsHighlight.module.scss'
 
 type Props = {
-  title?: string,
-  description?: string,
-  systems: System[],
+  title?: string
+  description?: string
+  systems: System[]
 }
 
 type System = {
-  imageSrc: string,
-  imageHref?: string,
+  imageSrc: string
+  imageHref?: string
 }
 
-export const SystemsHighlight: React.FunctionComponent<Props> = (props) => {
+export const SystemsHighlight: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <section className={styles['systems-highlight']}>
       <div className={styles.title}>{props.title}</div>
@@ -21,7 +21,7 @@ export const SystemsHighlight: React.FunctionComponent<Props> = (props) => {
           return (
             <div className={styles.system} key={index}>
               <a className={styles['system__link']} href={system.imageHref}>
-                <img className={styles['system__img']} src={system.imageSrc} alt="system image"/>
+                <img className={styles['system__img']} src={system.imageSrc} alt="system image" />
               </a>
             </div>
           )

@@ -1,24 +1,29 @@
 import { ChangeEvent, useState, useEffect, useRef } from 'react'
-import { ValidationRule, ValidationEmitter, ValidationState, validateRequired, validateEmail, validateRules } from '../validation'
+import {
+  ValidationRule,
+  ValidationEmitter,
+  ValidationState,
+  validateRequired,
+  validateEmail,
+  validateRules,
+} from '../validation'
 import styles from './textInput.module.scss'
 import classNames from 'classnames'
 
-const emailRegex = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-
 type Props = {
-  name: string,
-  label?: string,
-  type?: string,
-  value?: string | number | string[],
-  required?: boolean,
-  rules?: ValidationRule[],
-  validationEmitter?: ValidationEmitter,
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => any,
+  name: string
+  label?: string
+  type?: string
+  value?: string | number | string[]
+  required?: boolean
+  rules?: ValidationRule[]
+  validationEmitter?: ValidationEmitter
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const TextInput: React.FunctionComponent<Props> = (props) => {
+export const TextInput: React.FunctionComponent<Props> = (props: Props) => {
   const [isValid, setIsValid] = useState<boolean>(true)
-  const [errorMessage, setErrorMessage] = useState<string|undefined>(undefined)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const input = useRef<HTMLInputElement>(null)
 
   const inputClasses = [styles.input]
@@ -60,9 +65,12 @@ export const TextInput: React.FunctionComponent<Props> = (props) => {
   useEffect(() => {
     const formValidation = () => {
       const validationState = validate(input.current?.value)
-    
+
       if (props.validationEmitter) {
-        props.validationEmitter.updateState(props.name, { result: validationState.result, error: validationState.error })
+        props.validationEmitter.updateState(props.name, {
+          result: validationState.result,
+          error: validationState.error,
+        })
       }
     }
 

@@ -9,9 +9,9 @@ export enum AlertType {
 }
 
 export type AlertState = {
-  isVisible: boolean,
-  type: AlertType,
-  message: string,
+  isVisible: boolean
+  type: AlertType
+  message: string
 }
 
 const initialState: AlertState = {
@@ -35,7 +35,7 @@ const reducer: Reducer<AlertState, AnyAction> = (state = initialState, action) =
         isVisible: false,
       }
     case HYDRATE:
-      return {...state, ...action.payload.app }
+      return { ...state, ...action.payload.app }
     default:
       return state
   }

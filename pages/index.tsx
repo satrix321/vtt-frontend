@@ -21,7 +21,6 @@ const Home: NextPage = () => {
         <Container>
           <Row>
             <Column cols="12">
-
               <MediaHighlight
                 title="VTT"
                 subtitle="The Best Way to Play"
@@ -35,15 +34,15 @@ const Home: NextPage = () => {
                 description="VTT is a highly customizable tool that can support any custom system. Start now with built-in support for most popular game systems."
                 systems={[
                   {
-                    imageSrc: "/fantasy-2847724_1920.jpg",
+                    imageSrc: '/fantasy-2847724_1920.jpg',
                   },
                   {
-                    imageHref: "https://www.google.com",
-                    imageSrc: "/fantasy-2847724_1920.jpg",
+                    imageHref: 'https://www.google.com',
+                    imageSrc: '/fantasy-2847724_1920.jpg',
                   },
                   {
-                    imageHref: "https://www.google.com",
-                    imageSrc: "/fantasy-2847724_1920.jpg",
+                    imageHref: 'https://www.google.com',
+                    imageSrc: '/fantasy-2847724_1920.jpg',
                   },
                 ]}
               />
@@ -63,13 +62,12 @@ const Home: NextPage = () => {
                 ctaHref="https://www.google.com"
                 backgroundSrc="/fantasy-2847724_1920.jpg"
               />
-
             </Column>
           </Row>
         </Container>
       </motion.main>
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }

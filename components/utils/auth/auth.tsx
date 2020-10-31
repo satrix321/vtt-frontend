@@ -5,7 +5,7 @@ import Login from '../../../pages/login'
 export const withAuth = (Component: any) => {
   const Wrapper = (props: any) => {
     const isLogged = useSelector((state: State) => state.profile.isLogged)
-    
+
     if (isLogged === true) {
       return <Component {...props} />
     } else if (isLogged === false) {

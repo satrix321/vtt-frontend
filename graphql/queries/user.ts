@@ -3,12 +3,12 @@ import { Context } from '../context'
 export const user = async (_: any, { id }: any, ctx: Context) => {
   return await ctx.prisma.user.findOne({
     where: {
-      id: Number(id)
+      id: Number(id),
     },
     include: {
       games: true,
-      ownedGames: true
-    }
+      ownedGames: true,
+    },
   })
 }
 
@@ -20,6 +20,6 @@ export const currentUser = async (_: any, _args: any, ctx: Context) => {
   return ctx.prisma.user.findOne({
     where: {
       id: ctx.user.id,
-    }
+    },
   })
 }

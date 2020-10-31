@@ -54,14 +54,29 @@ export const Chat: React.FunctionComponent = () => {
         </Message>
       </div>
       <div className={styles['dice-inputs']}>
-        <div className={styles.die}><GiD4 /></div>
-        <div className={styles.die}><GiPerspectiveDiceSix /></div>
-        <div className={styles.die}><GiDiceEightFacesEight /></div>
-        <div className={styles.die}><GiD10 /></div>
-        <div className={styles.die}><GiD12 /></div>
-        <div className={styles.die}><GiDiceTwentyFacesTwenty /></div>
         <div className={styles.die}>
-          <div className={styles.d100}><GiD10 /><GiD10 /></div>
+          <GiD4 />
+        </div>
+        <div className={styles.die}>
+          <GiPerspectiveDiceSix />
+        </div>
+        <div className={styles.die}>
+          <GiDiceEightFacesEight />
+        </div>
+        <div className={styles.die}>
+          <GiD10 />
+        </div>
+        <div className={styles.die}>
+          <GiD12 />
+        </div>
+        <div className={styles.die}>
+          <GiDiceTwentyFacesTwenty />
+        </div>
+        <div className={styles.die}>
+          <div className={styles.d100}>
+            <GiD10 />
+            <GiD10 />
+          </div>
         </div>
       </div>
       <div className={styles['chat-input']}>

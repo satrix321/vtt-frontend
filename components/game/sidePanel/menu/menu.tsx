@@ -15,7 +15,7 @@ type Props = {
   onSectionChangedCallback?: (id: string | undefined) => void
 }
 
-export const Menu: React.FunctionComponent<Props> = (props) => {
+export const Menu: React.FunctionComponent<Props> = (props: Props) => {
   const [menuItems, setMenuItems] = useState([
     { id: 'chat', active: false, content: <IoMdChatboxes /> },
     { id: 'characters', active: false, content: <GiPerson /> },
@@ -30,12 +30,12 @@ export const Menu: React.FunctionComponent<Props> = (props) => {
 
   const changeSection = (event: React.MouseEvent<HTMLDivElement>) => {
     const menuItemsTemp = [...menuItems]
-    let id = event.currentTarget.dataset.id;
+    let id = event.currentTarget.dataset.id
 
     for (const menuItem of menuItemsTemp) {
       if (menuItem.active && menuItem.id === event.currentTarget.dataset.id) {
-        menuItem.active = false;
-        id = undefined;
+        menuItem.active = false
+        id = undefined
       } else {
         menuItem.active = menuItem.id === event.currentTarget.dataset.id
       }
@@ -43,7 +43,7 @@ export const Menu: React.FunctionComponent<Props> = (props) => {
     setMenuItems(menuItemsTemp)
 
     if (props.onSectionChangedCallback) {
-      props.onSectionChangedCallback(id);
+      props.onSectionChangedCallback(id)
     }
   }
 

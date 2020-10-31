@@ -3,17 +3,17 @@ import { HYDRATE } from 'next-redux-wrapper'
 import api, { BackendApi } from '../../adapters/api'
 
 export type AppState = {
-  api: BackendApi,
+  api: BackendApi
 }
 
 const initialState: AppState = {
-  api: api
+  api: api,
 }
 
 const reducer: Reducer<AppState, AnyAction> = (state = initialState, action) => {
   switch (action.type) {
     case HYDRATE:
-      return {...state, ...action.payload.app }
+      return { ...state, ...action.payload.app }
     default:
       return state
   }

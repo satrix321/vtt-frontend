@@ -11,17 +11,15 @@ const apolloClient = new ApolloClient({
 })
 
 export type BackendApi = {
-  register: (email: string, password: string, username?: string) => Promise<User>,
-  login: (email: string, password: string) => Promise<LoginResponse>,
-  autoLogin: (token: string) => Promise<LoginResponse>,
+  register: (email: string, password: string, username?: string) => Promise<User>
+  login: (email: string, password: string) => Promise<LoginResponse>
+  autoLogin: (token: string) => Promise<LoginResponse>
 
-  getGames: (userId: number) => Promise<Game[]>,
-  createGame: (gameName: string, description: string, gameImage: FileList | null) => Promise<boolean>,
+  getGames: (userId: number) => Promise<Game[]>
+  createGame: (ownerId: number, gameName: string, description: string, gameImage: FileList | null) => Promise<boolean>
 }
 
 const api: BackendApi = {
-  
-
   register: async (email: string, password: string, username?: string): Promise<User> => {
     const registerQuery = `mutation {
       register(email: "${email}", password: "${password}", username: "${username}") {
@@ -104,7 +102,12 @@ const api: BackendApi = {
     }
   },
 
-  createGame: async (gameName: string, description: string, gameImage: FileList | null): Promise<boolean> => {
+  createGame: async (
+    ownerId: number,
+    gameName: string,
+    description: string,
+    gameImage: FileList | null,
+  ): Promise<boolean> => {
     const mutation = gql`
       mutation($ownerId: ID!, $name: String!, $description: String, $file: Upload!) {
         createGame(ownerId: $ownerId, name: $name, description: $description, file: $file) {
@@ -121,11 +124,11 @@ const api: BackendApi = {
         const result = await apolloClient.mutate({
           mutation,
           variables: {
-            ownerId: 0,
+            ownerId: ownerId,
             name: gameName,
             description: description,
             file,
-          }
+          },
         })
 
         console.log(result)
@@ -136,7 +139,7 @@ const api: BackendApi = {
     }
 
     return false
-  }
+  },
 }
 
 export default api

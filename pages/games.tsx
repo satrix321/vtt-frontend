@@ -14,12 +14,12 @@ import { bindThunkAction } from '../store/utils'
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Games: NextPage<PropsFromRedux> = ({ requestGames }) => {
+const Games: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
   const userId = useSelector((state: State) => state.profile.user?.id)
 
   useEffect(() => {
     if (userId) {
-      requestGames(userId)
+      props.requestGames(userId)
     }
   }, [])
 
@@ -40,7 +40,7 @@ const Games: NextPage<PropsFromRedux> = ({ requestGames }) => {
         </Container>
       </motion.main>
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }

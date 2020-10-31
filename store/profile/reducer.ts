@@ -3,9 +3,9 @@ import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 
 export type ProfileState = {
-  isLogged: boolean | null,
-  user: User | null,
-  games: Game[],
+  isLogged: boolean | null
+  user: User | null
+  games: Game[]
 }
 
 const initialState: ProfileState = {
@@ -34,7 +34,7 @@ const reducer: Reducer<ProfileState, AnyAction> = (state = initialState, action)
         user: null,
       }
     case HYDRATE:
-      return {...state, ...action.payload.profile }
+      return { ...state, ...action.payload.profile }
     default:
       return state
   }

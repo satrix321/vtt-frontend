@@ -2,14 +2,14 @@ import { Cta } from '../cta/cta'
 import styles from './mediaHighlight.module.scss'
 
 type Props = {
-  title?: string,
-  subtitle?: string,
-  description?: string,
-  ctaText?: string,
-  ctaHref?: string,
+  title?: string
+  subtitle?: string
+  description?: string
+  ctaText?: string
+  ctaHref?: string
 }
 
-export const MediaHighlight: React.FunctionComponent<Props> = (props) => {
+export const MediaHighlight: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <section className={styles['media-highlight']}>
       <div className={styles.media}>

@@ -10,13 +10,15 @@ const rollTokensRegex = /\d+d\d+/gm
 const allTokensRegex = /\d+d\d+|d\d+|\d+|\+|\-|\*|\/|\(|\)/gm
 
 type RollResult = {
-  equation: string,
-  result: string,
-  tokens: {
-    token: string,
-    isRoll: boolean,
-    rollResults: number[] | null,
-  }[] | null,
+  equation: string
+  result: string
+  tokens:
+    | {
+        token: string
+        isRoll: boolean
+        rollResults: number[] | null
+      }[]
+    | null
 }
 
 export default {
@@ -33,7 +35,7 @@ export default {
       if (tokens) {
         for (const token of tokens) {
           const isRoll = token.match(rollTokensRegex) ? true : false
-          let rollResults = isRoll ? [] as number[] : null
+          const rollResults = isRoll ? ([] as number[]) : null
 
           if (isRoll) {
             const splitToken = token.split('d')
@@ -72,5 +74,5 @@ export default {
         tokens: null,
       }
     }
-  }
+  },
 }
