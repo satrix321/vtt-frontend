@@ -16,12 +16,10 @@ export default gql`
     login(email: String!, password: String!): LoginResponse!
     autoLogin(token: String!): User
 
-    createGame(ownerId: ID!, name: String!, description: String, file: Upload!): Game!
+    createGame(name: String!, description: String, file: Upload!): Game!
     deleteGame(id: ID!): Game!
     addPlayerToGame(gameId: ID!, userId: ID!): Game!
     removePlayerFromGame(gameId: ID!, userId: ID!): Game!
-
-    uploadFile(file: Upload!): Result!
   }
 
   type Result {

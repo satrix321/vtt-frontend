@@ -13,6 +13,7 @@
     "@prisma/client": "^2.10.1",
     "apollo-server-micro": "^2.18.2",
     "apollo-upload-client": "^14.1.1",
+    "aws-sdk": "^2.789.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.2.6",
@@ -36,6 +37,7 @@
     "subscriptions-transport-ws": "^0.9.18"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^10.0.0",
     "@prisma/cli": "^2.10.1",
     "@types/apollo-upload-client": "^14.1.0",
     "@types/bcryptjs": "^2.4.2",

@@ -26,7 +26,7 @@ const CreateGame: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
     e.preventDefault()
     setErrorMessage('')
 
-    props.createGame(0, gameName, description, gameImage)
+    props.createGame(gameName, description, gameImage)
   }
 
   return (

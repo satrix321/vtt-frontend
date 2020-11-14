@@ -1,41 +1,57 @@
 import { Context } from '../context'
+import s3 from '../../modules/s3'
 
-export const createGame = async (_: any, { ownerId, name, description, file }: any, ctx: Context) => {
+export const createGame = async (_: any, { name, description, file }: any, ctx: Context) => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
 
-  console.log(ctx.user)
+  const user = await ctx.prisma.user.findOne({
+    where: {
+      id: Number(ctx.user.id),
+    },
+  })
+  if (!user) {
+    throw new Error("The user with the provided id doesn't exit.")
+  }
 
-  // const { stream, filename, mimetype, encoding } = await file
+  console.log(user)
 
-  return { name }
+  const { filename, createReadStream } = await file
 
-  // const user = await ctx.prisma.user.findOne({
-  //   where: {
-  //     id: Number(ownerId)
-  //   }
-  // })
-  // if (!user) {
-  //   throw new Error('The user with the provided id doesn\'t exit.')
-  // }
+  try {
+    const response = await s3
+      .upload({
+        Bucket: 'vtt',
+        Key: filename,
+        Body: createReadStream(),
+        ACL: 'public-read',
+      })
+      .promise()
 
-  // const game = await ctx.prisma.game.create({
-  //   data: {
-  //     name,
-  //     description,
-  //     owner: {
-  //       connect: { id: Number(ownerId) }
-  //     },
-  //     players: {
-  //       connect: {
-  //         id: Number(ownerId)
-  //       }
-  //     }
-  //   }
-  // })
+    console.log(response)
 
-  // return game
+    return { name }
+
+    // const game = await ctx.prisma.game.create({
+    //   data: {
+    //     name,
+    //     description,
+    //     owner: {
+    //       connect: { id: Number(ctx.user.id) },
+    //     },
+    //     players: {
+    //       connect: {
+    //         id: Number(ctx.user.id),
+    //       },
+    //     },
+    //   },
+    // })
+
+    // return game
+  } catch (e) {
+    throw new Error('Internal Server Error')
+  }
 }
 
 export const deleteGame = async (_: any, { id }: any, ctx: Context) => {

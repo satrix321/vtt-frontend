@@ -19,17 +19,5 @@ export default {
   Mutation: {
     ...authMutations,
     ...gameMutations,
-
-    uploadFile: async (_: any, { file }: any, ctx: Context) => {
-      const { stream, filename, mimetype, encoding } = await file
-
-      // const s3Client = new S3()
-
-      console.log('upload file resovler!')
-      console.log(filename)
-      // console.log(mimetype)
-      // console.log(encoding)
-      // console.log(stream)
-    },
   },
 }

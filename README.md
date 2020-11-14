@@ -50,6 +50,12 @@ pip install awscli-local
 awslocal s3 mb s3://vtt
 ```
 
+4. Copy a sample file
+
+```
+awslocal s3 cp ./test.txt s3://vtt/test.txt --acl public-read
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

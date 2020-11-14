@@ -1,6 +1,6 @@
 import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
-import api, { BackendApi } from '../../adapters/api'
+import api, { BackendApi } from '../../modules/api'
 
 export type AppState = {
   api: BackendApi

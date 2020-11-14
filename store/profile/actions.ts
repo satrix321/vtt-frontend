@@ -22,15 +22,10 @@ export const requestGames = (userId: number): MyThunkAction => {
   }
 }
 
-export const createGame = (
-  ownerId: number,
-  gameName: string,
-  description: string,
-  gameImage: FileList | null,
-): MyThunkAction => {
+export const createGame = (gameName: string, description: string, gameImage: FileList | null): MyThunkAction => {
   return async (dispatch, getState) => {
     try {
-      await getState().app.api.createGame(ownerId, gameName, description, gameImage)
+      await getState().app.api.createGame(gameName, description, gameImage)
     } catch (e) {
       throw e
     }

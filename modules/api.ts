@@ -30,7 +30,7 @@ export type BackendApi = {
   autoLogin: (token: string) => Promise<LoginResponse>
 
   getGames: (userId: number) => Promise<Game[]>
-  createGame: (ownerId: number, gameName: string, description: string, gameImage: FileList | null) => Promise<boolean>
+  createGame: (gameName: string, description: string, gameImage: FileList | null) => Promise<boolean>
 }
 
 const api: BackendApi = {
@@ -116,15 +116,10 @@ const api: BackendApi = {
     }
   },
 
-  createGame: async (
-    ownerId: number,
-    gameName: string,
-    description: string,
-    gameImage: FileList | null,
-  ): Promise<boolean> => {
+  createGame: async (gameName: string, description: string, gameImage: FileList | null): Promise<boolean> => {
     const mutation = gql`
-      mutation($ownerId: ID!, $name: String!, $description: String, $file: Upload!) {
-        createGame(ownerId: $ownerId, name: $name, description: $description, file: $file) {
+      mutation($name: String!, $description: String, $file: Upload!) {
+        createGame(name: $name, description: $description, file: $file) {
           name
         }
       }
@@ -138,7 +133,6 @@ const api: BackendApi = {
         const result = await apolloClient.mutate({
           mutation,
           variables: {
-            ownerId: ownerId,
             name: gameName,
             description: description,
             file,
