@@ -24,7 +24,7 @@ export const Header: React.FunctionComponent = () => {
           <Column cols="2">
             <Link href="/">
               <a className={styles['logo-container']}>
-                <img className={styles.logo} src="logo-inverted.png" alt="logo" />
+                <img className={styles.logo} src="/logo-inverted.png" alt="logo" />
                 <span className={styles['logo-text']}>VTT</span>
               </a>
             </Link>
