@@ -43,6 +43,7 @@ export default gql`
     description: String
     lastGameDate: String
     nextGameDate: String
+    backgroundUrl: String
     players: [User!]
   }
 

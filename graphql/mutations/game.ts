@@ -15,8 +15,6 @@ export const createGame = async (_: any, { name, description, file }: any, ctx: 
     throw new Error("The user with the provided id doesn't exit.")
   }
 
-  console.log(user)
-
   const { filename, createReadStream } = await file
 
   try {
@@ -29,32 +27,51 @@ export const createGame = async (_: any, { name, description, file }: any, ctx: 
       })
       .promise()
 
-    console.log(response)
+    const game = await ctx.prisma.game.create({
+      data: {
+        name,
+        description,
+        owner: {
+          connect: { id: Number(ctx.user.id) },
+        },
+        players: {
+          connect: {
+            id: Number(ctx.user.id),
+          },
+        },
+        backgroundUrl: response.Location,
+      },
+    })
 
-    return { name }
-
-    // const game = await ctx.prisma.game.create({
-    //   data: {
-    //     name,
-    //     description,
-    //     owner: {
-    //       connect: { id: Number(ctx.user.id) },
-    //     },
-    //     players: {
-    //       connect: {
-    //         id: Number(ctx.user.id),
-    //       },
-    //     },
-    //   },
-    // })
-
-    // return game
+    return game
   } catch (e) {
     throw new Error('Internal Server Error')
   }
 }
 
 export const deleteGame = async (_: any, { id }: any, ctx: Context) => {
+  const game = await ctx.prisma.game.findOne({
+    where: {
+      id: Number(id),
+    },
+  })
+
+  if (!game) {
+    throw new Error("Game doesn't exist")
+  }
+
+  if (game.backgroundUrl) {
+    await s3
+      .deleteObject(
+        {
+          Bucket: 'vtt',
+          Key: game.backgroundUrl,
+        },
+        undefined,
+      )
+      .promise()
+  }
+
   return await ctx.prisma.game.delete({
     where: {
       id: Number(id),

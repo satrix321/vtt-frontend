@@ -10,9 +10,6 @@ $max-players-list-width: 450px;
   margin-bottom: $spacing-48;
 
   @include media('<=medium') {
-    max-width: $max-image-width;
-    margin-left: auto;
-    margin-right: auto;
     margin-bottom: $spacing-32;
   }
 
@@ -24,67 +21,76 @@ $max-players-list-width: 450px;
 
   .actions {
     display: flex;
+    flex-wrap: wrap;
     gap: $spacing-8;
   }
 }
 
 .game {
   display: flex;
-  gap: $spacing-16;
+  flex-direction: column;
+  background: $white;
 
-  @include media('<=medium') {
-    flex-direction: column;
-    max-width: $max-image-width;
-    margin: auto;
-  }
-
-  .image img {
+  .image {
     display: block;
+    position: relative;
     width: 100%;
-    width: $max-image-width;
+    padding-top: 56.25%;
 
-    @include media('<=medium') {
+    img {
+      position: absolute;
       width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      object-fit: cover;
     }
   }
 
-  .headers-section {
-    margin-bottom: $spacing-16;
+  .content {
+    padding: $spacing-16;
 
-    .title {
-      font-size: $font-30;
-      margin: 0 0 $spacing-4 0;
-    }
+    .headers-section {
+      margin-bottom: $spacing-16;
+  
+      .title {
+        color: $link;
+        font-size: $font-30;
+        margin: 0 0 $spacing-4 0;
 
-    .start-game-link {
-      font-size: $font-20;
-      color: $link;
-    }
-  }
-
-  .players-section {
-    margin-bottom: $spacing-4;
-
-    .title {
-      margin: 0 0 $spacing-8 0;
-    }
-    .players {
-      max-width: $max-players-list-width;
-
-      > * {
-        margin-right: $spacing-8;
-        margin-bottom: $spacing-8;
+        a {
+          color: $link;
+          text-decoration: none;
+        }
       }
     }
-  }
-
-  .dates-section {
-    .last-game-date {
-      margin-bottom: $spacing-8;
+  
+    .players-section {
+      margin-bottom: $spacing-16;
+  
+      .title {
+        margin: 0 0 $spacing-8 0;
+      }
+      .players {
+        max-width: $max-players-list-width;
+  
+        > * {
+          margin-right: $spacing-8;
+          margin-bottom: $spacing-8;
+        }
+      }
     }
-
-    .next-game-date {
-
+  
+    .dates-section {
+      .last-game-date {
+        margin-bottom: $spacing-8;
+      }
+  
+      .next-game-date {
+  
+      }
     }
   }
 }

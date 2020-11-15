@@ -7,7 +7,7 @@ import { Footer } from '../components/page/footer/footer'
 import { GameList } from '../components/page/gameList/gameList'
 import { Column, Container, Row } from '../components/page/grid/grid'
 import { withAuth } from '../components/utils/auth/auth'
-import { requestGames } from '../store/profile/actions'
+import { getGames } from '../store/profile/actions'
 import { State } from '../store/store'
 import { MyThunkDispatch } from '../store/types'
 import { bindThunkAction } from '../store/utils'
@@ -19,7 +19,7 @@ const Games: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
 
   useEffect(() => {
     if (userId) {
-      props.requestGames(userId)
+      props.getGames(userId)
     }
   }, [])
 
@@ -47,7 +47,7 @@ const Games: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
 
 const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    requestGames: bindThunkAction(requestGames, dispatch),
+    getGames: bindThunkAction(getGames, dispatch),
   }
 }
 

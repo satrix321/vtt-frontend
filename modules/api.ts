@@ -2,7 +2,15 @@ import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { createUploadLink } from 'apollo-upload-client'
 import axios from 'axios'
-import { Game, LoginResponse, User } from '../models/profile'
+import { LoginResponse, User } from '../models/profile'
+import { GameGetPayload } from '@prisma/client'
+
+type Game = GameGetPayload<{
+  include: {
+    players: true
+    owner: true
+  }
+}>
 
 const apiBaseUrl = process.env.apiBaseUrl as string
 
@@ -100,6 +108,7 @@ const api: BackendApi = {
         description
         lastGameDate
         nextGameDate
+        backgroundUrl
         players {
           id
           username

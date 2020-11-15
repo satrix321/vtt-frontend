@@ -1,6 +1,14 @@
-import { Game, User } from '../../models/profile'
+import { User } from '../../models/profile'
+import { GameGetPayload } from '@prisma/client'
 import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
+
+type Game = GameGetPayload<{
+  include: {
+    players: true
+    owner: true
+  }
+}>
 
 export type ProfileState = {
   isLogged: boolean | null
@@ -16,7 +24,7 @@ const initialState: ProfileState = {
 
 const reducer: Reducer<ProfileState, AnyAction> = (state = initialState, action) => {
   switch (action.type) {
-    case 'REQUEST_GAMES':
+    case 'GET_GAMES':
       return {
         ...state,
         games: action.payload,
