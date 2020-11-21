@@ -1,15 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Chip } from '../chip/chip'
-import { State } from '../../../store/store'
-import { ProfileState } from '../../../store/profile/reducer'
-import styles from './gameList.module.scss'
 import Link from 'next/link'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { State } from '../../../store/store'
+import { Chip } from '../chip/chip'
 import { Cta } from '../cta/cta'
 import { Column, Row } from '../grid/grid'
+import styles from './gameList.module.scss'
 
-const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
-  const games = profile.games
+export const GameList: React.FunctionComponent = () => {
+  const games = useSelector((state: State) => state.profile.games)
 
   return (
     <div>
@@ -34,7 +33,7 @@ const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
               <div className={styles.content}>
                 <div className={styles['headers-section']}>
                   <h3 className={styles.title}>
-                    <Link href="/inGame">
+                    <Link href="/game/[id]" as={`/game/${game.id}`}>
                       <a>{game.name}</a>
                     </Link>
                   </h3>
@@ -63,5 +62,3 @@ const GameListComponent: React.FunctionComponent<ProfileState> = (profile) => {
     </div>
   )
 }
-
-export const GameList = connect((state: State) => state.profile)(GameListComponent)

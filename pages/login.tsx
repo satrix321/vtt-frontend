@@ -1,22 +1,20 @@
+import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { useState, FormEvent } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
-import { Container, Row, Column } from '../components/page/grid/grid'
-import { TextInput } from '../components/page/form/textInput/textInput'
-import { Button } from '../components/page/form/button/button'
-import { Form } from '../components/page/form/form'
-import { ErrorBlock } from '../components/page/form/errorBlock/errorBlock'
-import { MyThunkDispatch } from '../store/types'
-import { bindThunkAction } from '../store/utils'
-import { login } from '../store/profile/actions'
 import Router from 'next/router'
+import { FormEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Button } from '../components/page/form/button/button'
+import { ErrorBlock } from '../components/page/form/errorBlock/errorBlock'
+import { Form } from '../components/page/form/form'
+import { TextInput } from '../components/page/form/textInput/textInput'
+import { Column, Container, Row } from '../components/page/grid/grid'
 import styleUtils from '../scss/utils.module.scss'
-import { motion } from 'framer-motion'
+import { login } from '../store/profile/actions'
+import { MyThunkDispatch } from '../store/types'
 
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-const Login: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
+const Login: NextPage = () => {
+  const dispatch: MyThunkDispatch = useDispatch()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -26,7 +24,7 @@ const Login: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
     setErrorMessage('')
 
     try {
-      await props.login(email, password)
+      await dispatch(login(email, password))
       if (Router.route === '/login') {
         Router.push('/')
       }
@@ -77,11 +75,4 @@ const Login: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
-  return {
-    login: bindThunkAction(login, dispatch),
-  }
-}
-
-const connector = connect(null, mapDispatchToProps)
-export default connector(Login)
+export default Login

@@ -1,9 +1,8 @@
-import { NextPage } from 'next'
-import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import { connect } from 'react-redux'
-import { SidePanel } from '../components/game/sidePanel/sidePanel'
 import { motion } from 'framer-motion'
+import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
+import Head from 'next/head'
+import { SidePanel } from '../components/game/sidePanel/sidePanel'
 
 const GameView = dynamic(
   async () => {
@@ -29,4 +28,4 @@ const InGame: NextPage = () => {
   )
 }
 
-export default connect(null, null)(InGame)
+export default InGame

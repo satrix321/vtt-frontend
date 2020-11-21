@@ -1,22 +1,19 @@
+import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Container, Row, Column } from '../components/page/grid/grid'
-import { motion } from 'framer-motion'
-import { Form } from '../components/page/form/form'
+import { FormEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button } from '../components/page/form/button/button'
 import { ErrorBlock } from '../components/page/form/errorBlock/errorBlock'
-import { TextInput } from '../components/page/form/textInput/textInput'
 import { FileInput } from '../components/page/form/fileInput/fileInput'
-import { useState, FormEvent } from 'react'
-import { TextArea, ResizeType } from '../components/page/form/textArea/textArea'
-import { MyThunkDispatch } from '../store/types'
-import { bindThunkAction } from '../store/utils'
-import { connect, ConnectedProps } from 'react-redux'
+import { Form } from '../components/page/form/form'
+import { ResizeType, TextArea } from '../components/page/form/textArea/textArea'
+import { TextInput } from '../components/page/form/textInput/textInput'
+import { Column, Container, Row } from '../components/page/grid/grid'
 import { createGame } from '../store/profile/actions'
 
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-const CreateGame: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
+const CreateGame: NextPage = () => {
+  const dispatch = useDispatch()
   const [gameName, setGameName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [gameImage, setGameImage] = useState<FileList | null>(null)
@@ -26,7 +23,7 @@ const CreateGame: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
     e.preventDefault()
     setErrorMessage('')
 
-    props.createGame(gameName, description, gameImage)
+    dispatch(createGame(gameName, description, gameImage))
   }
 
   return (
@@ -76,11 +73,4 @@ const CreateGame: NextPage<PropsFromRedux> = (props: PropsFromRedux) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
-  return {
-    createGame: bindThunkAction(createGame, dispatch),
-  }
-}
-
-const connector = connect(null, mapDispatchToProps)
-export default connector(CreateGame)
+export default CreateGame

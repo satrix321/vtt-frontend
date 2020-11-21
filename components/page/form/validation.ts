@@ -19,7 +19,7 @@ export class ValidationEmitter {
     return this.formState
   }
 
-  updateState(elementName: string, state: ValidationState) {
+  updateState(elementName: string, state: ValidationState): void {
     this.inputStates[elementName] = state
 
     let tempFormState = true
@@ -31,17 +31,17 @@ export class ValidationEmitter {
     this.formState = tempFormState
   }
 
-  subscribeToFormValidation(callback: EventEmitterCallback) {
+  subscribeToFormValidation(callback: EventEmitterCallback): void {
     this.eventEmitter.subscribe('formValidation', callback)
   }
-  unsubscribeToFormValidation(callback: EventEmitterCallback) {
+  unsubscribeToFormValidation(callback: EventEmitterCallback): void {
     this.eventEmitter.unsubscribe('formValidation', callback)
   }
 }
 
 type FieldValue = string | number | string[] | undefined
 
-export const validateRequired = (value: FieldValue, required: boolean | undefined) => {
+export const validateRequired = (value: FieldValue, required: boolean | undefined): ValidationState => {
   if (required) {
     if (!value) {
       return { result: false, error: 'Field is required' }
@@ -52,7 +52,7 @@ export const validateRequired = (value: FieldValue, required: boolean | undefine
 
 const emailRegex = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
-export const validateEmail = (value: FieldValue) => {
+export const validateEmail = (value: FieldValue): ValidationState => {
   if (typeof value === 'string') {
     if (!emailRegex.test(value)) {
       return { result: false, error: 'Invalid email format' }
@@ -63,7 +63,7 @@ export const validateEmail = (value: FieldValue) => {
   }
 }
 
-export const validateRules = (value: FieldValue, rules: ValidationRule[] | undefined) => {
+export const validateRules = (value: FieldValue, rules: ValidationRule[] | undefined): ValidationState => {
   if (rules) {
     for (const rule of rules) {
       const [result, error] = rule(value)

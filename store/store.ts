@@ -1,13 +1,10 @@
-import thunk from 'redux-thunk'
-import { createStore, applyMiddleware, combineReducers, AnyAction, Action } from 'redux'
+import { Context, createWrapper, MakeStore } from 'next-redux-wrapper'
+import { Action, applyMiddleware, combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import app from './app/reducer'
-import profile from './profile/reducer'
-import alert from './alert/reducer'
-import { MakeStore, Context, createWrapper } from 'next-redux-wrapper'
-import { AppState } from './app/reducer'
-import { ProfileState } from './profile/reducer'
-import { AlertState } from './alert/reducer'
+import thunk from 'redux-thunk'
+import alert, { AlertState } from './alert/reducer'
+import app, { AppState } from './app/reducer'
+import profile, { ProfileState } from './profile/reducer'
 
 export type State = {
   app: AppState

@@ -1,16 +1,15 @@
 import classNames from 'classnames'
-import { connect } from 'react-redux'
+import { IoMdCheckmarkCircle, IoMdCloseCircle, IoMdInformationCircle, IoMdWarning } from 'react-icons/io'
+import { useSelector } from 'react-redux'
+import { AlertType } from '../../../store/alert/reducer'
 import { State } from '../../../store/store'
-import { AlertState, AlertType } from '../../../store/alert/reducer'
-import { IoMdCloseCircle } from 'react-icons/io'
-import { IoMdWarning } from 'react-icons/io'
-import { IoMdCheckmarkCircle } from 'react-icons/io'
-import { IoMdInformationCircle } from 'react-icons/io'
 import styles from './alert.module.scss'
 
-const AlertComponent: React.FunctionComponent<AlertState> = (alert) => {
+export const Alert: React.FunctionComponent = () => {
+  const alert = useSelector((state: State) => state.alert)
   const classes: string[] = []
   let icon: JSX.Element | undefined
+
   classes.push(styles.alert)
   if (alert.isVisible) {
     classes.push(styles.visible)
@@ -41,5 +40,3 @@ const AlertComponent: React.FunctionComponent<AlertState> = (alert) => {
     </div>
   )
 }
-
-export const Alert = connect((state: State) => state.alert)(AlertComponent)
