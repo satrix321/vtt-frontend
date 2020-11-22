@@ -1,14 +1,18 @@
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
+import { useState } from 'react'
 import { Footer } from '../components/page/footer/footer'
 import { Column, Container, Row } from '../components/page/grid/grid'
 import { HeroHighlight } from '../components/page/heroHighlight/heroHighlight'
 import { MediaHighlight } from '../components/page/mediaHighlight/mediaHighlight'
 import { QuoteHighlight } from '../components/page/quoteHighlight/quoteHighlight'
 import { SystemsHighlight } from '../components/page/systemsHighlight/systemsHighlight'
+import { Tabs, Tab, TabItems, TabItem } from '../components/page/tabs/tabs'
 
 const Home: NextPage = () => {
+  const [activeTab, setActiveTab] = useState('0')
+
   return (
     <div>
       <Head>
@@ -20,6 +24,18 @@ const Home: NextPage = () => {
         <Container>
           <Row>
             <Column cols="12">
+              <Tabs model={activeTab} onChange={(name) => setActiveTab(name)}>
+                <Tab name="1">Tab 11111</Tab>
+                <Tab name="2">Tab 22</Tab>
+                <Tab name="3">Tab 333</Tab>
+              </Tabs>
+
+              <TabItems model={activeTab}>
+                <TabItem name="1">Tab 1 Content</TabItem>
+                <TabItem name="2">Tab 2 Content</TabItem>
+                <TabItem name="3">Tab 3 Content</TabItem>
+              </TabItems>
+
               <MediaHighlight
                 title="VTT"
                 subtitle="The Best Way to Play"

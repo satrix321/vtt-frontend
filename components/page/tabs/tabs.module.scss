@@ -1,0 +1,80 @@
+@import 'scss/colors';
+@import 'scss/spacings';
+@import 'scss/fonts';
+
+.tabs {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  justify-content: center;
+
+  &.tabs--dark {
+    background: $black;
+
+    .slider {
+      background: $white;
+    }
+  }
+
+  .slider {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background: $black;
+    transition: .3s;
+  }
+
+  .tab {
+    position: relative;
+    padding: $spacing-12;
+    color: $grey-4;
+    background: transparent;
+    border: 0;
+    text-transform: uppercase;
+    font-family: Roboto;
+    letter-spacing: 1px;
+    font-size: $font-14;
+    user-select: none;
+    transition: background ease-out .1s;
+
+    &:hover {
+      background: $grey-10;
+      cursor: pointer;
+    }
+
+    &:focus {
+      background: $grey-9;
+      outline: none;
+    }
+
+    &:active {
+      background: $grey-8;
+    }
+
+    &.tab--is-active {
+      color: $black;
+    }
+
+    &.tab--dark {
+      background: $black;
+      color: $grey-5;
+
+      &:hover {
+        background: $grey-1;
+      }
+
+      &:focus {
+        background: $grey-2;
+      }
+
+      &:active {
+        background: $grey-3;
+      }
+
+      &.tab--is-active {
+        color: $white;
+      }
+    }
+  }
+}
