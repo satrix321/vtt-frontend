@@ -1,6 +1,6 @@
-import styles from './tabs.module.scss'
 import classNames from 'classnames'
 import React, { forwardRef, ReactElement, useEffect, useRef } from 'react'
+import styles from './tabs.module.scss'
 
 type TabsProps = {
   children?: React.ReactElement<TabProps>[] | React.ReactElement<TabProps>
@@ -24,6 +24,7 @@ type TabItemsProps = {
 
 type TabItemProps = {
   children?: React.ReactElement | React.ReactElement[] | string
+  isActive?: boolean
   name: string
 }
 
@@ -67,7 +68,7 @@ export const Tabs: React.FunctionComponent<TabsProps> = (props: TabsProps) => {
       sliderRef.current.style.width = `${tabRefs.current[index]?.offsetWidth}px`
       sliderRef.current.style.left = `${tabRefs.current[index]?.offsetLeft}px`
     }
-  }, [sliderRef, activeTab])
+  }, [sliderRef, tabRefs, activeTab])
 
   return (
     <div className={classNames([styles.tabs, { [styles['tabs--dark']]: props.dark }])}>
@@ -86,7 +87,6 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>((props: TabProps, ref
         { [styles['tab--dark']]: props.dark },
       ])}
       onClick={() => {
-        console.log('on click hanlder!')
         if (props.onChange) {
           props.onChange(props.name)
         }
@@ -103,17 +103,99 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>((props: TabProps, ref
 Tab.displayName = 'Tab'
 
 export const TabItems: React.FunctionComponent<TabItemsProps> = (props: TabItemsProps) => {
-  let activeTabItem
+  let output: ReactElement<TabItemProps>[] | undefined = undefined
+  const tabItemsRef = useRef<HTMLDivElement>(null)
+  const oldModel = useRef<string | undefined>()
+  const timeoutId = useRef<ReturnType<typeof setTimeout>>()
 
-  if (Array.isArray(props.children)) {
-    activeTabItem = props.children.find((tabItem) => tabItem.props.name === props.model)
-  } else if (props.children?.props.name === props.model) {
-    activeTabItem = props.children
+  if (timeoutId.current) {
+    clearTimeout(timeoutId.current)
   }
 
-  return <div className={styles['tab-items']}>{activeTabItem}</div>
+  if (Array.isArray(props.children)) {
+    output = props.children.map((child, i) => {
+      return (
+        <TabItem {...child.props} key={i} isActive={child.props.name === props.model}>
+          {child.props.children}
+        </TabItem>
+      )
+    })
+  } else if (props.children) {
+    output = [
+      <TabItem {...props.children.props} key={0} isActive={props.children.props.name === props.model}>
+        {props.children.props.children}
+      </TabItem>,
+    ]
+  }
+
+  useEffect(() => {
+    if (tabItemsRef.current) {
+      let oldActiveElementIndex: number | undefined
+      let activeElementIndex: number | undefined
+
+      const tabItems = tabItemsRef.current.querySelectorAll(`.${styles['tab-item']}`)
+
+      for (const [i, item] of tabItems.entries()) {
+        const tabItem = item as HTMLDivElement
+
+        if (tabItem.dataset.name === oldModel.current) {
+          tabItem.style.display = 'block'
+          oldActiveElementIndex = i
+        } else if (tabItem.dataset.name === props.model) {
+          tabItem.style.display = 'block'
+          activeElementIndex = i
+        } else {
+          tabItem.style.display = 'none'
+        }
+      }
+
+      const activeElement = tabItemsRef.current.querySelector(`[data-name="${props.model}"]`) as HTMLDivElement
+      const oldActiveElement = tabItemsRef.current.querySelector(`[data-name="${oldModel.current}"]`) as HTMLDivElement
+
+      if (oldActiveElementIndex !== undefined && activeElementIndex !== undefined) {
+        if (activeElementIndex > oldActiveElementIndex) {
+          activeElement.style.left = '100%'
+        } else {
+          activeElement.style.left = '-100%'
+        }
+      }
+
+      tabItemsRef.current.style.height = `${activeElement?.offsetHeight}px`
+
+      requestAnimationFrame(() => {
+        if (tabItemsRef.current) {
+          if (oldActiveElement) {
+            if (activeElement.style.left === '100%') {
+              oldActiveElement.style.left = '-100%'
+            } else {
+              oldActiveElement.style.left = '100%'
+            }
+            activeElement.style.left = '0'
+
+            timeoutId.current = setTimeout(() => {
+              oldActiveElement.style.display = 'none'
+            }, 300)
+          }
+        }
+      })
+    }
+
+    if (oldModel.current !== props.model) {
+      oldModel.current = props.model
+    }
+  }, [props.model, tabItemsRef])
+
+  return (
+    <div className={styles['tab-items']} ref={tabItemsRef}>
+      {output}
+    </div>
+  )
 }
 
 export const TabItem: React.FunctionComponent<TabItemProps> = (props: TabItemProps) => {
-  return <div className={styles['tab-item']}>{props.children}</div>
+  return (
+    <div className={styles['tab-item']} data-name={props.name} data-active={props.isActive}>
+      {props.children}
+    </div>
+  )
 }

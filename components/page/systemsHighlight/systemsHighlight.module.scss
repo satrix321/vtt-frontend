@@ -73,10 +73,32 @@
 
       .system__link {
         display: block;
+        position: relative;
         transition: outline ease-in-out .1s;
 
+        &[href]:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: transparent;
+          transition: background ease-in-out .3s;
+        }
+
         &:focus {
-          outline: $spacing-4 solid $focus;
+          outline: 0;
+        }
+      
+        &[data-focus-visible-added] {
+          &:after {
+            background: rgba($white, 0.15);
+          }  
+        }
+
+        &[href]:hover:after {
+          background: rgba($white, 0.15);
         }
       }
 

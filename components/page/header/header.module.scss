@@ -5,8 +5,9 @@
 
 $header-text: $white;
 $header-background: $black;
-$header-item-hover: $grey-1;
+$header-item-hover: $grey-2;
 $header-item-focus: $grey-2;
+$header-item-active: $grey-3;
 $mobile-menu-width: 320px;
 
 .header {
@@ -47,7 +48,7 @@ $mobile-menu-width: 320px;
     text-decoration: none;
     padding-left: $spacing-16;
     padding-right: $spacing-16;
-    transition: background ease-out .1s;
+    transition: background ease-in-out .3s;
 
     &:focus {
       outline: 0;
@@ -82,11 +83,6 @@ $mobile-menu-width: 320px;
     .header-item {
       display: inline-block;
       cursor: pointer;
-      transition: background ease-out .3s;
-
-      &:hover {
-        background: $header-item-hover;
-      }
 
       .link {
         display: inline-block;
@@ -95,10 +91,18 @@ $mobile-menu-width: 320px;
         line-height: $spacing-48;
         padding-left: $spacing-16;
         padding-right: $spacing-16;
-        transition: background ease-out .1s;
+        transition: background ease-in-out .3s;
+
+        &:hover {
+          background: $header-item-hover;
+        }
 
         &[data-focus-visible-added] {
           background: $header-item-focus;
+        }
+
+        &:active {
+          background: $header-item-active;
         }
 
         &:focus {
@@ -117,7 +121,7 @@ $mobile-menu-width: 320px;
       top: 100%;
       right: -$mobile-menu-width;
       background: $header-background;
-      transition: right ease-out .3s;
+      transition: right ease-in-out .3s;
 
       &.mobile-open {
         right: 0;

@@ -49,7 +49,7 @@
     &.is-visible {
       transform: translateY(0);
       opacity: 1;
-      transition: transform ease-out .3s, opacity .3s .05s;
+      transition: transform ease-in-out .3s, opacity .3s .05s;
     }
   }
 }

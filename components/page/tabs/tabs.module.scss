@@ -36,7 +36,7 @@
     letter-spacing: 1px;
     font-size: $font-14;
     user-select: none;
-    transition: background ease-out .1s;
+    transition: background ease-in-out .3s;
 
     &:hover {
       background: $grey-10;
@@ -61,7 +61,7 @@
       color: $grey-5;
 
       &:hover {
-        background: $grey-1;
+        background: $grey-2;
       }
 
       &:focus {
@@ -76,5 +76,20 @@
         color: $white;
       }
     }
+  }
+}
+
+.tab-items {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  transition: height ease-in-out .3s;
+  
+  .tab-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: left ease-in-out .3s;
   }
 }

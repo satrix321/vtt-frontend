@@ -11,7 +11,7 @@ import { SystemsHighlight } from '../components/page/systemsHighlight/systemsHig
 import { Tabs, Tab, TabItems, TabItem } from '../components/page/tabs/tabs'
 
 const Home: NextPage = () => {
-  const [activeTab, setActiveTab] = useState('0')
+  const [activeTab, setActiveTab] = useState('1')
 
   return (
     <div>
@@ -24,16 +24,30 @@ const Home: NextPage = () => {
         <Container>
           <Row>
             <Column cols="12">
-              <Tabs model={activeTab} onChange={(name) => setActiveTab(name)}>
+              <Tabs model={activeTab} onChange={(name) => setActiveTab(name)} dark>
                 <Tab name="1">Tab 11111</Tab>
                 <Tab name="2">Tab 22</Tab>
                 <Tab name="3">Tab 333</Tab>
               </Tabs>
 
               <TabItems model={activeTab}>
-                <TabItem name="1">Tab 1 Content</TabItem>
+                <TabItem name="1">
+                  <p>Tab 1 Content</p>
+                  <a href="https://www.google.com">google</a>
+                  <p>Tab 1 Content</p>
+                  <p>Tab 1 Content</p>
+                  <p>Tab 1 Content</p>
+                  <p>Tab 1 Content</p>
+                  <p>Tab 1 Content</p>
+                </TabItem>
                 <TabItem name="2">Tab 2 Content</TabItem>
-                <TabItem name="3">Tab 3 Content</TabItem>
+                <TabItem name="3">
+                  <p>Tab 3 Content</p>
+                  <p>Tab 3 Content</p>
+                  <p>Tab 3 Content</p>
+                  <p>Tab 3 Content</p>
+                  <p>Tab 3 Content</p>
+                </TabItem>
               </TabItems>
 
               <MediaHighlight
