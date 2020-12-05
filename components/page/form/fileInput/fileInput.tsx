@@ -20,11 +20,6 @@ export const FileInput: React.FunctionComponent<Props> = (props: Props) => {
   const [fileWrappers, setFileWrappers] = useState<FileWrapper[]>([])
   const labelRef = useRef<HTMLLabelElement>(null)
 
-  const inputWrapperClasses = [styles['input-wrapper']]
-  if (props.multiple) {
-    inputWrapperClasses.push(styles['multiple-files'])
-  }
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const files: FileWrapper[] = []
@@ -63,7 +58,7 @@ export const FileInput: React.FunctionComponent<Props> = (props: Props) => {
           multiple={props.multiple}
           accept={props.accept}
         ></input>
-        <div className={classNames(inputWrapperClasses)}>
+        <div className={classNames(styles['input-wrapper'], { [styles['multiple-files']]: props.multiple })}>
           <span className={styles.button} tabIndex={0} onKeyPress={onKeyPress}>
             UPLOAD
           </span>

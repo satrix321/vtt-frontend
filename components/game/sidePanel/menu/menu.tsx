@@ -50,13 +50,13 @@ export const Menu: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <div className={styles.menu}>
       {menuItems.map((item) => {
-        const classes = [styles['menu-item']]
-        if (item.active) {
-          classes.push(styles['active'])
-        }
-
         return (
-          <div key={item.id} data-id={item.id} onClick={changeSection} className={classNames(classes)}>
+          <div
+            key={item.id}
+            data-id={item.id}
+            onClick={changeSection}
+            className={classNames(styles['menu-item'], { [styles['active']]: item.active })}
+          >
             {item.content}
           </div>
         )

@@ -14,14 +14,8 @@ type Props = {
 }
 
 export const HeroHighlight: React.FunctionComponent<Props> = (props: Props) => {
-  const classes: string[] = []
-  classes.push(styles['hero-highlight'])
-  if (props.invertColors) {
-    classes.push(styles['invert-colors'])
-  }
-
   return (
-    <section className={classNames(classes)}>
+    <section className={classNames(styles['hero-highlight'], { [styles['invert-colors']]: props.invertColors })}>
       <div className={styles['background-hero']}>
         <img src={props.backgroundSrc}></img>
       </div>

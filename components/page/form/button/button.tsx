@@ -5,22 +5,32 @@ type Props = {
   secondary?: boolean
   block?: boolean
   type?: 'submit' | 'reset' | 'button'
+  small?: boolean
   children: React.ReactNode
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Button: React.FunctionComponent<Props> = (props: Props) => {
-  const classes: string[] = [styles.button]
-  if (props.secondary) {
-    classes.push(styles.secondary)
-  } else {
-    classes.push(styles.primary)
-  }
-  if (props.block) {
-    classes.push(styles.block)
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('button click! :)')
+
+    if (props.onClick) {
+      console.log('calling props!')
+      props.onClick(event)
+    }
   }
 
   return (
-    <button className={classNames(classes)} type={props.type ? props.type : 'button'}>
+    <button
+      className={classNames(styles.button, {
+        [styles.primary]: !props.secondary,
+        [styles.secondary]: props.secondary,
+        [styles.block]: props.block,
+        [styles.small]: props.small,
+      })}
+      type={props.type ? props.type : 'button'}
+      onClick={onClick}
+    >
       {props.children}
     </button>
   )

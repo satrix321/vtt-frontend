@@ -9,33 +9,45 @@ type Props = {
 }
 
 export const Cta: React.FunctionComponent<Props> = (props) => {
-  const classes: string[] = []
-  classes.push(styles.cta)
-  if (props.secondary) {
-    classes.push(styles.secondary)
-  } else {
-    classes.push(styles.primary)
-  }
-
-  if (props.small) {
-    classes.push(styles.small)
-  }
-
-  if (!props.href) {
-    props.href = '#'
-  }
-
   if (props.href?.startsWith('http') || props.href?.startsWith('https')) {
     return (
-      <a className={classNames(classes)} href={props.href as string}>
+      <a
+        className={classNames(styles.cta, {
+          [styles.primary]: !props.secondary,
+          [styles.secondary]: props.secondary,
+          [styles.small]: props.small,
+        })}
+        href={props.href as string}
+      >
         {props.children}
       </a>
     )
-  } else {
+  } else if (props.href) {
     return (
       <Link href={props.href as string}>
-        <a className={classNames(classes)}>{props.children}</a>
+        <a
+          className={classNames(styles.cta, {
+            [styles.primary]: !props.secondary,
+            [styles.secondary]: props.secondary,
+            [styles.small]: props.small,
+          })}
+        >
+          {props.children}
+        </a>
       </Link>
+    )
+  } else {
+    return (
+      <a
+        className={classNames(styles.cta, {
+          [styles.primary]: !props.secondary,
+          [styles.secondary]: props.secondary,
+          [styles.small]: props.small,
+        })}
+        href="#"
+      >
+        {props.children}
+      </a>
     )
   }
 }

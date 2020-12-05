@@ -12,11 +12,6 @@ export const Header: React.FunctionComponent = () => {
   const isLogged = useSelector((state: State) => state.profile.isLogged)
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>()
 
-  const navClasses = [styles.navigation]
-  if (mobileNavOpen) {
-    navClasses.push(styles['mobile-open'])
-  }
-
   return (
     <motion.header className={styles.header} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <Container vCenter>
@@ -35,7 +30,7 @@ export const Header: React.FunctionComponent = () => {
                 <MdMenu size="2em" />
               </a>
             </div>
-            <nav className={classNames(navClasses)}>
+            <nav className={classNames(styles.navigation, { [styles['mobile-open']]: mobileNavOpen })}>
               {!isLogged ? (
                 <>
                   <HeaderItem href="/login">Login</HeaderItem>

@@ -1,14 +1,14 @@
-import { ChangeEvent, useState, useEffect, useRef } from 'react'
+import classNames from 'classnames'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import {
-  ValidationRule,
-  ValidationEmitter,
-  ValidationState,
-  validateRequired,
   validateEmail,
+  validateRequired,
   validateRules,
+  ValidationEmitter,
+  ValidationRule,
+  ValidationState,
 } from '../validation'
 import styles from './textInput.module.scss'
-import classNames from 'classnames'
 
 type Props = {
   name: string
@@ -25,13 +25,6 @@ export const TextInput: React.FunctionComponent<Props> = (props: Props) => {
   const [isValid, setIsValid] = useState<boolean>(true)
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const input = useRef<HTMLInputElement>(null)
-
-  const inputClasses = [styles.input]
-  const errorClasses = [styles['error-message']]
-  if (!isValid) {
-    inputClasses.push(styles['is-invalid'])
-    errorClasses.push(styles['is-visible'])
-  }
 
   const validate = (value: string | number | string[] | undefined): ValidationState => {
     const requiredValidation = validateRequired(value, props.required)
@@ -76,7 +69,7 @@ export const TextInput: React.FunctionComponent<Props> = (props: Props) => {
 
     props.validationEmitter?.subscribeToFormValidation(formValidation)
 
-    return function cleanup() {
+    return () => {
       props.validationEmitter?.unsubscribeToFormValidation(formValidation)
     }
   }, [props.validationEmitter, props.name, props.type, props.required, props.rules])
@@ -95,14 +88,14 @@ export const TextInput: React.FunctionComponent<Props> = (props: Props) => {
         {props.label} {props.required && '*'}
         <input
           ref={input}
-          className={classNames(inputClasses)}
+          className={classNames(styles.input, { [styles['is-invalid']]: !isValid })}
           name={props.name}
           type={props.type ? props.type : 'text'}
           value={props.value}
           onChange={props.onChange}
           onBlur={onBlur}
         ></input>
-        <p className={classNames(errorClasses)}>{errorMessage}</p>
+        <p className={classNames(styles['error-message'], { [styles['is-visible']]: !isValid })}>{errorMessage}</p>
       </label>
     </div>
   )

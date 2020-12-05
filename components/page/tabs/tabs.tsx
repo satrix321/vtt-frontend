@@ -70,8 +70,24 @@ export const Tabs: React.FunctionComponent<TabsProps> = (props: TabsProps) => {
     }
   }, [sliderRef, tabRefs, activeTab])
 
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (activeTab && sliderRef.current) {
+        const index = activeTab.key as number
+        sliderRef.current.style.width = `${tabRefs.current[index]?.offsetWidth}px`
+        sliderRef.current.style.left = `${tabRefs.current[index]?.offsetLeft}px`
+      }
+    }
+
+    window.addEventListener('resize', resizeHandler)
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+    }
+  }, [])
+
   return (
-    <div className={classNames([styles.tabs, { [styles['tabs--dark']]: props.dark }])}>
+    <div className={classNames(styles.tabs, { [styles['tabs--dark']]: props.dark })}>
       <div ref={sliderRef} className={styles.slider}></div>
       {tabs}
     </div>
@@ -79,18 +95,38 @@ export const Tabs: React.FunctionComponent<TabsProps> = (props: TabsProps) => {
 }
 
 export const Tab = forwardRef<HTMLButtonElement, TabProps>((props: TabProps, ref) => {
+  const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (props.onChange) {
+      props.onChange(props.name)
+    }
+
+    const button = event.currentTarget
+    const circle = document.createElement('span')
+    const diameter = Math.max(button.clientWidth, button.clientHeight)
+    const radius = diameter / 2
+    const { left: buttonLeft, top: buttonTop } = button.getBoundingClientRect()
+
+    circle.style.width = circle.style.height = `${diameter}px`
+    circle.style.left = `${event.clientX - (buttonLeft + radius)}px`
+    circle.style.top = `${event.clientY - (buttonTop + radius)}px`
+    circle.classList.add(styles.ripple)
+
+    const ripple = button.querySelector(`.${styles.ripple}`)
+
+    if (ripple) {
+      ripple.remove()
+    }
+
+    button.appendChild(circle)
+  }
+
   return (
     <button
-      className={classNames([
-        styles.tab,
-        { [styles['tab--is-active']]: props.isActive },
-        { [styles['tab--dark']]: props.dark },
-      ])}
-      onClick={() => {
-        if (props.onChange) {
-          props.onChange(props.name)
-        }
-      }}
+      className={classNames(styles.tab, {
+        [styles['tab--is-active']]: props.isActive,
+        [styles['tab--dark']]: props.dark,
+      })}
+      onClick={onClick}
       ref={ref}
       tabIndex={0}
       role="tab"

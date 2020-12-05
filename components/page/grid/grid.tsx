@@ -7,13 +7,8 @@ type ContainerProps = {
 }
 
 export const Container: React.FunctionComponent<ContainerProps> = (props: ContainerProps) => {
-  const classes: string[] = [styles.container]
-  if (props.vCenter) {
-    classes.push(styles['v-center'])
-  }
-
   return (
-    <div className={classNames(classes)}>
+    <div className={classNames(styles.container, { [styles['v-center']]: props.vCenter })}>
       <div>{props.children}</div>
     </div>
   )
@@ -26,15 +21,11 @@ type RowProps = {
 }
 
 export const Row: React.FunctionComponent<RowProps> = (props: RowProps) => {
-  const classes: string[] = [styles.row]
-  if (props.noMargins) {
-    classes.push(styles['no-margins'])
-  }
-  if (props.center) {
-    classes.push(styles.center)
-  }
-
-  return <div className={classNames(classes)}>{props.children}</div>
+  return (
+    <div className={classNames(styles.row, { [styles['no-margins']]: props.noMargins, [styles.center]: props.center })}>
+      {props.children}
+    </div>
+  )
 }
 
 type ColumnProps = {
@@ -52,37 +43,24 @@ type ColumnProps = {
 }
 
 export const Column: React.FunctionComponent<ColumnProps> = (props: ColumnProps) => {
-  const classes: string[] = []
-  if (props.cols) {
-    classes.push(styles['col-' + props.cols])
-  }
-  if (props.sm) {
-    classes.push(styles['col-sm-' + props.sm])
-  }
-  if (props.md) {
-    classes.push(styles['col-md-' + props.md])
-  }
-  if (props.lg) {
-    classes.push(styles['col-lg-' + props.lg])
-  }
-  if (props.xl) {
-    classes.push(styles['col-xl-' + props.xl])
-  }
-  if (props.offset) {
-    classes.push(styles['col-offset-' + props.offset])
-  }
-  if (props['offset-sm']) {
-    classes.push(styles['col-sm-offset-' + props['offset-sm']])
-  }
-  if (props['offset-md']) {
-    classes.push(styles['col-md-offset-' + props['offset-md']])
-  }
-  if (props['offset-lg']) {
-    classes.push(styles['col-lg-offset-' + props['offset-lg']])
-  }
-  if (props['offset-xl']) {
-    classes.push(styles['col-xl-offset-' + props['offset-xl']])
-  }
-
-  return <div className={classNames(classes)}>{props.children}</div>
+  return (
+    <div
+      className={classNames(
+        classNames({
+          [styles['col-' + props.cols]]: props.cols,
+          [styles['col-sm-' + props.sm]]: props.sm,
+          [styles['col-md-' + props.md]]: props.md,
+          [styles['col-lg-' + props.lg]]: props.lg,
+          [styles['col-xl-' + props.xl]]: props.xl,
+          [styles['col-offset-' + props.offset]]: props.offset,
+          [styles['col-sm-offset-' + props['offset-sm']]]: props['offset-sm'],
+          [styles['col-md-offset-' + props['offset-md']]]: props['offset-md'],
+          [styles['col-lg-offset-' + props['offset-lg']]]: props['offset-lg'],
+          [styles['col-xl-offset-' + props['offset-xl']]]: props['offset-xl'],
+        }),
+      )}
+    >
+      {props.children}
+    </div>
+  )
 }

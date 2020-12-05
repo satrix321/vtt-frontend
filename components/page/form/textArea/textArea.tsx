@@ -30,32 +30,6 @@ export const TextArea: React.FunctionComponent<Props> = (props: Props) => {
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
   const textarea = useRef<HTMLTextAreaElement>(null)
 
-  const textareaClasses: string[] = [styles.textarea]
-  if (props.resize) {
-    switch (props.resize as ResizeType) {
-      case ResizeType.None:
-        textareaClasses.push(styles['resize-none'])
-        break
-      case ResizeType.Horizontal:
-        textareaClasses.push(styles['resize-horizontal'])
-        break
-      case ResizeType.Vertical:
-        textareaClasses.push(styles['resize-vertical'])
-        break
-      case ResizeType.Both:
-        textareaClasses.push(styles['resize-both'])
-        break
-    }
-  } else {
-    textareaClasses.push(styles['resize-both'])
-  }
-
-  const errorClasses = [styles['error-message']]
-  if (!isValid) {
-    textareaClasses.push(styles['is-invalid'])
-    errorClasses.push(styles['is-visible'])
-  }
-
   const validate = (value: string | number | string[] | undefined): ValidationState => {
     const requiredValidation = validateRequired(value, props.required)
     if (!requiredValidation.result) {
@@ -109,7 +83,13 @@ export const TextArea: React.FunctionComponent<Props> = (props: Props) => {
         {props.label}
         <textarea
           ref={textarea}
-          className={classNames(textareaClasses)}
+          className={classNames(styles.textarea, {
+            [styles['resize-none']]: props.resize === ResizeType.None,
+            [styles['resize-horizontal']]: props.resize === ResizeType.Horizontal,
+            [styles['resize-vertical']]: props.resize === ResizeType.Vertical,
+            [styles['resize-both']]: !props.resize || props.resize === ResizeType.Both,
+            [styles['is-invalid']]: !isValid,
+          })}
           name={props.name}
           value={props.value}
           onChange={props.onChange}
@@ -121,6 +101,7 @@ export const TextArea: React.FunctionComponent<Props> = (props: Props) => {
           }}
           onBlur={onBlur}
         ></textarea>
+        <p className={classNames(styles['error-message'], { [styles['is-visible']]: !isValid })}>{errorMessage}</p>
       </label>
     </div>
   )

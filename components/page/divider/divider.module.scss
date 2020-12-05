@@ -1,0 +1,16 @@
+@import 'scss/colors';
+
+.divider {
+  border-style: solid;
+  border-color: $grey-6;
+  border-width: thin 0 0 0;
+
+  &.vertical {
+    display: inline-block;
+    max-height: 100%;
+    min-height: 100%;
+    width: 0;
+    max-width: 0;
+    border-width: 0 thin 0 0;
+  }
+}

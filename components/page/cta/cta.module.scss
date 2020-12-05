@@ -8,13 +8,26 @@
   text-decoration: none;
   padding-left: $spacing-32;
   padding-right: $spacing-32;
-  transition: outline ease-in-out .1s, background ease-in-out .3s;
+  transition: background ease-in-out .3s;
   user-select: none;
+  margin-right: $spacing-8;
 
   &.primary {
     color: $white;
     background: $black;
     line-height: $spacing-48;
+
+    &[data-focus-visible-added] {
+      background: $grey-3;
+    }
+
+    &:hover {
+      background: $grey-2;
+    }
+
+    &:active {
+      background: $grey-3;
+    }
 
     &.small {
       line-height: $spacing-32;
@@ -23,16 +36,29 @@
       padding-right: $spacing-16;
     }
   }
-  
+
   &.secondary {
+    background: transparent;
     color: $black;
-    line-height: $spacing-48 - $spacing-2*2;
-    border: $spacing-2 solid $grey-6;
+    line-height: $spacing-48 - $spacing-2;
+    border: thin solid $black;
     padding-left: $spacing-32 - $spacing-2;
     padding-right: $spacing-32 - $spacing-2;
 
+    &[data-focus-visible-added] {
+      background: $grey-7;
+    }
+
+    &:hover {
+      background: $grey-8;
+    }
+
+    &:active {
+      background: $grey-7;
+    }
+
     &.small {
-      line-height: $spacing-32 - $spacing-2*2;
+      line-height: $spacing-32 - $spacing-2;
       font-size: $font-16;
       padding-left: $spacing-16 - $spacing-2;
       padding-right: $spacing-16 - $spacing-2;
@@ -41,17 +67,5 @@
 
   &:focus {
     outline: 0;
-  }
-
-  &[data-focus-visible-added] {
-    background: $grey-3;
-  }
-
-  &:hover {
-    background: $grey-2;
-  }
-
-  &:active {
-    background: $grey-3;
   }
 }
