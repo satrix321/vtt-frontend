@@ -28,7 +28,7 @@ export const Alert: React.FunctionComponent = () => {
   return (
     <div
       className={classNames(styles.alert, {
-        [styles.visible]: alert.isVisible,
+        [styles['is-visible']]: alert.isVisible,
         [styles['error-type']]: alert.type === AlertType.Error,
         [styles['warning-type']]: alert.type === AlertType.Warning,
         [styles['success-type']]: alert.type === AlertType.Success,

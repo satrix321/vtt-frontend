@@ -80,7 +80,7 @@ export const TextArea: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <div className={styles['form-component']}>
       <label className={styles.label}>
-        {props.label}
+        {props.label} {props.required && '*'}
         <textarea
           ref={textarea}
           className={classNames(styles.textarea, {

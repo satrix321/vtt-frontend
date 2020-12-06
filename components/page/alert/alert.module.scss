@@ -18,7 +18,7 @@
   box-shadow: 0 $spacing-4 $spacing-12 rgba(0, 0, 0, 0.15);
   background: $white;
 
-  &.visible {
+  &.is-visible {
     display: inline-flex !important;
     visibility: visible;
     opacity: 1;
