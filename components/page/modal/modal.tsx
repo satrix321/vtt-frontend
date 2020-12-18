@@ -17,7 +17,7 @@ export const Modal: React.FunctionComponent<Props> = (props: Props) => {
           width: props.width ? props.width : 'max-content',
           height: props.height ? props.height : 'max-content',
         }}
-        className={styles.modal}
+        className={classNames(styles.modal, { [styles['is-visible']]: props.open })}
         open={!!props.open}
       >
         {props.children}

@@ -2,13 +2,13 @@
 @import 'scss/spacings';
 
 .overlay {
-  visibility: hidden;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background: rgb(33, 33, 33);
+  visibility: hidden;
   opacity: 0;
   transition: all .3s;
 
@@ -24,4 +24,13 @@
   border: 0;
   box-shadow: $elevation-24;
   border-radius: $spacing-4;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+  }
 }

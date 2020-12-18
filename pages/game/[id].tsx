@@ -14,7 +14,7 @@ import { withAuth } from '../../components/utils/auth/auth'
 
 const Games: NextPage = () => {
   const [activeTab, setActiveTab] = useState<string>('2')
-  const [confirmationModel, setConfirmationModal] = useState<boolean>(true)
+  const [confirmationModel, setConfirmationModal] = useState<boolean>(false)
   const router = useRouter()
   const { id } = router.query
 
