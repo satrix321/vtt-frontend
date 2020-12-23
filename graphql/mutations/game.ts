@@ -1,5 +1,6 @@
 import { Context } from '../context'
 import s3 from '../../modules/s3'
+import { Game } from '@prisma/client'
 
 export const createGame = async (_: any, { name, description, file }: any, ctx: Context) => {
   if (!ctx.user) {
@@ -49,7 +50,41 @@ export const createGame = async (_: any, { name, description, file }: any, ctx: 
   }
 }
 
+export const modifyGame = async (_: any, game: Game, ctx: Context) => {
+  if (!ctx.user) {
+    throw new Error('Not Authenticated')
+  }
+
+  const modGame = await ctx.prisma.game.findOne({
+    where: {
+      id: Number(game.id),
+    },
+  })
+
+  if (!modGame) {
+    throw new Error("Game doesn't exist")
+  }
+
+  if (modGame.backgroundUrl !== game.backgroundUrl) {
+    // ...handle S3
+    throw new Error('Not implemented!')
+  }
+
+  Object.assign(modGame, game)
+
+  await ctx.prisma.game.update({
+    where: { id: modGame.id },
+    data: game,
+  })
+
+  return modGame
+}
+
 export const deleteGame = async (_: any, { id }: any, ctx: Context) => {
+  if (!ctx.user) {
+    throw new Error('Not Authenticated')
+  }
+
   const game = await ctx.prisma.game.findOne({
     where: {
       id: Number(id),
@@ -80,6 +115,10 @@ export const deleteGame = async (_: any, { id }: any, ctx: Context) => {
 }
 
 export const addPlayerToGame = async (_: any, { gameId, userId }: any, ctx: Context) => {
+  if (!ctx.user) {
+    throw new Error('Not Authenticated')
+  }
+
   const game = await ctx.prisma.game.findOne({
     where: {
       id: Number(gameId),
@@ -120,6 +159,10 @@ export const addPlayerToGame = async (_: any, { gameId, userId }: any, ctx: Cont
 }
 
 export const removePlayerFromGame = async (_: any, { gameId, userId }: any, ctx: Context) => {
+  if (!ctx.user) {
+    throw new Error('Not Authenticated')
+  }
+
   const game = await ctx.prisma.game.findOne({
     where: {
       id: Number(gameId),
