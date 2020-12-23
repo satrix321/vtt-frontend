@@ -12,10 +12,7 @@ type Props = {
 
 export const Button: React.FunctionComponent<Props> = (props: Props) => {
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('button click! :)')
-
     if (props.onClick) {
-      console.log('calling props!')
       props.onClick(event)
     }
   }
