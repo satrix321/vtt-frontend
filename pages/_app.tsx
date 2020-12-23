@@ -10,12 +10,18 @@ import styles from '../scss/page.module.scss'
 import '../scss/global.scss'
 import { Header } from '../components/page/header/header'
 import 'focus-visible'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 function handleExitComplete() {
   if (typeof window !== 'undefined') {
     window.scrollTo({ top: 0 })
   }
 }
+
+const apolloClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: process.env.apiBaseUrl as string,
+})
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const dispatch = useDispatch()
@@ -26,15 +32,17 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   }, [])
 
   return (
-    <div className={styles.page}>
-      <div style={{ display: router.route === '/inGame' ? 'none' : 'initial' }}>
-        <Header />
+    <ApolloProvider client={apolloClient}>
+      <div className={styles.page}>
+        <div style={{ display: router.route === '/inGame' ? 'none' : 'initial' }}>
+          <Header />
+        </div>
+        <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
+          <Component {...pageProps} key={router.route} />
+        </AnimatePresence>
+        <Alert />
       </div>
-      <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
-        <Component {...pageProps} key={router.route} />
-      </AnimatePresence>
-      <Alert />
-    </div>
+    </ApolloProvider>
   )
 }
 
