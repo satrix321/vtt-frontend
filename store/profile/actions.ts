@@ -1,26 +1,6 @@
 import { MyThunkAction } from '../types'
-import { showAlert } from '../alert/action'
-import { AlertType } from '../alert/reducer'
 import { User } from '../../models/profile'
 import axios from 'axios'
-
-export const getGames = (userId: number): MyThunkAction => {
-  return async (dispatch, getState) => {
-    try {
-      const games = await getState().app.api.getGames(userId)
-      dispatch({
-        type: 'GET_GAMES',
-        payload: games,
-      })
-    } catch (e) {
-      dispatch({
-        type: 'GET_GAMES',
-        payload: [],
-      })
-      dispatch(showAlert(AlertType.Error, e.message))
-    }
-  }
-}
 
 export const createGame = (gameName: string, description: string, gameImage: FileList | null): MyThunkAction => {
   return async (dispatch, getState) => {

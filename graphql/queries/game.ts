@@ -12,7 +12,7 @@ export const game = async (_: any, { id }: any, ctx: Context) => {
   })
 }
 
-export const listOfGames = async (_: any, { userId }: any, ctx: Context) => {
+export const games = async (_: any, { userId }: any, ctx: Context) => {
   const user = await ctx.prisma.user.findOne({
     where: {
       id: Number(userId),

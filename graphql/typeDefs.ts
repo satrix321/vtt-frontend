@@ -6,7 +6,7 @@ export default gql`
     currentUser: User!
 
     game(id: ID!): Game
-    listOfGames(userId: ID!): [Game!]
+    games(userId: ID!): [Game!]
 
     roll(equation: String!, verbose: Boolean): Roll!
   }
@@ -17,6 +17,7 @@ export default gql`
     autoLogin(token: String!): User
 
     createGame(name: String!, description: String, file: Upload!): Game!
+    modifyGame(game: GameInput!): Game!
     deleteGame(id: ID!): Game!
     addPlayerToGame(gameId: ID!, userId: ID!): Game!
     removePlayerFromGame(gameId: ID!, userId: ID!): Game!
@@ -45,6 +46,15 @@ export default gql`
     nextGameDate: String
     backgroundUrl: String
     players: [User!]
+  }
+
+  input GameInput {
+    id: ID!
+    name: String!
+    description: String
+    lastGameDate: String
+    nextGameDate: String
+    backgroundUrl: String
   }
 
   type LoginResponse {

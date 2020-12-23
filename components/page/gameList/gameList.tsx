@@ -1,3 +1,5 @@
+import { gql, useQuery } from '@apollo/client'
+import { GameGetPayload } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -7,8 +9,42 @@ import { Cta } from '../cta/cta'
 import { Column, Row } from '../grid/grid'
 import styles from './gameList.module.scss'
 
+type Game = GameGetPayload<{
+  include: {
+    players: true
+    owner: true
+  }
+}>
+
+const GET_GAMES = gql`
+  query GetGames($userId: ID!) {
+    games(userId: $userId) {
+      id
+      name
+      ownerId
+      description
+      lastGameDate
+      nextGameDate
+      backgroundUrl
+      players {
+        id
+        username
+      }
+    }
+  }
+`
+
 export const GameList: React.FunctionComponent = () => {
-  const games = useSelector((state: State) => state.profile.games)
+  const userId = useSelector((state: State) => state.profile.user?.id)
+  const { loading, error, data } = useQuery(GET_GAMES, {
+    variables: { userId: userId },
+  })
+
+  if (loading) {
+    return <></>
+  }
+
+  const games = data.games as Game[]
 
   return (
     <div>

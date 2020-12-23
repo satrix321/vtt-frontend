@@ -1,3 +1,4 @@
+import { gql, useQuery } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
@@ -12,11 +13,29 @@ import { Spacer } from '../../components/page/spacer/spacer'
 import { Tab, TabItem, TabItems, Tabs } from '../../components/page/tabs/tabs'
 import { withAuth } from '../../components/utils/auth/auth'
 
+const GET_GAME = gql`
+  query GetGame($id: ID!) {
+    game(id: $id) {
+      id
+      name
+      description
+      backgroundUrl
+    }
+  }
+`
+
 const Games: NextPage = () => {
-  const [activeTab, setActiveTab] = useState<string>('2')
-  const [confirmationModel, setConfirmationModal] = useState<boolean>(false)
   const router = useRouter()
-  const { id } = router.query
+  const [id] = useState<string | string[] | undefined>(router.query.id)
+  const [activeTab, setActiveTab] = useState<string>('Home')
+  const [confirmationModel, setConfirmationModal] = useState<boolean>(false)
+  const { loading, error, data } = useQuery(GET_GAME, {
+    variables: { id },
+  })
+
+  if (loading) {
+    return <></>
+  }
 
   return (
     <div>
@@ -28,17 +47,24 @@ const Games: NextPage = () => {
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <Container>
           <Row>
-            <Column cols="4">
+            <Column cols="12">
               <Tabs model={activeTab} onChange={(name) => setActiveTab(name)}>
-                <Tab name="1">Home</Tab>
-                <Tab name="2">Settings</Tab>
+                <Tab name="Home">Home</Tab>
+                <Tab name="Settings">Settings</Tab>
               </Tabs>
 
               <TabItems model={activeTab}>
-                <TabItem name="1">
-                  <Box>Hello World!</Box>
+                <TabItem name="Home">
+                  <Box>
+                    <img
+                      src={data.game.backgroundUrl ? data.game.backgroundUrl : '/fantasy-2847724_1920.jpg'}
+                      alt="game image"
+                    />
+                    <h1>{data.game.name}</h1>
+                    <p>{data.game.description}</p>
+                  </Box>
                 </TabItem>
-                <TabItem name="2">
+                <TabItem name="Settings">
                   <Box>
                     <BoxContent>
                       <Button
@@ -54,7 +80,7 @@ const Games: NextPage = () => {
                 </TabItem>
               </TabItems>
 
-              <Modal open={confirmationModel}>
+              <Modal open={confirmationModel} onClose={() => setConfirmationModal(false)}>
                 <Box>
                   <BoxTitle>Confirmation</BoxTitle>
                   <BoxContent>Are you sure you want to delete this game?</BoxContent>
