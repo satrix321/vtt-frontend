@@ -3,12 +3,14 @@
 @import 'scss/spacings';
 
 .cta {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   font-size: $font-18;
   text-decoration: none;
   padding-left: $spacing-32;
   padding-right: $spacing-32;
-  transition: background ease-in-out .3s;
+  transition: background ease-in-out 0.3s;
   user-select: none;
   margin-right: $spacing-8;
 

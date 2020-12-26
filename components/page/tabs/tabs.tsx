@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React, { forwardRef, ReactElement, useEffect, useRef } from 'react'
+import { createRipple } from '../../../componentUtils/ripple/ripple'
 import styles from './tabs.module.scss'
 
 type TabsProps = {
@@ -100,24 +101,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>((props: TabProps, ref
       props.onChange(props.name)
     }
 
-    const button = event.currentTarget
-    const circle = document.createElement('span')
-    const diameter = Math.max(button.clientWidth, button.clientHeight)
-    const radius = diameter / 2
-    const { left: buttonLeft, top: buttonTop } = button.getBoundingClientRect()
-
-    circle.style.width = circle.style.height = `${diameter}px`
-    circle.style.left = `${event.clientX - (buttonLeft + radius)}px`
-    circle.style.top = `${event.clientY - (buttonTop + radius)}px`
-    circle.classList.add(styles.ripple)
-
-    const ripple = button.querySelector(`.${styles.ripple}`)
-
-    if (ripple) {
-      ripple.remove()
-    }
-
-    button.appendChild(circle)
+    createRipple(event)
   }
 
   return (

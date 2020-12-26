@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { createRipple } from '../../../../componentUtils/ripple/ripple'
 import styles from './button.module.scss'
 
 type Props = {
@@ -15,6 +16,8 @@ export const Button: React.FunctionComponent<Props> = (props: Props) => {
     if (props.onClick) {
       props.onClick(event)
     }
+
+    createRipple(event)
   }
 
   return (

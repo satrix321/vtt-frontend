@@ -22,7 +22,7 @@
     bottom: 0;
     height: 2px;
     background: $black;
-    transition: .3s;
+    transition: 0.3s;
   }
 
   .tab {
@@ -37,21 +37,21 @@
     letter-spacing: 1px;
     font-size: $font-14;
     user-select: none;
-    transition: background ease-in-out .3s;
+    transition: background ease-in-out 0.3s;
     white-space: nowrap;
 
     &:hover {
-      background: $grey-10;
+      background: $grey-9;
       cursor: pointer;
     }
 
     &:focus {
-      background: $grey-9;
+      background: $grey-8;
       outline: none;
     }
 
     &:active {
-      background: $grey-8;
+      background: $grey-7;
     }
 
     &.tab--is-active {
@@ -85,28 +85,13 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  transition: height ease-in-out .3s;
-  
+  transition: height ease-in-out 0.3s;
+
   .tab-item {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    transition: left ease-in-out .3s;
-  }
-}
-
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple .5s linear;
-  background-color: rgba($grey-8, 0.6);
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
+    transition: left ease-in-out 0.3s;
   }
 }

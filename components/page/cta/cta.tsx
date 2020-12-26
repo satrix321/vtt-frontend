@@ -1,6 +1,7 @@
 import classNames from 'classnames'
-import styles from './cta.module.scss'
 import Link from 'next/link'
+import { createRipple } from '../../../componentUtils/ripple/ripple'
+import styles from './cta.module.scss'
 
 type Props = {
   secondary?: boolean
@@ -9,6 +10,10 @@ type Props = {
 }
 
 export const Cta: React.FunctionComponent<Props> = (props) => {
+  const onClick = (event: React.MouseEvent<HTMLElement>) => {
+    createRipple(event)
+  }
+
   if (props.href?.startsWith('http') || props.href?.startsWith('https')) {
     return (
       <a
@@ -18,6 +23,7 @@ export const Cta: React.FunctionComponent<Props> = (props) => {
           [styles.small]: props.small,
         })}
         href={props.href as string}
+        onClick={onClick}
       >
         {props.children}
       </a>
@@ -31,6 +37,7 @@ export const Cta: React.FunctionComponent<Props> = (props) => {
             [styles.secondary]: props.secondary,
             [styles.small]: props.small,
           })}
+          onClick={onClick}
         >
           {props.children}
         </a>
@@ -45,6 +52,7 @@ export const Cta: React.FunctionComponent<Props> = (props) => {
           [styles.small]: props.small,
         })}
         href="#"
+        onClick={onClick}
       >
         {props.children}
       </a>
