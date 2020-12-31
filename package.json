@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -55,5 +56,8 @@
     "eslint-plugin-react": "^7.21.5",
     "prettier": "^2.1.2",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "graphql-upload": "^11.0.0"
   }
 }

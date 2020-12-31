@@ -5,25 +5,35 @@ import { Form } from '@/components/page/form/form'
 import { ResizeType, TextArea } from '@/components/page/form/textArea/textArea'
 import { TextInput } from '@/components/page/form/textInput/textInput'
 import { Column, Container, Row } from '@/components/page/grid/grid'
-import { createGame } from '@/store/profile/actions'
+import { gql, useMutation } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { FormEvent, useState } from 'react'
-import { useDispatch } from 'react-redux'
+
+const CREATE_GAME = gql`
+  mutation($name: String!, $description: String, $file: Upload!) {
+    createGame(name: $name, description: $description, file: $file) {
+      id
+      name
+    }
+  }
+`
 
 const CreateGame: NextPage = () => {
-  const dispatch = useDispatch()
   const [gameName, setGameName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [gameImage, setGameImage] = useState<FileList | null>(null)
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [createGame] = useMutation(CREATE_GAME)
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
 
-    dispatch(createGame(gameName, description, gameImage))
+    if (gameImage && gameImage.length) {
+      createGame({ variables: { name: gameName, description: description, file: gameImage[0] } })
+    }
   }
 
   return (

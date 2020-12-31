@@ -5,6 +5,8 @@ import styles from '@/scss/page.module.scss'
 import { autoLogin } from '@/store/profile/actions'
 import { wrapper } from '@/store/store'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import { createUploadLink } from 'apollo-upload-client'
 import 'focus-visible'
 import { AnimatePresence } from 'framer-motion'
 import { AppProps } from 'next/app'
@@ -18,9 +20,21 @@ function handleExitComplete() {
   }
 }
 
+const apiBaseUrl = process.env.apiBaseUrl as string
+const uploadLink = createUploadLink({ uri: apiBaseUrl })
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
+
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: process.env.apiBaseUrl as string,
+  link: authLink.concat(uploadLink),
 })
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {

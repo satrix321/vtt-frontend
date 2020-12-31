@@ -46,7 +46,7 @@ export const createGame = async (_: any, { name, description, file }: any, ctx: 
 
     return game
   } catch (e) {
-    throw new Error('Internal Server Error')
+    throw new Error(e)
   }
 }
 
