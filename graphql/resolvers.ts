@@ -1,9 +1,9 @@
+import rollParser from '@/modules/rollParser/rollParser'
 import { Context } from './context'
-import rollParser from '../modules/rollParser/rollParser'
-import * as userQueries from './queries/user'
-import * as gameQueries from './queries/game'
 import * as authMutations from './mutations/auth'
 import * as gameMutations from './mutations/game'
+import * as gameQueries from './queries/game'
+import * as userQueries from './queries/user'
 
 export default {
   Query: {

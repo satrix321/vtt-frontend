@@ -1,6 +1,6 @@
+import { createRipple } from '@/componentUtils/ripple/ripple'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { createRipple } from '../../../componentUtils/ripple/ripple'
 import styles from './cta.module.scss'
 
 type Props = {

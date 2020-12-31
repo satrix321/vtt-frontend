@@ -20,7 +20,7 @@
     box-sizing: border-box;
     font-size: $font-16;
     padding: $spacing-16 $spacing-12;
-    transition: outline ease-in-out .1s;
+    transition: outline ease-in-out 0.1s;
 
     &:focus {
       outline: $spacing-4 solid $focus;
@@ -53,14 +53,14 @@
 
     color: $error;
     margin-top: $spacing-8;
-    transition: transform ease-in .3s, opacity .3s;
+    transition: transform ease-in 0.3s, opacity 0.3s;
     transform: translateY(-$spacing-16);
     opacity: 0;
 
     &.is-visible {
       transform: translateY(0);
       opacity: 1;
-      transition: transform ease-in-out .3s, opacity .3s .05s;
+      transition: transform ease-in-out 0.3s, opacity 0.3s 0.05s;
     }
   }
 }

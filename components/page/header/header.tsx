@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import { Container, Row, Column } from '../grid/grid'
-import { useState } from 'react'
+import { Column, Container, Row } from '@/components/page/grid/grid'
+import { State } from '@/store/store'
 import classNames from 'classnames'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { useState } from 'react'
 import { MdMenu } from 'react-icons/md'
 import { useSelector } from 'react-redux'
-import { State } from '../../../store/store'
 import styles from './header.module.scss'
-import { motion } from 'framer-motion'
 
 export const Header: React.FunctionComponent = () => {
   const isLogged = useSelector((state: State) => state.profile.isLogged)

@@ -1,5 +1,5 @@
+import { createRipple } from '@/componentUtils/ripple/ripple'
 import classNames from 'classnames'
-import { createRipple } from '../../../../componentUtils/ripple/ripple'
 import styles from './button.module.scss'
 
 type Props = {

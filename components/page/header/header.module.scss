@@ -48,7 +48,7 @@ $mobile-menu-width: 320px;
     text-decoration: none;
     padding-left: $spacing-16;
     padding-right: $spacing-16;
-    transition: background ease-in-out .3s;
+    transition: background ease-in-out 0.3s;
 
     &:focus {
       outline: 0;
@@ -68,7 +68,9 @@ $mobile-menu-width: 320px;
     }
   }
 
-  .container, .row, .column {
+  .container,
+  .row,
+  .column {
     height: 100%;
     margin-top: 0;
     margin-bottom: 0;
@@ -91,7 +93,7 @@ $mobile-menu-width: 320px;
         line-height: $spacing-48;
         padding-left: $spacing-16;
         padding-right: $spacing-16;
-        transition: background ease-in-out .3s;
+        transition: background ease-in-out 0.3s;
 
         &:hover {
           background: $header-item-hover;
@@ -121,7 +123,7 @@ $mobile-menu-width: 320px;
       top: 100%;
       right: -$mobile-menu-width;
       background: $header-background;
-      transition: right ease-in-out .3s;
+      transition: right ease-in-out 0.3s;
 
       &.mobile-open {
         right: 0;

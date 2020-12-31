@@ -1,6 +1,6 @@
-import { ChangeEvent, useState, useRef } from 'react'
-import styles from './fileInput.module.scss'
 import classNames from 'classnames'
+import { ChangeEvent, useRef, useState } from 'react'
+import styles from './fileInput.module.scss'
 
 type Props = {
   name?: string

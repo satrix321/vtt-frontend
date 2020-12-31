@@ -12,8 +12,8 @@
   margin-top: $spacing-64;
   margin-bottom: $spacing-64;
   grid-template-areas:
-    "media text"
-    "media text";
+    'media text'
+    'media text';
 
   @include media('<large') {
     padding-left: $spacing-16;
@@ -22,8 +22,8 @@
 
   @include media('<=medium') {
     grid-template-areas:
-      "text text"
-      "media media";
+      'text text'
+      'media media';
     row-gap: $spacing-32;
   }
 
@@ -53,7 +53,9 @@
     @include media('<=medium') {
       align-items: center;
 
-      .title, .subtitle, .description {
+      .title,
+      .subtitle,
+      .description {
         text-align: center;
       }
     }

@@ -1,12 +1,12 @@
+import { Chip } from '@/components/page/chip/chip'
+import { Cta } from '@/components/page/cta/cta'
+import { Column, Row } from '@/components/page/grid/grid'
+import { State } from '@/store/store'
 import { gql, useQuery } from '@apollo/client'
 import { GameGetPayload } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { State } from '../../../store/store'
-import { Chip } from '../chip/chip'
-import { Cta } from '../cta/cta'
-import { Column, Row } from '../grid/grid'
 import styles from './gameList.module.scss'
 
 type Game = GameGetPayload<{
@@ -36,7 +36,7 @@ const GET_GAMES = gql`
 
 export const GameList: React.FunctionComponent = () => {
   const userId = useSelector((state: State) => state.profile.user?.id)
-  const { loading, error, data } = useQuery(GET_GAMES, {
+  const { loading, data } = useQuery(GET_GAMES, {
     variables: { userId: userId },
   })
 

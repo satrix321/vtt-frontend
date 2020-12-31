@@ -1,6 +1,6 @@
-import { Container, Row, Column } from '../grid/grid'
-import styles from './footer.module.scss'
+import { Column, Container, Row } from '@/components/page/grid/grid'
 import { motion } from 'framer-motion'
+import styles from './footer.module.scss'
 
 export const Footer: React.FunctionComponent = () => {
   return (

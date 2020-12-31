@@ -1,6 +1,6 @@
+import { Cta } from '@/components/page/cta/cta'
+import { Column, Row } from '@/components/page/grid/grid'
 import classNames from 'classnames'
-import { Row, Column } from '../grid/grid'
-import { Cta } from '../cta/cta'
 import styles from './heroHighlight.module.scss'
 
 type Props = {

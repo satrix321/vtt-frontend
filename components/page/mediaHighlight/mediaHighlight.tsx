@@ -1,4 +1,4 @@
-import { Cta } from '../cta/cta'
+import { Cta } from '@/components/page/cta/cta'
 import styles from './mediaHighlight.module.scss'
 
 type Props = {

@@ -1,14 +1,11 @@
 import classNames from 'classnames'
 import { useState } from 'react'
-import { IoMdChatboxes } from 'react-icons/io'
-import { GiPerson } from 'react-icons/gi'
-import { GiBookmark } from 'react-icons/gi'
-import { GiTreasureMap } from 'react-icons/gi'
-import { TiWeatherPartlySunny } from 'react-icons/ti'
-import { MdQueueMusic } from 'react-icons/md'
-import { GiSpinningSword } from 'react-icons/gi'
 import { AiFillCode } from 'react-icons/ai'
 import { FaCogs } from 'react-icons/fa'
+import { GiBookmark, GiPerson, GiSpinningSword, GiTreasureMap } from 'react-icons/gi'
+import { IoMdChatboxes } from 'react-icons/io'
+import { MdQueueMusic } from 'react-icons/md'
+import { TiWeatherPartlySunny } from 'react-icons/ti'
 import styles from './menu.module.scss'
 
 type Props = {

@@ -1,4 +1,4 @@
-import { Context } from '../context'
+import { Context } from '@/graphql/context'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 

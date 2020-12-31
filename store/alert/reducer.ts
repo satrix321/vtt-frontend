@@ -1,5 +1,5 @@
-import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
+import { AnyAction, Reducer } from 'redux'
 
 export enum AlertType {
   Error,

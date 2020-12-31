@@ -1,6 +1,6 @@
+import { createRipple } from '@/componentUtils/ripple/ripple'
 import classNames from 'classnames'
 import React, { forwardRef, ReactElement, useEffect, useRef } from 'react'
-import { createRipple } from '../../../componentUtils/ripple/ripple'
 import styles from './tabs.module.scss'
 
 type TabsProps = {

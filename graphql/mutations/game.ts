@@ -1,5 +1,5 @@
-import { Context } from '../context'
-import s3 from '../../modules/s3'
+import { Context } from '@/graphql/context'
+import s3 from '@/modules/s3'
 import { Game } from '@prisma/client'
 
 export const createGame = async (_: any, { name, description, file }: any, ctx: Context) => {

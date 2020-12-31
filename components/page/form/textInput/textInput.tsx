@@ -1,5 +1,3 @@
-import classNames from 'classnames'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import {
   validateEmail,
   validateRequired,
@@ -7,7 +5,9 @@ import {
   ValidationEmitter,
   ValidationRule,
   ValidationState,
-} from '../validation'
+} from '@/modules/validation'
+import classNames from 'classnames'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import styles from './textInput.module.scss'
 
 type Props = {

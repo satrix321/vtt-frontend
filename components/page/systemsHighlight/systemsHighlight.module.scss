@@ -6,7 +6,7 @@
 .systems-highlight {
   margin-top: $spacing-64;
   margin-bottom: $spacing-64;
-  
+
   .title {
     font-size: $font-36;
     text-align: center;
@@ -33,7 +33,7 @@
 
       @include media('>medium') {
         &:first-child,
-        &:nth-child(6n+1) {
+        &:nth-child(6n + 1) {
           padding-left: 0;
         }
 
@@ -47,34 +47,34 @@
         width: calc((100% - (#{$grid-gutter} * 3)) / 4);
 
         &:first-child,
-        &:nth-child(4n+1) {
+        &:nth-child(4n + 1) {
           padding-left: 0;
         }
 
         &:last-child,
         &:nth-child(4n) {
           padding-right: 0;
-        }        
+        }
       }
 
       @include media('<small') {
         width: calc((100% - #{$grid-gutter}) / 2);
 
         &:first-child,
-        &:nth-child(2n+1) {
+        &:nth-child(2n + 1) {
           padding-left: 0;
         }
 
         &:last-child,
         &:nth-child(2n) {
           padding-right: 0;
-        }        
+        }
       }
 
       .system__link {
         display: block;
         position: relative;
-        transition: outline ease-in-out .1s;
+        transition: outline ease-in-out 0.1s;
 
         &[href]:after {
           content: '';
@@ -84,17 +84,17 @@
           right: 0;
           bottom: 0;
           background: transparent;
-          transition: background ease-in-out .3s;
+          transition: background ease-in-out 0.3s;
         }
 
         &:focus {
           outline: 0;
         }
-      
+
         &[data-focus-visible-added] {
           &:after {
             background: rgba($white, 0.15);
-          }  
+          }
         }
 
         &[href]:hover:after {

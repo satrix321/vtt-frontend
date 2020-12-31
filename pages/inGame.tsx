@@ -1,12 +1,12 @@
+import { SidePanel } from '@/components/game/sidePanel/sidePanel'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { SidePanel } from '../components/game/sidePanel/sidePanel'
 
 const GameView = dynamic(
   async () => {
-    const { GameView } = await import('../components/game/gameView/gameView')
+    const { GameView } = await import('@/components/game/gameView/gameView')
     return GameView
   },
   { ssr: false },

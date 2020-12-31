@@ -1,7 +1,7 @@
-import { User } from '../../models/profile'
+import { User } from '@/models/profile'
 import { GameGetPayload } from '@prisma/client'
-import { Reducer, AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
+import { AnyAction, Reducer } from 'redux'
 
 type Game = GameGetPayload<{
   include: {

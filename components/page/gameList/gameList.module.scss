@@ -54,7 +54,7 @@ $max-players-list-width: 450px;
 
     .headers-section {
       margin-bottom: $spacing-16;
-  
+
       .title {
         color: $link;
         font-size: $font-30;
@@ -66,30 +66,26 @@ $max-players-list-width: 450px;
         }
       }
     }
-  
+
     .players-section {
       margin-bottom: $spacing-16;
-  
+
       .title {
         margin: 0 0 $spacing-8 0;
       }
       .players {
         max-width: $max-players-list-width;
-  
+
         > * {
           margin-right: $spacing-8;
           margin-bottom: $spacing-8;
         }
       }
     }
-  
+
     .dates-section {
       .last-game-date {
         margin-bottom: $spacing-8;
-      }
-  
-      .next-game-date {
-  
       }
     }
   }

@@ -1,12 +1,14 @@
-import { GiD4 } from 'react-icons/gi'
-import { GiPerspectiveDiceSix } from 'react-icons/gi'
-import { GiDiceEightFacesEight } from 'react-icons/gi'
-import { GiD10 } from 'react-icons/gi'
-import { GiD12 } from 'react-icons/gi'
-import { GiDiceTwentyFacesTwenty } from 'react-icons/gi'
-import { Message } from './message/message'
-import styles from './chat.module.scss'
 import { useRef, useState } from 'react'
+import {
+  GiD10,
+  GiD12,
+  GiD4,
+  GiDiceEightFacesEight,
+  GiDiceTwentyFacesTwenty,
+  GiPerspectiveDiceSix,
+} from 'react-icons/gi'
+import styles from './chat.module.scss'
+import { Message } from './message/message'
 
 export const Chat: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null)

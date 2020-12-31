@@ -1,12 +1,12 @@
+import { Footer } from '@/components/page/footer/footer'
+import { Column, Container, Row } from '@/components/page/grid/grid'
+import { HeroHighlight } from '@/components/page/heroHighlight/heroHighlight'
+import { MediaHighlight } from '@/components/page/mediaHighlight/mediaHighlight'
+import { QuoteHighlight } from '@/components/page/quoteHighlight/quoteHighlight'
+import { SystemsHighlight } from '@/components/page/systemsHighlight/systemsHighlight'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Footer } from '../components/page/footer/footer'
-import { Column, Container, Row } from '../components/page/grid/grid'
-import { HeroHighlight } from '../components/page/heroHighlight/heroHighlight'
-import { MediaHighlight } from '../components/page/mediaHighlight/mediaHighlight'
-import { QuoteHighlight } from '../components/page/quoteHighlight/quoteHighlight'
-import { SystemsHighlight } from '../components/page/systemsHighlight/systemsHighlight'
 
 const Home: NextPage = () => {
   return (

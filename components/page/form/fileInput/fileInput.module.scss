@@ -29,18 +29,18 @@
       color: $black;
       border: thin solid $black;
       box-sizing: border-box;
-      line-height: $spacing-32 - $spacing-2*2;
-      transition: outline ease-in-out .1s;
-  
+      line-height: $spacing-32 - $spacing-2 * 2;
+      transition: outline ease-in-out 0.1s;
+
       &::-moz-focus-inner {
         border: 0;
       }
-  
+
       &:focus {
         outline: $spacing-4 solid $focus;
       }
     }
-  
+
     .filename {
       overflow: hidden;
       text-overflow: ellipsis;

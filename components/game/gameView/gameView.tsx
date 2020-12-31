@@ -1,5 +1,5 @@
-import * as PIXI from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
+import * as PIXI from 'pixi.js'
 import { useEffect, useRef } from 'react'
 import styles from './gameView.module.scss'
 

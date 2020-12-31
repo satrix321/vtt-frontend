@@ -1,4 +1,4 @@
-import { EventEmitter, EventEmitterCallback } from '../../../modules/eventEmitter'
+import { EventEmitter, EventEmitterCallback } from '@/modules/eventEmitter'
 
 export type ValidationState = { result: boolean; error?: string }
 export type ValidationRule = (data: string | number | string[] | undefined) => [boolean, string]
@@ -23,7 +23,7 @@ export class ValidationEmitter {
     this.inputStates[elementName] = state
 
     let tempFormState = true
-    for (const [_, { result: inputResult }] of Object.entries(this.inputStates)) {
+    for (const [, { result: inputResult }] of Object.entries(this.inputStates)) {
       if (!inputResult) {
         tempFormState = false
       }

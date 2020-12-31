@@ -1,10 +1,9 @@
-import { FormEvent, useState } from 'react'
-import styles from './form.module.scss'
-import React from 'react'
-import { ValidationEmitter } from './validation'
-import { TextInput } from './textInput/textInput'
-import { TextArea } from './textArea/textArea'
+import { ValidationEmitter } from '@/modules/validation'
+import React, { FormEvent, useState } from 'react'
 import { FileInput } from './fileInput/fileInput'
+import styles from './form.module.scss'
+import { TextArea } from './textArea/textArea'
+import { TextInput } from './textInput/textInput'
 
 type Props = {
   onSubmit?: (e: FormEvent) => void

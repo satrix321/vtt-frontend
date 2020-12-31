@@ -1,7 +1,13 @@
-import { ChangeEvent, useRef, useState, useEffect } from 'react'
-import styles from './textArea.module.scss'
+import {
+  validateRequired,
+  validateRules,
+  ValidationEmitter,
+  ValidationRule,
+  ValidationState,
+} from '@/modules/validation'
 import classNames from 'classnames'
-import { ValidationRule, ValidationEmitter, ValidationState, validateRules, validateRequired } from '../validation'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import styles from './textArea.module.scss'
 
 export enum ResizeType {
   None = 1,

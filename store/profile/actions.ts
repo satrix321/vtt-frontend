@@ -1,5 +1,5 @@
-import { MyThunkAction } from '../types'
-import { User } from '../../models/profile'
+import { User } from '@/models/profile'
+import { MyThunkAction } from '@/store/types'
 import axios from 'axios'
 
 export const createGame = (gameName: string, description: string, gameImage: FileList | null): MyThunkAction => {

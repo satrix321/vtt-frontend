@@ -10,12 +10,12 @@
   background: rgb(33, 33, 33);
   visibility: hidden;
   opacity: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   z-index: 1000;
 
   &.is-visible {
     visibility: visible;
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 
@@ -28,7 +28,7 @@
   display: block;
   visibility: hidden;
   opacity: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   max-width: calc(100vw - #{$spacing-16});
   z-index: 1001;
 

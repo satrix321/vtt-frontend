@@ -1,4 +1,4 @@
-import { Context } from '../context'
+import { Context } from '@/graphql/context'
 
 export const user = async (_: any, { id }: any, ctx: Context) => {
   return await ctx.prisma.user.findOne({

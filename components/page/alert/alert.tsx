@@ -1,8 +1,8 @@
+import { AlertType } from '@/store/alert/reducer'
+import { State } from '@/store/store'
 import classNames from 'classnames'
 import { IoMdCheckmarkCircle, IoMdCloseCircle, IoMdInformationCircle, IoMdWarning } from 'react-icons/io'
 import { useSelector } from 'react-redux'
-import { AlertType } from '../../../store/alert/reducer'
-import { State } from '../../../store/store'
 import styles from './alert.module.scss'
 
 export const Alert: React.FunctionComponent = () => {

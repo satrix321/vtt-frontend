@@ -1,10 +1,10 @@
+import { Column, Container, Row } from '@/components/page/grid/grid'
+import { logout } from '@/store/profile/actions'
+import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Container, Row, Column } from '../components/page/grid/grid'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../store/profile/actions'
-import { motion } from 'framer-motion'
 
 const Logout: NextPage = () => {
   const dispatch = useDispatch()

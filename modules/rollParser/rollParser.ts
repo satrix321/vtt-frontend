@@ -1,5 +1,4 @@
 import peg from 'pegjs'
-
 import fullGrammar from './fullGrammar'
 import rollGrammar from './rollGrammar'
 

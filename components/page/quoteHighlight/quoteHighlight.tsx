@@ -1,5 +1,5 @@
-import { Row, Column } from '../grid/grid'
-import { Cta } from '../cta/cta'
+import { Cta } from '@/components/page/cta/cta'
+import { Column, Row } from '@/components/page/grid/grid'
 import styles from './quoteHighlight.module.scss'
 
 type Props = {

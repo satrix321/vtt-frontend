@@ -33,7 +33,9 @@
   }
 
   &.invert-colors .text {
-    .title, .subtitle, .description {
+    .title,
+    .subtitle,
+    .description {
       filter: invert(100%);
     }
   }

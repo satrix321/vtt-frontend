@@ -1,7 +1,7 @@
-import { Menu } from './menu/menu'
-import { Chat } from './chat/chat'
-import styles from './sidePanel.module.scss'
 import { useState } from 'react'
+import { Chat } from './chat/chat'
+import { Menu } from './menu/menu'
+import styles from './sidePanel.module.scss'
 
 export const SidePanel: React.FunctionComponent = () => {
   const [activePanelId, setActivePanelId] = useState<string | undefined>(undefined)

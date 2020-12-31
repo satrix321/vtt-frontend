@@ -1,7 +1,7 @@
+import { Column, Container, Row } from '@/components/page/grid/grid'
+import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Container, Row, Column } from '../components/page/grid/grid'
-import { motion } from 'framer-motion'
 
 const RegisterSuccess: NextPage = () => {
   return (

@@ -1,6 +1,6 @@
-import styles from './modal.module.scss'
 import classNames from 'classnames'
 import { useCallback, useEffect, useRef } from 'react'
+import styles from './modal.module.scss'
 
 type Props = {
   open: boolean

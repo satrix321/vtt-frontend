@@ -1,5 +1,5 @@
-import { MyThunkAction } from '../types'
-import { debounce } from '../../modules/utils'
+import { debounce } from '@/modules/utils'
+import { MyThunkAction } from '@/store/types'
 import { AlertType } from './reducer'
 
 const alertDuration = 3000

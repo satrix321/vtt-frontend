@@ -80,7 +80,7 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
 
     @for $i from 1 through $number-of-columns {
       .col-offset-#{$i} {
-        grid-column-start: $i+1;
+        grid-column-start: $i + 1;
       }
     }
 
@@ -89,11 +89,11 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
         grid-column-start: unset;
       }
     }
-  
+
     @for $i from 1 through $number-of-columns {
       .col-sm-offset-#{$i} {
         @include media('>small') {
-          grid-column-start: $i+1;
+          grid-column-start: $i + 1;
         }
       }
     }
@@ -103,11 +103,11 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
         grid-column-start: unset;
       }
     }
-  
+
     @for $i from 1 through $number-of-columns {
       .col-md-offset-#{$i} {
         @include media('>medium') {
-          grid-column-start: $i+1;
+          grid-column-start: $i + 1;
         }
       }
     }
@@ -117,11 +117,11 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
         grid-column-start: unset;
       }
     }
-  
+
     @for $i from 1 through $number-of-columns {
       .col-lg-offset-#{$i} {
         @include media('>large') {
-          grid-column-start: $i+1;
+          grid-column-start: $i + 1;
         }
       }
     }
@@ -131,11 +131,11 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
         grid-column-start: unset;
       }
     }
-  
+
     @for $i from 1 through $number-of-columns {
       .col-xl-offset-#{$i} {
         @include media('>x-large') {
-          grid-column-start: $i+1;
+          grid-column-start: $i + 1;
         }
       }
     }
@@ -152,7 +152,7 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
           width: calc(#{$percents} + #{$pixels});
         }
       }
-  
+
       @for $i from 1 through $number-of-columns {
         .col-sm-#{$i} {
           @include media('>small') {
@@ -162,7 +162,7 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
           }
         }
       }
-  
+
       @for $i from 1 through $number-of-columns {
         .col-md-#{$i} {
           @include media('>medium') {
@@ -172,7 +172,7 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
           }
         }
       }
-  
+
       @for $i from 1 through $number-of-columns {
         .col-lg-#{$i} {
           @include media('>large') {
@@ -182,7 +182,7 @@ $grid-gutters-width-sum: ($number-of-columns - 1) * $grid-gutter;
           }
         }
       }
-  
+
       @for $i from 1 through $number-of-columns {
         .col-xl-#{$i} {
           @include media('>x-large') {

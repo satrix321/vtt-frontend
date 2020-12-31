@@ -1,4 +1,4 @@
-export type EventEmitterCallback = (...args: any[]) => any
+export type EventEmitterCallback = (...args: unknown[]) => unknown
 
 export class EventEmitter {
   events: Record<string, EventEmitterCallback[]>
@@ -7,7 +7,7 @@ export class EventEmitter {
     this.events = {}
   }
 
-  dispatch(event: string, data: any) {
+  dispatch(event: string, data: unknown): void {
     if (!this.events[event]) {
       return
     }
@@ -16,14 +16,14 @@ export class EventEmitter {
     }
   }
 
-  subscribe(event: string, callback: EventEmitterCallback) {
+  subscribe(event: string, callback: EventEmitterCallback): void {
     if (!this.events[event]) {
       this.events[event] = []
     }
     this.events[event].push(callback)
   }
 
-  unsubscribe(event: string, callback: EventEmitterCallback) {
+  unsubscribe(event: string, callback: EventEmitterCallback): void {
     for (let i = 0; i < this.events[event].length; i++) {
       if (this.events[event][i] === callback) {
         this.events[event].splice(i, 1)
