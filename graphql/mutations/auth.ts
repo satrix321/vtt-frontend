@@ -1,10 +1,16 @@
 import { Context } from '@/graphql/context'
+import { User } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { TokenPayload } from '../types'
 
 const jwtSecret = 'my-secret-from-env-file-in-prod'
 
-export const register = async (_: any, { email, password, username }: any, ctx: Context) => {
+export const register = async (
+  _: unknown,
+  { email, password, username }: { email: string; password: string; username: string },
+  ctx: Context,
+): Promise<User> => {
   if (await ctx.prisma.user.findOne({ where: { email } })) {
     throw new Error('Email already in use')
   }
@@ -25,7 +31,11 @@ export const register = async (_: any, { email, password, username }: any, ctx: 
   return user
 }
 
-export const login = async (_: any, { email, password }: any, ctx: Context) => {
+export const login = async (
+  _: unknown,
+  { email, password }: { email: string; password: string },
+  ctx: Context,
+): Promise<{ token: string; user: User }> => {
   const user = await ctx.prisma.user.findOne({
     where: { email },
   })
@@ -57,8 +67,8 @@ export const login = async (_: any, { email, password }: any, ctx: Context) => {
   }
 }
 
-export const autoLogin = async (_: any, { token }: any, ctx: Context) => {
-  const decodedToken = jwt.decode(token) as any
+export const autoLogin = async (_: unknown, { token }: { token: string }, ctx: Context): Promise<User | null> => {
+  const decodedToken = jwt.decode(token) as TokenPayload | null
 
   if (decodedToken) {
     return await ctx.prisma.user.findOne({

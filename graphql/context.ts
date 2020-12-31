@@ -1,16 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 import jwt from 'jsonwebtoken'
+import { TokenPayload } from './types'
 
 const jwtSecret = 'my-secret-from-env-file-in-prod'
 
 const prisma = new PrismaClient()
-
-type TokenPayload = {
-  id: number
-  email: string
-  iat: number
-  exp: number
-}
 
 export type Context = {
   user: TokenPayload | null
@@ -39,6 +33,6 @@ export function createContext({ req }: any): Context {
   }
 }
 
-export function destroyContext(): Promise<any> {
+export function destroyContext(): Promise<unknown> {
   return prisma.$disconnect()
 }

@@ -8,7 +8,7 @@ const rollParser = peg.generate(rollGrammar)
 const rollTokensRegex = /\d+d\d+/gm
 const allTokensRegex = /\d+d\d+|d\d+|\d+|\+|\-|\*|\/|\(|\)/gm
 
-type RollResult = {
+export type RollResult = {
   equation: string
   result: string
   tokens:
@@ -21,7 +21,7 @@ type RollResult = {
 }
 
 export default {
-  parse: (equation: string, options: { verbose: boolean } = { verbose: false }) => {
+  parse: (equation: string, options: { verbose: boolean } = { verbose: false }): RollResult => {
     if (options.verbose) {
       const tokens = equation.match(allTokensRegex)
       const tempTokens = [] as string[]
@@ -71,7 +71,7 @@ export default {
         equation,
         result: fullParser.parse(equation),
         tokens: null,
-      }
+      } as RollResult
     }
   },
 }

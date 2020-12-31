@@ -1,8 +1,13 @@
 import { Context } from '@/graphql/context'
 import s3 from '@/modules/s3'
 import { Game } from '@prisma/client'
+import { FileUpload } from '@/graphql/types'
 
-export const createGame = async (_: any, { name, description, file }: any, ctx: Context) => {
+export const createGame = async (
+  _: unknown,
+  { name, description, file }: { name: string; description: string; file: Promise<FileUpload> },
+  ctx: Context,
+): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
@@ -50,37 +55,37 @@ export const createGame = async (_: any, { name, description, file }: any, ctx: 
   }
 }
 
-export const modifyGame = async (_: any, game: Game, ctx: Context) => {
+export const modifyGame = async (_: unknown, game: Game, ctx: Context): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
 
-  const modGame = await ctx.prisma.game.findOne({
+  const modifiedGame = await ctx.prisma.game.findOne({
     where: {
       id: Number(game.id),
     },
   })
 
-  if (!modGame) {
+  if (!modifiedGame) {
     throw new Error("Game doesn't exist")
   }
 
-  if (modGame.backgroundUrl !== game.backgroundUrl) {
-    // ...handle S3
+  if (modifiedGame.backgroundUrl !== game.backgroundUrl) {
+    //TODO ...handle S3
     throw new Error('Not implemented!')
   }
 
-  Object.assign(modGame, game)
+  Object.assign(modifiedGame, game)
 
   await ctx.prisma.game.update({
-    where: { id: modGame.id },
+    where: { id: modifiedGame.id },
     data: game,
   })
 
-  return modGame
+  return modifiedGame
 }
 
-export const deleteGame = async (_: any, { id }: any, ctx: Context) => {
+export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Context): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
@@ -114,7 +119,11 @@ export const deleteGame = async (_: any, { id }: any, ctx: Context) => {
   })
 }
 
-export const addPlayerToGame = async (_: any, { gameId, userId }: any, ctx: Context) => {
+export const addPlayerToGame = async (
+  _: unknown,
+  { gameId, userId }: { gameId: number; userId: number },
+  ctx: Context,
+): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
@@ -158,7 +167,11 @@ export const addPlayerToGame = async (_: any, { gameId, userId }: any, ctx: Cont
   })
 }
 
-export const removePlayerFromGame = async (_: any, { gameId, userId }: any, ctx: Context) => {
+export const removePlayerFromGame = async (
+  _: unknown,
+  { gameId, userId }: { gameId: number; userId: number },
+  ctx: Context,
+): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }

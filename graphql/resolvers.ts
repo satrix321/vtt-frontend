@@ -1,4 +1,4 @@
-import rollParser from '@/modules/rollParser/rollParser'
+import rollParser, { RollResult } from '@/modules/rollParser/rollParser'
 import { Context } from './context'
 import * as authMutations from './mutations/auth'
 import * as gameMutations from './mutations/game'
@@ -10,7 +10,11 @@ export default {
     ...userQueries,
     ...gameQueries,
 
-    roll: (_: any, { equation, verbose }: { equation: string; verbose: boolean }, ctx: Context) => {
+    roll: (
+      _: unknown,
+      { equation, verbose }: { equation: string; verbose: boolean },
+      ctx: Context,
+    ): RollResult => {
       return rollParser.parse(equation, {
         verbose,
       })
