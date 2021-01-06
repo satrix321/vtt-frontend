@@ -1,7 +1,7 @@
 import { Context } from '@/graphql/context'
-import { User, UserGetPayload } from '@prisma/client'
+import { User, Prisma } from '@prisma/client'
 
-type UserWithGamesOwnedGames = UserGetPayload<{
+type UserWithGamesOwnedGames = Prisma.UserGetPayload<{
   include: {
     games: true
     ownedGames: true

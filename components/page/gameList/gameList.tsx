@@ -3,13 +3,13 @@ import { Cta } from '@/components/page/cta/cta'
 import { Column, Row } from '@/components/page/grid/grid'
 import { State } from '@/store/store'
 import { gql, useQuery } from '@apollo/client'
-import { GameGetPayload } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styles from './gameList.module.scss'
 
-type Game = GameGetPayload<{
+type Game = Prisma.GameGetPayload<{
   include: {
     players: true
     owner: true
