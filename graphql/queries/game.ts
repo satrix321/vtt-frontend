@@ -15,7 +15,7 @@ type GameWithPlayers = GameGetPayload<{
 }>
 
 export const game = async (_: unknown, { id }: { id: number }, ctx: Context): Promise<GameWithOwnerPlayers | null> => {
-  return await ctx.prisma.game.findOne({
+  return await ctx.prisma.game.findUnique({
     where: {
       id: Number(id),
     },
@@ -31,7 +31,7 @@ export const games = async (
   { userId }: { userId: number },
   ctx: Context,
 ): Promise<GameWithPlayers[] | undefined> => {
-  const user = await ctx.prisma.user.findOne({
+  const user = await ctx.prisma.user.findUnique({
     where: {
       id: Number(userId),
     },

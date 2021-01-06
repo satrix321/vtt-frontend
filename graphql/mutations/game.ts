@@ -12,7 +12,7 @@ export const createGame = async (
     throw new Error('Not Authenticated')
   }
 
-  const user = await ctx.prisma.user.findOne({
+  const user = await ctx.prisma.user.findUnique({
     where: {
       id: Number(ctx.user.id),
     },
@@ -46,6 +46,7 @@ export const createGame = async (
           },
         },
         backgroundUrl: response.Location,
+        backgroundFileName: filename,
       },
     })
 
@@ -55,12 +56,12 @@ export const createGame = async (
   }
 }
 
-export const modifyGame = async (_: unknown, game: Game, ctx: Context): Promise<Game> => {
+export const updateGame = async (_: unknown, game: Game, ctx: Context): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
 
-  const modifiedGame = await ctx.prisma.game.findOne({
+  const modifiedGame = await ctx.prisma.game.findUnique({
     where: {
       id: Number(game.id),
     },
@@ -73,6 +74,15 @@ export const modifyGame = async (_: unknown, game: Game, ctx: Context): Promise<
   if (modifiedGame.backgroundUrl !== game.backgroundUrl) {
     //TODO ...handle S3
     throw new Error('Not implemented!')
+    // s3.deleteObject({ Bucket: 'vtt', Key: game.backgroundUrl })
+    // const response = await s3
+    //   .upload({
+    //     Bucket: 'vtt',
+    //     Key: filename,
+    //     Body: createReadStream(),
+    //     ACL: 'public-read',
+    //   })
+    //   .promise()
   }
 
   Object.assign(modifiedGame, game)
@@ -90,7 +100,7 @@ export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Contex
     throw new Error('Not Authenticated')
   }
 
-  const game = await ctx.prisma.game.findOne({
+  const game = await ctx.prisma.game.findUnique({
     where: {
       id: Number(id),
     },
@@ -102,13 +112,10 @@ export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Contex
 
   if (game.backgroundUrl) {
     await s3
-      .deleteObject(
-        {
-          Bucket: 'vtt',
-          Key: game.backgroundUrl,
-        },
-        undefined,
-      )
+      .deleteObject({
+        Bucket: 'vtt',
+        Key: game.backgroundUrl,
+      })
       .promise()
   }
 
@@ -128,7 +135,7 @@ export const addPlayerToGame = async (
     throw new Error('Not Authenticated')
   }
 
-  const game = await ctx.prisma.game.findOne({
+  const game = await ctx.prisma.game.findUnique({
     where: {
       id: Number(gameId),
     },
@@ -176,7 +183,7 @@ export const removePlayerFromGame = async (
     throw new Error('Not Authenticated')
   }
 
-  const game = await ctx.prisma.game.findOne({
+  const game = await ctx.prisma.game.findUnique({
     where: {
       id: Number(gameId),
     },

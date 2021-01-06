@@ -40,11 +40,17 @@ export const autoLogin = (): MyThunkAction<Promise<User | undefined>> => {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         const response = await getState().app.api.autoLogin(token)
-        dispatch({
-          type: 'LOGIN',
-          payload: response,
-        })
-        return response.user
+
+        if (response) {
+          dispatch({
+            type: 'LOGIN',
+            payload: response,
+          })
+          return response.user
+        } else {
+          dispatch({ type: 'LOGOUT' })
+          delete axios.defaults.headers.common['Authorization']
+        }
       } catch (e) {
         dispatch({ type: 'LOGOUT' })
         delete axios.defaults.headers.common['Authorization']

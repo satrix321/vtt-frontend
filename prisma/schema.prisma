@@ -1,32 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model User {
-  id         Int     @id @default(autoincrement())
-  email      String  @unique
+  id         Int    @id @default(autoincrement())
+  email      String @unique
   password   String
-  username   String  @unique
-  ownedGames Game[]  @relation(name: "OwnedGames")
-  games      Game[]  @relation(name: "Players", references: [id])
+  username   String @unique
+  ownedGames Game[] @relation("OwnedGames")
+  games      Game[] @relation("Players")
 }
 
 model Game {
-  id            Int     @id @default(autoincrement())
-  owner         User    @relation(name: "OwnedGames", fields: [ownerId], references: [id])
-  ownerId       Int
-  name          String
-  description   String?
-  lastGameDate  String?
-  nextGameDate  String?
-  players       User[]  @relation(name: "Players", references: [id])
-  backgroundUrl String?
+  id                 Int     @id @default(autoincrement())
+  ownerId            Int
+  name               String
+  description        String?
+  lastGameDate       String?
+  nextGameDate       String?
+  backgroundUrl      String?
+  backgroundFileName String?
+  owner              User    @relation("OwnedGames", fields: [ownerId], references: [id])
+  players            User[]  @relation("Players")
 }

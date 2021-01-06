@@ -13,7 +13,7 @@ export const user = async (
   { id }: { id: number },
   ctx: Context,
 ): Promise<UserWithGamesOwnedGames | null> => {
-  return await ctx.prisma.user.findOne({
+  return await ctx.prisma.user.findUnique({
     where: {
       id: Number(id),
     },
@@ -29,7 +29,7 @@ export const currentUser = async (_: unknown, _args: unknown, ctx: Context): Pro
     throw new Error('Not Authenticated')
   }
 
-  return ctx.prisma.user.findOne({
+  return ctx.prisma.user.findUnique({
     where: {
       id: ctx.user.id,
     },

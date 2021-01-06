@@ -19,17 +19,6 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 email: admin@gmail.com
 password: adminq1@W
 
-## Prisma Migrations
-
-1. Modify the schema
-2. Run the following commands:
-
-```
-npx @prisma/cli migrate save --experimental
-npx @prisma/cli migrate up --experimental
-npx @prisma/cli generate
-```
-
 ## Localstack [WIP]
 
 1. Install localstack & run it

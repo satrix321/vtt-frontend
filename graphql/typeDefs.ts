@@ -17,7 +17,7 @@ export default gql`
     autoLogin(token: String!): User
 
     createGame(name: String!, description: String, file: Upload!): Game!
-    modifyGame(game: GameInput!): Game!
+    updateGame(game: GameInput!): Game!
     deleteGame(id: ID!): Game!
     addPlayerToGame(gameId: ID!, userId: ID!): Game!
     removePlayerFromGame(gameId: ID!, userId: ID!): Game!

@@ -6,7 +6,7 @@ const apiBaseUrl = process.env.apiBaseUrl as string
 export type BackendApi = {
   register: (email: string, password: string, username?: string) => Promise<User>
   login: (email: string, password: string) => Promise<LoginResponse>
-  autoLogin: (token: string) => Promise<LoginResponse>
+  autoLogin: (token: string) => Promise<LoginResponse | null>
 }
 
 const api: BackendApi = {
@@ -49,7 +49,7 @@ const api: BackendApi = {
     }
   },
 
-  autoLogin: async (token: string): Promise<LoginResponse> => {
+  autoLogin: async (token: string): Promise<LoginResponse | null> => {
     const autoLoginQuery = `mutation {
       autoLogin(token: "${token}") {
         id
@@ -61,7 +61,7 @@ const api: BackendApi = {
     const response = await axios.post(apiBaseUrl, { query: autoLoginQuery })
 
     if (!response.data.errors) {
-      return response.data.data.autoLogin as LoginResponse
+      return response.data.data.autoLogin
     } else {
       throw new Error(response.data.errors[0].message)
     }

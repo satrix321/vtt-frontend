@@ -11,11 +11,11 @@ export const register = async (
   { email, password, username }: { email: string; password: string; username: string },
   ctx: Context,
 ): Promise<User> => {
-  if (await ctx.prisma.user.findOne({ where: { email } })) {
+  if (await ctx.prisma.user.findUnique({ where: { email } })) {
     throw new Error('Email already in use')
   }
 
-  if (await ctx.prisma.user.findOne({ where: { username } })) {
+  if (await ctx.prisma.user.findUnique({ where: { username } })) {
     throw new Error('Username already in use')
   }
 
@@ -36,18 +36,18 @@ export const login = async (
   { email, password }: { email: string; password: string },
   ctx: Context,
 ): Promise<{ token: string; user: User }> => {
-  const user = await ctx.prisma.user.findOne({
+  const user = await ctx.prisma.user.findUnique({
     where: { email },
   })
 
   if (!user) {
-    throw new Error('Invalid Login')
+    throw new Error('Invalid Data')
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password)
 
   if (!passwordMatch) {
-    throw new Error('Invalid Login')
+    throw new Error('Invalid Data')
   }
 
   const token = jwt.sign(
@@ -71,7 +71,7 @@ export const autoLogin = async (_: unknown, { token }: { token: string }, ctx: C
   const decodedToken = jwt.decode(token) as TokenPayload | null
 
   if (decodedToken) {
-    return await ctx.prisma.user.findOne({
+    return await ctx.prisma.user.findUnique({
       where: { id: decodedToken.id },
     })
   }
