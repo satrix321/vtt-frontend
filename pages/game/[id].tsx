@@ -1,4 +1,5 @@
 import { Box, BoxContent, BoxFooter, BoxTitle } from '@/components/page/box/box'
+import { Cta } from '@/components/page/cta/cta'
 import { Footer } from '@/components/page/footer/footer'
 import { Button } from '@/components/page/form/button/button'
 import { Column, Container, Row } from '@/components/page/grid/grid'
@@ -6,7 +7,7 @@ import { Modal } from '@/components/page/modal/modal'
 import { Spacer } from '@/components/page/spacer/spacer'
 import { Tab, TabItem, TabItems, Tabs } from '@/components/page/tabs/tabs'
 import { withAuth } from '@/components/utils/auth/auth'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
@@ -24,14 +25,24 @@ const GET_GAME = gql`
   }
 `
 
+const DELETE_GAME = gql`
+  mutation DeleteGame($id: ID!) {
+    deleteGame(id: $id) {
+      id
+      name
+    }
+  }
+`
+
 const Games: NextPage = () => {
   const router = useRouter()
   const [id] = useState<string | string[] | undefined>(router.query.id)
   const [activeTab, setActiveTab] = useState<string>('Home')
   const [confirmationModel, setConfirmationModal] = useState<boolean>(false)
-  const { loading, error, data } = useQuery(GET_GAME, {
+  const { loading, data } = useQuery(GET_GAME, {
     variables: { id },
   })
+  const [deleteGame] = useMutation(DELETE_GAME)
 
   if (loading) {
     return <></>
@@ -61,6 +72,11 @@ const Games: NextPage = () => {
                       alt="game image"
                     />
                     <h1>{data.game.name}</h1>
+                    <p>
+                      <Cta small href="/inGame">
+                        Start Game
+                      </Cta>
+                    </p>
                     <p>{data.game.description}</p>
                   </Box>
                 </TabItem>
@@ -88,8 +104,10 @@ const Games: NextPage = () => {
                     <Spacer />
                     <Button
                       small
-                      onClick={() => {
+                      onClick={async () => {
+                        await deleteGame({ variables: { id } })
                         setConfirmationModal(false)
+                        router.push('/games')
                       }}
                     >
                       Yes

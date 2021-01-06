@@ -106,6 +106,8 @@ export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Contex
     },
   })
 
+  console.log(game)
+
   if (!game) {
     throw new Error("Game doesn't exist")
   }
@@ -118,6 +120,8 @@ export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Contex
       })
       .promise()
   }
+
+  console.log(game)
 
   return await ctx.prisma.game.delete({
     where: {

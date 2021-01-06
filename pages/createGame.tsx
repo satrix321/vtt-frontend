@@ -9,10 +9,11 @@ import { gql, useMutation } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 
 const CREATE_GAME = gql`
-  mutation($name: String!, $description: String, $file: Upload!) {
+  mutation CreateGame($name: String!, $description: String, $file: Upload!) {
     createGame(name: $name, description: $description, file: $file) {
       id
       name
@@ -21,6 +22,7 @@ const CREATE_GAME = gql`
 `
 
 const CreateGame: NextPage = () => {
+  const router = useRouter()
   const [gameName, setGameName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [gameImage, setGameImage] = useState<FileList | null>(null)
@@ -31,8 +33,13 @@ const CreateGame: NextPage = () => {
     e.preventDefault()
     setErrorMessage('')
 
-    if (gameImage && gameImage.length) {
-      createGame({ variables: { name: gameName, description: description, file: gameImage[0] } })
+    try {
+      if (gameImage && gameImage.length) {
+        await createGame({ variables: { name: gameName, description: description, file: gameImage[0] } })
+        router.push('/games')
+      }
+    } catch (e) {
+      setErrorMessage(e.message)
     }
   }
 
@@ -44,7 +51,7 @@ const CreateGame: NextPage = () => {
       </Head>
 
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-        <Container>
+        <Container vCenter>
           <Row center>
             <Column cols="12" sm="8" md="6" lg="4">
               <Form onSubmit={onSubmit}>
@@ -71,7 +78,7 @@ const CreateGame: NextPage = () => {
                   onChange={(e) => setGameImage(e.target.files)}
                 />
                 <ErrorBlock message={errorMessage} />
-                <Button block type="submit">
+                <Button block secondary type="submit">
                   SUBMIT
                 </Button>
               </Form>

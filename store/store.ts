@@ -3,11 +3,9 @@ import { Action, applyMiddleware, combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import alert, { AlertState } from './alert/reducer'
-import app, { AppState } from './app/reducer'
 import profile, { ProfileState } from './profile/reducer'
 
 export type State = {
-  app: AppState
   profile: ProfileState
   alert: AlertState
 }
@@ -15,7 +13,6 @@ export type State = {
 const makeStore: MakeStore<State, Action> = (context: Context) => {
   return createStore(
     combineReducers<State, Action>({
-      app,
       profile,
       alert,
     }),

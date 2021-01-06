@@ -31,6 +31,10 @@ export const games = async (
   { userId }: { userId: number },
   ctx: Context,
 ): Promise<GameWithPlayers[] | undefined> => {
+  if (!ctx.user) {
+    throw new Error('Not Authenticated')
+  }
+
   const user = await ctx.prisma.user.findUnique({
     where: {
       id: Number(userId),

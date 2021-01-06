@@ -2,9 +2,8 @@ import { Alert } from '@/components/page/alert/alert'
 import { Header } from '@/components/page/header/header'
 import '@/scss/global.scss'
 import styles from '@/scss/page.module.scss'
-import { autoLogin } from '@/store/profile/actions'
 import { wrapper } from '@/store/store'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, gql, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { createUploadLink } from 'apollo-upload-client'
 import 'focus-visible'
@@ -13,6 +12,16 @@ import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+
+const AUTO_LOGIN = gql`
+  mutation AutoLogin($token: String!) {
+    autoLogin(token: $token) {
+      id
+      email
+      username
+    }
+  }
+`
 
 function handleExitComplete() {
   if (typeof window !== 'undefined') {
@@ -38,11 +47,32 @@ const apolloClient = new ApolloClient({
 })
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
-  const dispatch = useDispatch()
   const router = useRouter()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(autoLogin())
+    const token = window.localStorage.getItem('token')
+
+    if (token) {
+      try {
+        ;(async () => {
+          const response = await apolloClient.mutate({ mutation: AUTO_LOGIN, variables: { token } })
+          if (response.data.autoLogin) {
+            dispatch({
+              type: 'LOGIN',
+              payload: response.data.autoLogin,
+            })
+          } else {
+            dispatch({ type: 'LOGOUT' })
+          }
+        })()
+      } catch (e) {
+        console.error(e)
+        dispatch({ type: 'LOGOUT' })
+      }
+    } else {
+      dispatch({ type: 'LOGOUT' })
+    }
   }, [])
 
   return (

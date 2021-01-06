@@ -1,5 +1,4 @@
 import { Column, Container, Row } from '@/components/page/grid/grid'
-import { logout } from '@/store/profile/actions'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
@@ -9,7 +8,8 @@ import { useDispatch } from 'react-redux'
 const Logout: NextPage = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(logout())
+    window.localStorage.removeItem('token')
+    dispatch({ type: 'LOGOUT' })
   }, [])
 
   return (

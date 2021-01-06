@@ -4,30 +4,39 @@ import { Form } from '@/components/page/form/form'
 import { TextInput } from '@/components/page/form/textInput/textInput'
 import { Column, Container, Row } from '@/components/page/grid/grid'
 import styleUtils from '@/scss/utils.module.scss'
-import { register } from '@/store/profile/actions'
-import { MyThunkDispatch } from '@/store/types'
+import { gql, useMutation } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
-import { useDispatch } from 'react-redux'
+
+const REGISTER = gql`
+  mutation Register($email: String!, $password: String!, $username: String!) {
+    register(email: $email, password: $password, username: $username) {
+      id
+      email
+      username
+    }
+  }
+`
 
 const Register: NextPage = () => {
-  const dispatch: MyThunkDispatch = useDispatch()
+  const router = useRouter()
   const [username, setUsername] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [register] = useMutation(REGISTER)
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
 
     try {
-      await dispatch(register(email, password, username))
-      Router.push('/')
+      await register({ variables: { email, password, username } })
+      router.push('/')
     } catch (e) {
       setErrorMessage(e.message)
     }

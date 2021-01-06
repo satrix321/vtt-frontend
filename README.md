@@ -45,6 +45,12 @@ awslocal s3 mb s3://vtt
 awslocal s3 cp ./test.txt s3://vtt/test.txt --acl public-read
 ```
 
+5. Run localstack through docker
+
+```
+docker-compose up
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

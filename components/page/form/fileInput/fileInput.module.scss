@@ -20,6 +20,8 @@
     align-items: baseline;
 
     .button {
+      position: relative;
+      overflow: hidden;
       display: inline-block;
       margin-top: $spacing-8;
       padding-left: $spacing-16 - $spacing-2;
@@ -30,14 +32,27 @@
       border: thin solid $black;
       box-sizing: border-box;
       line-height: $spacing-32 - $spacing-2 * 2;
-      transition: outline ease-in-out 0.1s;
+      user-select: none;
+      transition: outline ease-in-out 0.1s, background ease-in-out 0.3s;
 
       &::-moz-focus-inner {
         border: 0;
       }
 
       &:focus {
+        outline: 0;
+      }
+
+      &[data-focus-visible-added] {
         outline: $spacing-4 solid $focus;
+      }
+
+      &:hover {
+        background: $grey-8;
+      }
+  
+      &:active {
+        background: $grey-7;
       }
     }
 

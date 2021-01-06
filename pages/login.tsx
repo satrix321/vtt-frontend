@@ -4,29 +4,45 @@ import { Form } from '@/components/page/form/form'
 import { TextInput } from '@/components/page/form/textInput/textInput'
 import { Column, Container, Row } from '@/components/page/grid/grid'
 import styleUtils from '@/scss/utils.module.scss'
-import { login } from '@/store/profile/actions'
-import { MyThunkDispatch } from '@/store/types'
+import { gql, useMutation } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+const LOGIN = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        id
+        email
+        username
+      }
+    }
+  }
+`
+
 const Login: NextPage = () => {
-  const dispatch: MyThunkDispatch = useDispatch()
+  const router = useRouter()
+  const dispatch = useDispatch()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [login] = useMutation(LOGIN)
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
 
     try {
-      await dispatch(login(email, password))
-      if (Router.route === '/login') {
-        Router.push('/')
+      const response = await login({ variables: { email, password } })
+      localStorage.setItem('token', response.data.login.token)
+      dispatch({ type: 'LOGIN', payload: response.data.login.user })
+      if (router.route === '/login') {
+        router.push('/')
       }
     } catch (e) {
       setErrorMessage(e.message)

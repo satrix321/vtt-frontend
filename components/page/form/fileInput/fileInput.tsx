@@ -1,3 +1,4 @@
+import { createRipple } from '@/componentUtils/ripple/ripple'
 import classNames from 'classnames'
 import { ChangeEvent, useRef, useState } from 'react'
 import styles from './fileInput.module.scss'
@@ -46,6 +47,10 @@ export const FileInput: React.FunctionComponent<Props> = (props: Props) => {
     }
   }
 
+  const onClick = (event: React.MouseEvent<HTMLSpanElement>) => {
+    createRipple(event)
+  }
+
   return (
     <div className={styles['form-component']}>
       <label ref={labelRef} className={styles.label}>
@@ -59,7 +64,7 @@ export const FileInput: React.FunctionComponent<Props> = (props: Props) => {
           accept={props.accept}
         ></input>
         <div className={classNames(styles['input-wrapper'], { [styles['multiple-files']]: props.multiple })}>
-          <span className={styles.button} tabIndex={0} onKeyPress={onKeyPress}>
+          <span className={styles.button} tabIndex={0} onKeyPress={onKeyPress} onClick={onClick}>
             UPLOAD
           </span>
           {!props.imagePreview &&

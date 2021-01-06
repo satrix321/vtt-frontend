@@ -153,11 +153,9 @@ export const TabItems: React.FunctionComponent<TabItemsProps> = (props: TabItems
       let oldActiveElementIndex: number | undefined
       let activeElementIndex: number | undefined
 
-      const tabItems = tabItemsRef.current.querySelectorAll(`.${styles['tab-item']}`)
+      const tabItems = tabItemsRef.current.querySelectorAll<HTMLDivElement>(`.${styles['tab-item']}`)
 
-      for (const [i, item] of tabItems.entries()) {
-        const tabItem = item as HTMLDivElement
-
+      for (const [i, tabItem] of tabItems.entries()) {
         if (tabItem.dataset.name === oldModel.current) {
           tabItem.style.display = 'block'
           oldActiveElementIndex = i
@@ -169,35 +167,46 @@ export const TabItems: React.FunctionComponent<TabItemsProps> = (props: TabItems
         }
       }
 
-      const activeElement = tabItemsRef.current.querySelector(`[data-name="${props.model}"]`) as HTMLDivElement
-      const oldActiveElement = tabItemsRef.current.querySelector(`[data-name="${oldModel.current}"]`) as HTMLDivElement
+      const activeElement = tabItemsRef.current.querySelector<HTMLDivElement>(`[data-name="${props.model}"]`)
+      const oldActiveElement = tabItemsRef.current.querySelector<HTMLDivElement>(`[data-name="${oldModel.current}"]`)
 
-      if (oldActiveElementIndex !== undefined && activeElementIndex !== undefined) {
-        if (activeElementIndex > oldActiveElementIndex) {
-          activeElement.style.left = '100%'
-        } else {
-          activeElement.style.left = '-100%'
-        }
-      }
-
-      tabItemsRef.current.style.height = `${activeElement?.offsetHeight}px`
-
-      requestAnimationFrame(() => {
-        if (tabItemsRef.current) {
-          if (oldActiveElement) {
-            if (activeElement.style.left === '100%') {
-              oldActiveElement.style.left = '-100%'
-            } else {
-              oldActiveElement.style.left = '100%'
-            }
-            activeElement.style.left = '0'
-
-            timeoutId.current = setTimeout(() => {
-              oldActiveElement.style.display = 'none'
-            }, 300)
+      if (activeElement) {
+        if (oldActiveElementIndex !== undefined && activeElementIndex !== undefined) {
+          if (activeElementIndex > oldActiveElementIndex) {
+            activeElement.style.left = '100%'
+          } else {
+            activeElement.style.left = '-100%'
           }
         }
-      })
+
+        if (oldActiveElement) {
+          activeElement.style.position = 'absolute'
+          oldActiveElement.style.position = 'absolute'
+
+          tabItemsRef.current.style.height = `${oldActiveElement?.offsetHeight}px`
+
+          requestAnimationFrame(() => {
+            if (tabItemsRef.current) {
+              tabItemsRef.current.style.height = `${activeElement?.offsetHeight}px`
+
+              if (activeElement.style.left === '100%') {
+                oldActiveElement.style.left = '-100%'
+              } else {
+                oldActiveElement.style.left = '100%'
+              }
+              activeElement.style.left = '0'
+
+              timeoutId.current = setTimeout(() => {
+                oldActiveElement.style.display = 'none'
+                activeElement.style.position = 'initial'
+                if (tabItemsRef.current) {
+                  tabItemsRef.current.style.height = 'auto'
+                }
+              }, 300)
+            }
+          })
+        }
+      }
     }
 
     if (oldModel.current !== props.model) {

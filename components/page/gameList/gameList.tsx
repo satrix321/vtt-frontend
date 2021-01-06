@@ -38,6 +38,7 @@ export const GameList: React.FunctionComponent = () => {
   const userId = useSelector((state: State) => state.profile.user?.id)
   const { loading, data } = useQuery(GET_GAMES, {
     variables: { userId: userId },
+    fetchPolicy: 'network-only',
   })
 
   if (loading) {

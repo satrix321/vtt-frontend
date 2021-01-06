@@ -50,6 +50,7 @@
   .error-message {
     position: absolute;
     top: 100%;
+    font-size: $font-12;
 
     color: $error;
     margin-top: $spacing-8;
