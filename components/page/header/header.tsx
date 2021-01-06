@@ -31,7 +31,7 @@ export const Header: React.FunctionComponent = () => {
               </a>
             </div>
             <nav className={classNames(styles.navigation, { [styles['mobile-open']]: mobileNavOpen })}>
-              {!isLogged ? (
+              {isLogged === false ? (
                 <>
                   <HeaderItem href="/login">Login</HeaderItem>
                   <HeaderItem href="/register">Register</HeaderItem>
