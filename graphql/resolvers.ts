@@ -10,11 +10,7 @@ export default {
     ...userQueries,
     ...gameQueries,
 
-    roll: (
-      _: unknown,
-      { equation, verbose }: { equation: string; verbose: boolean },
-      ctx: Context,
-    ): RollResult => {
+    roll: (_: unknown, { equation, verbose }: { equation: string; verbose: boolean }, ctx: Context): RollResult => {
       return rollParser.parse(equation, {
         verbose,
       })
