@@ -19,37 +19,29 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 email: admin@gmail.com
 password: adminq1@W
 
-## Localstack [WIP]
+## Localstack Setup
 
-1. Install localstack & run it
-
-```
-DATA_DIR="/tmp/localstack/data" localstack start
-```
-
-2. Install awscli-local
+1. Install awscli-local
 
 ```
 pip install awscli-local
 ```
 
-3. Create VTT Bucket
+2. Create VTT Bucket
 
 ```
 awslocal s3 mb s3://vtt
 ```
 
-4. Copy a sample file
+## Localstack Run
 
-```
-awslocal s3 cp ./test.txt s3://vtt/test.txt --acl public-read
-```
-
-5. Run localstack through docker
+1. Run localstack through docker
 
 ```
 docker-compose up
 ```
+
+2. Check if the localstack port in next.config.js file is correct
 
 ## Learn More
 
