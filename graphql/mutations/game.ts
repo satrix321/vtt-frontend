@@ -1,11 +1,14 @@
 import { Context } from '@/graphql/context'
 import s3 from '@/modules/s3'
 import { Game } from '@prisma/client'
+import { GameInput } from '@/graphql/generated'
 import { FileUpload } from '@/graphql/types'
+
+const gameBucket = 'vtt'
 
 export const createGame = async (
   _: unknown,
-  { name, description, file }: { name: string; description: string; file: Promise<FileUpload> },
+  { name, description, backgroundImage }: { name: string; description: string; backgroundImage: Promise<FileUpload> },
   ctx: Context,
 ): Promise<Game> => {
   if (!ctx.user) {
@@ -21,12 +24,12 @@ export const createGame = async (
     throw new Error("The user with the provided id doesn't exit.")
   }
 
-  const { filename, createReadStream } = await file
+  const { filename, createReadStream } = await backgroundImage
 
   try {
     const response = await s3
       .upload({
-        Bucket: 'vtt',
+        Bucket: gameBucket,
         Key: filename,
         Body: createReadStream(),
         ACL: 'public-read',
@@ -46,7 +49,6 @@ export const createGame = async (
           },
         },
         backgroundUrl: response.Location,
-        backgroundFileName: filename,
       },
     })
 
@@ -56,43 +58,60 @@ export const createGame = async (
   }
 }
 
-export const updateGame = async (_: unknown, game: Game, ctx: Context): Promise<Game> => {
+export const updateGame = async (_: unknown, { game: gameInput }: { game: GameInput }, ctx: Context): Promise<Game> => {
   if (!ctx.user) {
     throw new Error('Not Authenticated')
   }
 
-  const modifiedGame = await ctx.prisma.game.findUnique({
+  const game = await ctx.prisma.game.findUnique({
     where: {
-      id: Number(game.id),
+      id: Number(gameInput.id),
     },
   })
 
-  if (!modifiedGame) {
+  if (!game) {
     throw new Error("Game doesn't exist")
   }
 
-  if (modifiedGame.backgroundUrl !== game.backgroundUrl) {
-    //TODO ...handle S3
-    throw new Error('Not implemented!')
-    // s3.deleteObject({ Bucket: 'vtt', Key: game.backgroundUrl })
-    // const response = await s3
-    //   .upload({
-    //     Bucket: 'vtt',
-    //     Key: filename,
-    //     Body: createReadStream(),
-    //     ACL: 'public-read',
-    //   })
-    //   .promise()
-  }
+  console.log(game)
+  console.log(gameInput)
 
-  Object.assign(modifiedGame, game)
+  //TODO: implement S3 support
+
+  // if (gameInput.backgroundUrl !== undefined) {
+  //   if (gameInput.backgroundUrl === null && game.backgroundUrl) {
+  //     await s3
+  //       .deleteObject({
+  //         Bucket: gameBucket,
+  //         Key: game.backgroundUrl,
+  //       })
+  //       .promise()
+  //   }
+
+  //   // if (gameInput.backgroundUrl) {
+  //   //   const response = await s3
+  //   //     .upload({
+  //   //       Bucket: gameBucket,
+  //   //       Key: filename,
+  //   //       Body: createReadStream(),
+  //   //       ACL: 'public-read',
+  //   //     })
+  //   //     .promise()
+  //   // }
+  // }
+
+  Object.assign(game, gameInput)
 
   await ctx.prisma.game.update({
-    where: { id: modifiedGame.id },
-    data: game,
+    where: { id: Number(game.id) },
+    data: {
+      id: Number(game.id),
+      name: gameInput.name,
+      description: gameInput.description,
+    },
   })
 
-  return modifiedGame
+  return game
 }
 
 export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Context): Promise<Game> => {
@@ -106,8 +125,6 @@ export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Contex
     },
   })
 
-  console.log(game)
-
   if (!game) {
     throw new Error("Game doesn't exist")
   }
@@ -115,7 +132,7 @@ export const deleteGame = async (_: unknown, { id }: { id: number }, ctx: Contex
   if (game.backgroundUrl) {
     await s3
       .deleteObject({
-        Bucket: 'vtt',
+        Bucket: gameBucket,
         Key: game.backgroundUrl,
       })
       .promise()

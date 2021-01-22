@@ -13,8 +13,8 @@ import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 
 const CREATE_GAME = gql`
-  mutation CreateGame($name: String!, $description: String, $file: Upload!) {
-    createGame(name: $name, description: $description, file: $file) {
+  mutation CreateGame($name: String!, $description: String, $backgroundImage: Upload!) {
+    createGame(name: $name, description: $description, backgroundImage: $backgroundImage) {
       id
       name
     }
@@ -24,7 +24,7 @@ const CREATE_GAME = gql`
 const CreateGame: NextPage = () => {
   const router = useRouter()
   const [gameName, setGameName] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
+  const [gameDescription, setGameDescription] = useState<string>('')
   const [gameImage, setGameImage] = useState<FileList | null>(null)
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [createGame] = useMutation(CREATE_GAME)
@@ -35,9 +35,12 @@ const CreateGame: NextPage = () => {
 
     try {
       if (gameImage && gameImage.length) {
-        await createGame({ variables: { name: gameName, description: description, file: gameImage[0] } })
-        router.push('/games')
+        await createGame({ variables: { name: gameName, description: gameDescription, backgroundImage: gameImage[0] } })
+      } else {
+        await createGame({ variables: { name: gameName, description: gameDescription } })
       }
+
+      router.push('/games')
     } catch (e) {
       setErrorMessage(e.message)
     }
@@ -55,6 +58,8 @@ const CreateGame: NextPage = () => {
           <Row center>
             <Column cols="12" sm="8" md="6" lg="4">
               <Form onSubmit={onSubmit}>
+                <h1 style={{ textAlign: 'center' }}>Create Game</h1>
+
                 <TextInput
                   name="gameName"
                   label="Game Name"
@@ -65,8 +70,8 @@ const CreateGame: NextPage = () => {
                 <TextArea
                   name="description"
                   label="Description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={gameDescription}
+                  onChange={(e) => setGameDescription(e.target.value)}
                   resize={ResizeType.Vertical}
                   minHeight={200}
                 />

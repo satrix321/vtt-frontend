@@ -24,7 +24,6 @@ model Game {
   lastGameDate       String?
   nextGameDate       String?
   backgroundUrl      String?
-  backgroundFileName String?
   owner              User    @relation("OwnedGames", fields: [ownerId], references: [id])
   players            User[]  @relation("Players")
 }

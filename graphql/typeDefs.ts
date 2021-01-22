@@ -16,7 +16,7 @@ export default gql`
     login(email: String!, password: String!): LoginResponse!
     autoLogin(token: String!): User
 
-    createGame(name: String!, description: String, file: Upload!): Game!
+    createGame(name: String!, description: String, backgroundImage: Upload!): Game!
     updateGame(game: GameInput!): Game!
     deleteGame(id: ID!): Game!
     addPlayerToGame(gameId: ID!, userId: ID!): Game!
@@ -54,7 +54,7 @@ export default gql`
     description: String
     lastGameDate: String
     nextGameDate: String
-    backgroundUrl: String
+    backgroundImageFile: Upload
   }
 
   type LoginResponse {
