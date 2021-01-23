@@ -24,14 +24,14 @@ export const createGame = async (
     throw new Error("The user with the provided id doesn't exit.")
   }
 
-  const { filename, createReadStream } = await backgroundImage
+  const { filename: backgroundImageFilename, createReadStream: backgroundImageCreateReadStream } = await backgroundImage
 
   try {
     const response = await s3
       .upload({
         Bucket: gameBucket,
-        Key: filename,
-        Body: createReadStream(),
+        Key: backgroundImageFilename,
+        Body: backgroundImageCreateReadStream(),
         ACL: 'public-read',
       })
       .promise()
@@ -73,42 +73,47 @@ export const updateGame = async (_: unknown, { game: gameInput }: { game: GameIn
     throw new Error("Game doesn't exist")
   }
 
-  console.log(game)
-  console.log(gameInput)
+  const updatedGame = Object.assign(game, {})
 
-  //TODO: implement S3 support
+  updatedGame.name = gameInput.name !== undefined ? gameInput.name : game.name
+  updatedGame.description = gameInput.description !== undefined ? gameInput.description : null
+  updatedGame.backgroundUrl = game.backgroundUrl
+  updatedGame.lastGameDate = gameInput.lastGameDate !== undefined ? gameInput.lastGameDate : null
+  updatedGame.nextGameDate = gameInput.nextGameDate !== undefined ? gameInput.nextGameDate : null
+  updatedGame.nextGameDate = game.nextGameDate
 
-  // if (gameInput.backgroundUrl !== undefined) {
-  //   if (gameInput.backgroundUrl === null && game.backgroundUrl) {
-  //     await s3
-  //       .deleteObject({
-  //         Bucket: gameBucket,
-  //         Key: game.backgroundUrl,
-  //       })
-  //       .promise()
-  //   }
+  if (gameInput.backgroundImageFile !== undefined) {
+    if (game.backgroundUrl) {
+      await s3
+        .deleteObject({
+          Bucket: gameBucket,
+          Key: game.backgroundUrl,
+        })
+        .promise()
+    }
 
-  //   // if (gameInput.backgroundUrl) {
-  //   //   const response = await s3
-  //   //     .upload({
-  //   //       Bucket: gameBucket,
-  //   //       Key: filename,
-  //   //       Body: createReadStream(),
-  //   //       ACL: 'public-read',
-  //   //     })
-  //   //     .promise()
-  //   // }
-  // }
+    if (gameInput.backgroundImageFile) {
+      const {
+        filename: backgroundImageFilename,
+        createReadStream: backgroundImageCreateReadStream,
+      } = await gameInput.backgroundImageFile
 
-  Object.assign(game, gameInput)
+      const response = await s3
+        .upload({
+          Bucket: gameBucket,
+          Key: backgroundImageFilename,
+          Body: backgroundImageCreateReadStream(),
+          ACL: 'public-read',
+        })
+        .promise()
+
+      updatedGame.backgroundUrl = response.Location
+    }
+  }
 
   await ctx.prisma.game.update({
     where: { id: Number(game.id) },
-    data: {
-      id: Number(game.id),
-      name: gameInput.name,
-      description: gameInput.description,
-    },
+    data: updatedGame,
   })
 
   return game
